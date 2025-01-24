@@ -1,0 +1,54 @@
+﻿@page "/prospects"
+
+<h3>Prospects</h3>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- PROPOSAL -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <a href="/submitted" class="text-white"> <h1>@PROPOSAL</h1></a>
+                    <p>Proposal</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBMITTED PROPOSAL -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <h1>@SUBMITTEDPROPOSAL</h1>
+                    <p>Submitted Proposals</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROPOSAL STATUS -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <h1>@PROPOSALSTATUS</h1>
+                    <p>Proposal Status</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private int PROPOSAL = 150;
+    private int SUBMITTEDPROPOSAL = 53;
+    private int PROPOSALSTATUS = 44;
+
+}

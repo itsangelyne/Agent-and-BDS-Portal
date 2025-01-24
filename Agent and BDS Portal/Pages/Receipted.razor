@@ -1,0 +1,278 @@
+﻿@page "/receipted"
+@using Agent_and_BDS_Portal.Data
+@inject SubmittedReport_Services accountServices
+
+<div class="container mt-0">
+	<!-- Unified Border -->
+	<div class="border p-4" style="background-color: #eaf5e5;">
+		<img src="images/ck_logo.png" alt="CK Logo" class="img-fluid" style="max-height: 50px; display: block; margin-left: auto; margin-right: auto;" />
+		<br />
+		<!-- Search Bar and Dropdown -->
+		<div class="row align-items-center">
+			<div class="col-md-8 mb-3 mb-md-0">
+				<input class="form-control" id="myInput" type="text" placeholder="Search..">
+			</div>
+			<div class="col-md-4">
+				<div class="input-group">
+					<select class="form-control" @onchange="HandleTypeChange">
+						<option value="Type1"></option>
+						<option value="Type2">Agent</option>
+						<option value="Type3">BDS</option>
+					</select>
+					<span class="input-group-text">
+						<i class="bi bi-caret-down-fill"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Date Fields -->
+		<div class="row mt-4">
+			<div class="col-md-6">
+				<strong>Date From:</strong>
+				<input type="text" class="form-control" value="8/1/2023" readonly />
+			</div>
+			<div class="col-md-6">
+				<strong>Date To:</strong>
+				<input type="text" class="form-control" value="8/4/2023" readonly />
+			</div>
+		</div>
+
+		<!-- Table -->
+		<div class="mt-4 table-responsive">
+			<table class="table table-bordered">
+				<thead style="background-color: #F95454 !important;">
+					<tr>
+						<th style="color:white;">ID</th>
+						<th style="color:white;">Name of Insured</th>
+						<th style="color:white;">Civil Status</th>
+						<th style="color:white;">Gender</th>
+						<th style="color:white;">Contact Number</th>
+						<th style="color:white;">Nationality</th>
+						<th style="color:white;">Occupation & Livelihood</th>
+						<th style="color:white;">Date and Time</th>
+						<th style="color:white;">Status</th>
+						<th style="color:white;">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@if (SubObj == null || !SubObj.Any())
+					{
+						<tr>
+							<td colspan="15" class="text-center">No records found.</td>
+						</tr>
+					}
+					else
+					{
+						@foreach (var submitted in SubObj)
+						{
+							<tr>
+								<td>@submitted.id</td>
+								<td>@submitted.NameofInsured</td>
+								<td>@submitted.CivilStatus</td>
+								<td>@submitted.Gender</td>
+								<td>@(submitted.ContactNumber.ToString() ?? "N/A")</td>
+								<td>@submitted.Nationality</td>
+								<td>@submitted.OccupationNLivelihood</td>
+								<td>@submitted.date</td>
+								<td><span class="badge bg-warning">OR</span></td>
+								<td class="d-flex justify-content-around">
+									<button class="btn btn-primary btn-sm" @onclick="() => OpenDetailsModal(submitted)">View</button>
+									<button class="btn btn-danger btn-sm" @onclick="() => OpenDetailsModal(submitted)">Notice</button>
+								</td>
+							</tr>
+						}
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+@if (IsModalOpen)
+{
+	<div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content shadow-lg rounded-4">
+				<!-- Modal Header -->
+				<div class="modal-header bg-primary text-white">
+					<h5 class="modal-title">
+						<i class="bi bi-info-circle-fill me-2"></i> Detail Information
+					</h5>
+					<button type="button" class="btn-close text-white" @onclick="CloseDetailsModal"></button>
+				</div>
+
+				<!-- Modal Body -->
+				<div class="modal-body modal-body" style="max-width: 100%; width: auto;">
+					<form>
+						<div class="row mb-3">
+							<div class="col-sm-6">
+								<label for="id" class="form-l label fw-bold">ID:</label>
+								<input type="text" class="form-control" id="id" value="@SelectedDetail.id" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="policyHolder" class="form-label fw-bold">Policy Holder:</label>
+								<input type="text" class="form-control" id="policyHolder" value="@SelectedDetail.PolicyHolder" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="policyHolder" class="form-label fw-bold">Name of Insured:</label>
+								<input type="text" class="form-control" id="nameofinsured" value="@SelectedDetail.NameofInsured" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="policyHolder" class="form-label fw-bold">Civil Status:</label>
+								<input type="text" class="form-control" id="civilstatus" value="@SelectedDetail.CivilStatus" disabled />
+							</div>
+						</div>
+						<!-- Additional fields -->
+						<div class="row mb-3">
+							<div class="col-sm-6">
+								<label for="gender" class="form-label fw-bold">Gender:</label>
+								<input type="text" class="form-control" id="gender" value="@SelectedDetail.Gender" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="gender" class="form-label fw-bold">Height:</label>
+								<input type="text" class="form-control" id="height" value="@SelectedDetail.Height" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="gender" class="form-label fw-bold">Weight:</label>
+								<input type="text" class="form-control" id="height" value="@SelectedDetail.Weight" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="gender" class="form-label fw-bold">Address:</label>
+								<input type="text" class="form-control" id="height" value="@SelectedDetail.Address" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="gender" class="form-label fw-bold">Contact Number:</label>
+								<input type="text" class="form-control" id="height" value="@SelectedDetail.ContactNumber" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Email:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.EmailAddress" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Age:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.Age" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Date of Birth:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.DateofBirth" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Place of Birth:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.PlaceofBirth" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Nationality:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.Nationality" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">TIN/SSS/GSIS:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.GovernmentIDNo" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Source of Funds:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.SourceofFunds" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Nature of Self-Employment:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.NatureofSelfEmployment" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Address of Employer:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.AddressofEmployer" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Occupation and Livelihood:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.OccupationNLivelihood" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Amount of Insurance:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.AmountofInsurance" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Term of Loan:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.TermofLoan" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Premium:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.Premium" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Effective Date:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.EffectDate" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Mode of Payment:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.Modeofpayment" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Rider:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.Rider" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Termination Date:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.TerminationDate" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label><b>Coverage</b></label>
+								<label for="email" class="form-label fw-bold">Fullname of Beneficiaries:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.FullNamedBeneficiaries" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Age of Beneficiaries:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.AgeofBeneficiaries" disabled />
+							</div>
+							<div class="col-sm-6">
+								<label for="email" class="form-label fw-bold">Relationship to Insured Policy/Creditor:</label>
+								<input type="text" class="form-control" id="email" value="@SelectedDetail.RelationshiptoInsured" disabled />
+							</div>
+
+						</div>
+					</form>
+				</div>
+
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button class="btn btn-secondary" @onclick="CloseDetailsModal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	private bool IsModalOpen = false;
+
+	private Cgl_submittedReport SelectedDetail = new Cgl_submittedReport();
+
+	private List<Cgl_submittedReport> SubObj = new List<Cgl_submittedReport>();
+
+	// Open modal
+	private void OpenDetailsModal(Cgl_submittedReport detail)
+	{
+		SelectedDetail = detail;
+		IsModalOpen = true;
+	}
+
+	private void CloseDetailsModal()
+	{
+		IsModalOpen = false;
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		SubObj = await accountServices.GetAllSubmittedReportsAsync();
+
+	}
+	private string SelectedType { get; set; } = string.Empty;
+
+	private void HandleTypeChange(ChangeEventArgs e)
+	{
+		SelectedType = e.Value.ToString();
+		// Perform any action based on the selected type
+		Console.WriteLine($"Selected Type: {SelectedType}");
+
+
+	}
+}

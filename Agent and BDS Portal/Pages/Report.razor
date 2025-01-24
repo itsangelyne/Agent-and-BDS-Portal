@@ -1,0 +1,83 @@
+﻿@page "/report"
+@using Agent_and_BDS_Portal.Data
+@using Microsoft.EntityFrameworkCore;
+@inject ProductionReport_Services Cgl_Services ;
+
+
+<h3>Report</h3>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- PRODUCTION -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+
+                    <a href="/summaryreport" class="text-white"><h1>@PRODUCTION</h1></a>
+                    <p>Production</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CLAIMS PAID -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+
+                    <h1>@CLAIMSPAID</h1>
+                    <p>Claims Paid</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOSS RATIO -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+
+                    <h1>@LOSSRATIO</h1>
+                    <p>Loss Ratio</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- NET INCOME -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+
+                    <a href="/submitted" class="text-white"><h1>@NETINCOME</h1></a>
+                    <p>Net Income</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int PRODUCTION = 0;
+    private int CLAIMSPAID = 0; 
+    private int LOSSRATIO = 0; 
+    private int NETINCOME = 44; 
+    protected override async Task OnInitializedAsync()
+    {
+        // Call service to get the production count
+        PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+        CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+        LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+
+    }
+}
+

@@ -1,0 +1,58 @@
+﻿@page "/target"
+
+<h3>Target</h3>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- OVERALL -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #f80c0c, #ff7f50);">
+                <div class="card-body">
+                    <a href="/submitted" class="text-white"> <h1>@OVERALL</h1></a>
+                    <p>Overall</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MUST MAKE -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #f80c0c, #ff7f50);">
+                <div class="card-body">
+                    <h1>@MUSTMAKE</h1>
+                    <p>Must Make</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MUST PRODUCE -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #f80c0c, #ff7f50);">
+                <div class="card-body">
+                    <h1>@MUSTProduce</h1>
+                    <p>Must Produce</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private int OVERALL = 150;
+    private int MUSTMAKE = 53;
+    private int MUSTProduce = 44;
+
+}
+
+
+

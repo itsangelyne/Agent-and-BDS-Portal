@@ -1,0 +1,253 @@
+﻿@page "/navMenu"
+@using Microsoft.AspNetCore.Components.Routing
+@inject NavigationManager Navigation
+
+<div class="top-row ps-3 bg-#e51933 navbar-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href=""><h3>Marketing</h3></a>
+		<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</div>
+
+<div class="@NavMenuCssClass">
+	<nav class="flex-column"></nav>
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="/index" Match="NavLinkMatch.All">
+			<span class="fa fa-home fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Dashboard</b>
+		</NavLink>
+	</div>
+</div>
+
+<!-- Production Dropdown with Submenu -->
+<div class="nav-item px-3">
+	<a class="nav-link d-flex justify-content-between" href="production" @onclick="ToggleProductionDropdown">
+		<div>
+			<span class="fa fa-cogs fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
+		</div>
+		<i class="fa-solid @(showProductionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+	</a>
+	<!--Submitted-->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleSubmittedDropdown">
+			<div>
+				<span class="fa fa-paper-plane" aria-hidden="true" style="margin-right:20px"></span><b>Submitted</b>
+			</div>
+			<i class="fa-solid @(showSubmittedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @SubmittedDropdownClass">
+			<NavLink class="nav-link" href="banklist">
+				<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @SubmittedDropdownClass">
+			<NavLink class="nav-link" href="submitted">
+				<span class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+
+	<!--REceipted-->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="receipted" @onclick="ToggleReceiptedDropdown">
+			<div>
+				<span class="fa fa-box fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
+			</div>
+			<i class="fa-solid @(showReceiptedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
+			<NavLink class="nav-link" href="summaryreport">
+				<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
+			<NavLink class="nav-link" href="receipted">
+				<span class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+	<!-- Compliance -->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleComplianceDropdown">
+			<div>
+				<span class="fa fa-clipboard-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+			</div>
+			<i class="fa-solid @(showComplianceDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ComplianceDropdownClass">
+			<NavLink class="nav-link" href="summaryreport">
+				<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ComplianceDropdownClass">
+			<NavLink class="nav-link" href="receipted">
+				<span class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+
+	<!-- Approved -->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleApprovedDropdown">
+			<div>
+				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
+			</div>
+			<i class="fa-solid @(showApprovedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ApprovedDropdownClass">
+			<NavLink class="nav-link" href="summaryreport">
+				<span class="fas fa-chart-area fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ApprovedDropdownClass">
+			<NavLink class="nav-link" href="receipted">
+				<span class="fas fa-receipt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+</div>
+
+
+<!-- Other Menu Items -->
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="claims">
+		<span class="fas fa-file-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims</b>
+	</NavLink>
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="visitation">
+		<span class="fas fa-user-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Visitation</b>
+	</NavLink>
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="target">
+		<span class="fas fa-bullseye fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Targets</b>
+	</NavLink>
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="prospects">
+		<span class="fas fa-users fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Prospects</b>
+	</NavLink>
+</div>
+
+<!-- Report Dropdown with Submenu -->
+<div class="nav-item px-3">
+	<a class="nav-link d-flex justify-content-between" href="report" @onclick="ToggleReportDropdown">
+		<div>
+			<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Reports</b>
+		</div>
+		<i class="fa-solid @(showReportDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+	</a>
+	<div class="nested-menu ps-3 @ReportDropdownClass">
+		<NavLink class="nav-link" href="summaryreport">
+			<span class="fas fa-chart-bar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
+		</NavLink>
+		<NavLink class="nav-link" href="receipted">
+			<span class="fas fa-money-check-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims Paid</b>
+		</NavLink>
+		<NavLink class="nav-link" href="receipted">
+			<span class="fas fa-percentage fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Loss Ratio</b>
+		</NavLink>
+		<NavLink class="nav-link" href="receipted">
+			<span class="fas fa-wallet fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Net Income</b>
+		</NavLink>
+
+	</div>
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="commission">
+		<span class="fas fa-dollar-sign fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Commission</b>
+	</NavLink>
+
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="accountList">
+		<span class="fas fa-user fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Users</b>
+	</NavLink>
+</div>
+
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="main">
+		<span class="fas fa-user fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Logout</b>
+	</NavLink>
+</div>
+
+
+
+@code {
+	private bool collapseNavMenu = true;
+	private bool showProductionDropdown = false;
+	private bool showSubmittedDropdown = false;
+	private bool showReceiptedDropdown = false;
+	private bool showApprovedDropdown = false;
+	private bool showComplianceDropdown = false;
+	private bool showReportDropdown = false;
+	private bool showSubmittedDropdownClass = false;
+	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+	private string ProductionDropdownClass => showProductionDropdown ? "show" : "d-none";
+	private string ReportDropdownClass => showReportDropdown ? "show" : "d-none";
+	private string SubmittedDropdownClass => showSubmittedDropdown ? "show" : "d-none";
+	private string ReceiptedDropdownClass => showReceiptedDropdown ? "show" : "d-none";
+	private string ApprovedDropdownClass => showApprovedDropdown ? "show" : "d-none";
+	private string ComplianceDropdownClass => showComplianceDropdown ? "show" : "d-none";
+
+	private void ToggleNavMenu()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+
+	private void ToggleProductionDropdown()
+	{
+		showReportDropdown = false;
+		showSubmittedDropdown = false;
+		showReceiptedDropdown = false;
+		showApprovedDropdown = false;
+		showComplianceDropdown = false;
+		showProductionDropdown = !showProductionDropdown;
+	}
+
+	private void ToggleSubmittedDropdown()
+	{
+		showReportDropdown = false;
+		showReceiptedDropdown = false;
+		showApprovedDropdown = false;
+		showComplianceDropdown = false;
+		showSubmittedDropdown = !showSubmittedDropdown;
+	}
+	private void ToggleReportDropdown()
+	{
+		showReceiptedDropdown = false;
+		showProductionDropdown = false;
+		showSubmittedDropdown = false;
+		showApprovedDropdown = false;
+		showComplianceDropdown = false;
+		showReportDropdown = !showReportDropdown;
+	}
+	private void ToggleReceiptedDropdown()
+	{
+		showReportDropdown = false;
+		showApprovedDropdown = false;
+		showSubmittedDropdown = false;
+		showComplianceDropdown = false;
+		showReceiptedDropdown = !showReceiptedDropdown;
+	}
+	private void ToggleComplianceDropdown()
+	{
+		showReceiptedDropdown = false;
+		showReportDropdown = false;
+		showApprovedDropdown = false;
+		showSubmittedDropdown = false;
+		showComplianceDropdown = !showComplianceDropdown;
+	}
+	private void ToggleApprovedDropdown()
+	{
+		showReceiptedDropdown = false;
+		showReportDropdown = false;
+		showSubmittedDropdown = false;
+		showComplianceDropdown = false;
+		showApprovedDropdown = !showApprovedDropdown;
+	}
+	
+
+}

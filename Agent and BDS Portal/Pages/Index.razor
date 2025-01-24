@@ -1,0 +1,222 @@
+﻿@page "/"
+@using Agent_and_BDS_Portal.Data
+@inject ProductionReport_Services Cgl_Services ;
+@layout MainLayout
+
+<h3>Summary Report</h3>
+<div class="container mt-3">
+	<!-- Unified Border -->
+	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
+		<div class="row">
+			<!-- PRODUCTION -->
+			<div class="col-xs-4 col-lg-3">
+				<div class="card text-white bg-primary mb-0" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+					<div class="card-body text-center">
+						<a href="/summaryreport" class="text-white"><h1>@PRODUCTION</h1></a>
+						<p>Production</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- CLAIMS PAID -->
+			<div class="col-xs-4 col-lg-3">
+				<div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+					<div class="card-body text-center">
+						<h1>@CLAIMSPAID</h1>
+						<p>Claims Paid</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- LOSS RATIO -->
+			<div class="col-xs-4 col-lg-3">
+				<div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+					<div class="card-body text-center">
+						<h1>@LOSSRATIO</h1>
+						<p>Loss Ratio</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- NET INCOME -->
+			<div class="col-xs-4 col-lg-3">
+				<div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+					<div class="card-body text-center">
+						<a href="/submitted" class="text-white"><h1>@NETINCOME</h1></a>
+						<p>Net Income</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-2">
+	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
+		<!-- Row for Both Charts -->
+		<div class="d-flex justify-content-between" style="gap: 10px;">
+			<!-- Bar Chart -->
+			<div class="chart-container" style="width: 48%; background-color: #f9f9f9; border-radius: 9px; padding: 10px;">
+				<Chart @ref="barChart" Type="ChartType.Bar" TItem="double" Clicked="@OnClicked" style="width: 100%; height: 350px;" />
+			</div>
+
+			<!-- Line Chart -->
+			<div class="chart-container" style="width: 48%; background-color: #f9f9f9; border-radius: 9px; padding: 10px;">
+				<LineChart @ref="lineChart" TItem="double" style="width: 100%; height: 350px;" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-2">
+	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
+		<h2><b>Agent</b></h2>
+		<div class="mt-4 table-responsive">
+			<table class="table table-bordered">
+				<thead style="background-color: #d9eee2 !important;">
+					<tr>
+						<th>Bank</th>
+						<th>Bank Name</th>
+						<th>Name</th>
+						<th>Type of Term</th>
+						<th>Cost</th>
+						<th>Due Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1045</td>
+						<td>--</td>
+						<td>Trix</td>
+						<td>Long Term</td>
+						<td>100000</td>
+						<td>08-27-2001</td>
+						<td><span class="badge bg-secondary">PENDING</span></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td>1045</td>
+						<td>--</td>
+						<td>Angelyne</td>
+						<td>Short Term</td>
+						<td>100000</td>
+						<td>09-28-2002</td>
+						<td><span class="badge bg-success">COMPLETED</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+@code {
+	// Chart components for Bar and Line charts
+	Chart<double> barChart;
+	LineChart<double> lineChart;
+
+	// Initialize values for charts
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await HandleRedraw();
+		}
+	}
+
+	async Task HandleRedraw()
+	{
+		// Redraw both charts with data
+		await barChart.Clear();
+		await barChart.AddLabelsDatasetsAndUpdate(Labels, GetBarChartDataset());
+
+		await lineChart.Clear();
+		await lineChart.AddLabelsDatasetsAndUpdate(Labels, GetLineChartDataset());
+	}
+
+	// Bar Chart dataset
+	private BarChartDataset<double> GetBarChartDataset()
+	{
+		return new()
+		{
+			Label = "Production",
+			Data = GetProductionData(),
+			BackgroundColor = backgroundColors,
+			BorderColor = borderColors,
+			BorderWidth = 1
+		};
+	}
+
+	// Line Chart dataset
+	private LineChartDataset<double> GetLineChartDataset()
+	{
+		return new LineChartDataset<double>
+		{
+			Label = "2025 vs. 2024 Total Production",
+			Data = RandomizeData(),
+			BackgroundColor = backgroundColors,
+			BorderColor = borderColors,
+			Fill = true,
+			PointRadius = 3,
+			CubicInterpolationMode = "monotone",
+		};
+	}
+
+	// Labels and colors for the charts
+	string[] Labels = { "Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+	List<string> backgroundColors = new List<string>
+	{
+		ChartColor.FromRgba(255, 99, 132, 0.2f),
+		ChartColor.FromRgba(54, 162, 235, 0.2f),
+		ChartColor.FromRgba(255, 206, 86, 0.2f),
+		ChartColor.FromRgba(75, 192, 192, 0.2f),
+		ChartColor.FromRgba(153, 102, 255, 0.2f),
+		ChartColor.FromRgba(255, 159, 64, 0.2f)
+	};
+	List<string> borderColors = new List<string>
+	{
+		ChartColor.FromRgba(255, 99, 132, 1f),
+		ChartColor.FromRgba(54, 162, 235, 1f),
+		ChartColor.FromRgba(255, 206, 86, 1f),
+		ChartColor.FromRgba(75, 192, 192, 1f),
+		ChartColor.FromRgba(153, 102, 255, 1f),
+		ChartColor.FromRgba(255, 159, 64, 1f)
+	};
+
+	// Generate random production data for each month (instead of same data for all months)
+	private List<double> GetProductionData()
+	{
+		var r = new Random(DateTime.Now.Millisecond);
+		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();
+	}
+
+	// Randomize data for Line chart
+	List<double> RandomizeData()
+	{
+		var r = new Random(DateTime.Now.Millisecond);
+		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();
+	}
+
+	// Handle bar chart click events
+	Task OnClicked(ChartMouseEventArgs e)
+	{
+		var model = e.Model as BarChartModel;
+		Console.WriteLine($"Handling event for {nameof(BarChartModel)}: x:{model.X} y:{model.Y}");
+		return Task.CompletedTask;
+	}
+
+	// Initialize values
+	private int PRODUCTION = 0;
+	private int CLAIMSPAID = 0;
+	private int LOSSRATIO = 0;
+	private int NETINCOME = 44;
+
+	protected override async Task OnInitializedAsync()
+	{
+		// Call service to get the production count
+		PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+		CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+		LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+	}
+}

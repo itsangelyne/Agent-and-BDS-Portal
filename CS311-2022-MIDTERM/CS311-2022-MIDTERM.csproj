@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5F8CD2B-BCA8-4C5A-AB51-4C9CEC7CCA6D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CS311_2022_MIDTERM</RootNamespace>
+    <AssemblyName>CS311-2022-MIDTERM</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\..\Documents\3rd YEAR COLLEGE\COMPUTER PROGRAMMING 3 (LAB)\MySql.Data.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="fmAdminApprove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmAdminApprove.Designer.cs">
+      <DependentUpon>fmAdminApprove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAccounts.Designer.cs">
+      <DependentUpon>frmAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminTicket.Designer.cs">
+      <DependentUpon>frmAdminTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmApproveAdminn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmApproveAdminn.Designer.cs">
+      <DependentUpon>frmApproveAdminn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAssignAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAssignAdmin.Designer.cs">
+      <DependentUpon>frmAssignAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCompleteTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCompleteTable.Designer.cs">
+      <DependentUpon>frmCompleteTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCompleteTech.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCompleteTech.Designer.cs">
+      <DependentUpon>frmCompleteTech.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateAdmin.Designer.cs">
+      <DependentUpon>frmCreateAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateTech.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateTech.Designer.cs">
+      <DependentUpon>frmCreateTech.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateTicket.Designer.cs">
+      <DependentUpon>frmCreateTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEquipment.Designer.cs">
+      <DependentUpon>frmEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmlogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmlogin.Designer.cs">
+      <DependentUpon>frmlogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewAccount.Designer.cs">
+      <DependentUpon>frmNewAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewEquipment.Designer.cs">
+      <DependentUpon>frmNewEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTechApprove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTechApprove.Designer.cs">
+      <DependentUpon>frmTechApprove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTechTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTechTicket.Designer.cs">
+      <DependentUpon>frmTechTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTicket.Designer.cs">
+      <DependentUpon>frmTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateAccount.Designer.cs">
+      <DependentUpon>frmUpdateAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateEquipment.Designer.cs">
+      <DependentUpon>frmUpdateEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateTicket.Designer.cs">
+      <DependentUpon>frmUpdateTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThemeColor.cs" />
+    <EmbeddedResource Include="fmAdminApprove.resx">
+      <DependentUpon>fmAdminApprove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAccounts.resx">
+      <DependentUpon>frmAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminTicket.resx">
+      <DependentUpon>frmAdminTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmApproveAdminn.aa.resx">
+      <DependentUpon>frmApproveAdminn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmApproveAdminn.resx">
+      <DependentUpon>frmApproveAdminn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAssignAdmin.resx">
+      <DependentUpon>frmAssignAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCompleteTable.resx">
+      <DependentUpon>frmCompleteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCompleteTech.resx">
+      <DependentUpon>frmCompleteTech.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateAdmin.resx">
+      <DependentUpon>frmCreateAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateTech.resx">
+      <DependentUpon>frmCreateTech.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateTicket.resx">
+      <DependentUpon>frmCreateTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEquipment.resx">
+      <DependentUpon>frmEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmlogin.resx">
+      <DependentUpon>frmlogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewAccount.resx">
+      <DependentUpon>frmNewAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewEquipment.resx">
+      <DependentUpon>frmNewEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTechApprove.resx">
+      <DependentUpon>frmTechApprove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTechTicket.resx">
+      <DependentUpon>frmTechTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTicket.resx">
+      <DependentUpon>frmTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateAccount.resx">
+      <DependentUpon>frmUpdateAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateEquipment.resx">
+      <DependentUpon>frmUpdateEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateTicket.resx">
+      <DependentUpon>frmUpdateTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tr.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iccon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iccon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iccon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iccon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\q.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\y.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\u.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\u1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\y2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\y3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\account.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\invite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\invite %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\invite %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\invite %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\invite %286%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close-window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power-off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close-window1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hj.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hj1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\o.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-bar %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-bar %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-bar %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\invite %285%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ad9dd2d7fbf335850dfa8a549871c11e.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hj2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rh1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gghhj.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a104520ff4f70984e5592156c176bfb5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e7df3ca95aec1e915ed4918187e4ac32.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e7df3ca95aec1e915ed4918187e4ac321.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\o.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\XRXJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 113216.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 122716.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 123309.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 124209.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 124658.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 125207.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 125431.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 1252071.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\las.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\olp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jh1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\olp1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jgf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\klkkj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 142817.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jgf1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-09 1428171.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jgf2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\o1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\y1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\simple-multi-colored-abstract-gradient-blur-background-overlay-graphic-design-banner-poster-themes-171996603.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\154406-blurred-gradient-748x421.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\154406-blurred-gradient-748x4211.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\154406-blurred-gradient-748x4212.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\154406-blurred-gradient-748x4213.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\154406-blurred-gradient-748x4214.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

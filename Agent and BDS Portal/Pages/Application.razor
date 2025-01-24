@@ -1,0 +1,41 @@
+﻿@page "/application"
+@using Agent_and_BDS_Portal.Data;
+@using Agent_and_BDS_Portal.Pages;
+@using Microsoft.EntityFrameworkCore;
+<h3>Application</h3>
+
+<div class="container mt-0">
+	<!-- Unified Border -->
+	<div class="border p-4" style="background-color: #eaf5e5;">
+		<img src="images/ck_logo.png" alt="CK Logo" class="img-fluid" style="max-height: 50px; display: block; margin-left: auto; margin-right: auto;" />
+		<a class="btn btn-primary btn-sm" href="banklist">Back</a>
+		<div class="mt-4 table-responsive">
+			<table class="table table-bordered">
+				<thead style="background-color: #F95454 !important;">
+					<tr>
+						<th><i>DCHS</i></th>
+						<th><i>Name of Bank</i></th>
+						<th <i>Action</i></th>
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td>11-22345</td>
+						<td>Sample</td>
+						<td>
+							<a class="btn btn-primary btn-sm" href="submitted">View Details</a>
+
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+@code {
+
+}

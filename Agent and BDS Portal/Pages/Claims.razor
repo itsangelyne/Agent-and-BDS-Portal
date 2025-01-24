@@ -1,0 +1,69 @@
+﻿@page "/claims"
+
+<h3>Claims</h3>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- FILEDCLAIMS -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <a href="/submitted" class="text-white"> <h1>@FILEDCLAIMS</h1></a>
+                    <p>Filed Claims</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AGING -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <h1>@AGING</h1>
+                    <p>AGING</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADDITIONAL REQUIREMENTS -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <h1>@ADDITIONALREQUIREMENTS</h1>
+                    <p>Additional Requirements</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPROVED -->
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="card text-white mb-3" style="background: linear-gradient(160deg, #165404, #90a30b);">
+                <div class="card-body">
+                    <h1>@APPROVED</h1>
+                    <p>Approved</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    private int FILEDCLAIMS = 150;
+    private int AGING = 53;
+    private int ADDITIONALREQUIREMENTS = 44;
+    private int APPROVED = 65;
+}

@@ -1,0 +1,85 @@
+﻿@page "/production"
+@using Agent_and_BDS_Portal.Data;
+@using Microsoft.EntityFrameworkCore;
+
+@inject SubmittedReport_Services SubmittedReport_Services ;
+
+
+<h3><i><b>Production</b></i></h3>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- SUBMITTED -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+                    <a href="/submitted" class="text-white">
+                        <h1>@SUBMITTED</h1>
+                    </a>
+                    <p>Submitted</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECEIPTED -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+                    <a href="/receipted" class="text-white">
+                        <h1>@RECEIPTED</h1>
+                    </a>
+                    <p>Receipted</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPLIANCE -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+                    <a href="/compliance" class="text-white">
+                        <h1>@COMPLIANCE</h1>
+                    </a>
+                    <p>Compliance</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPROVED -->
+        <div class="col-xs-4 col-lg-3">
+            <div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div class="card-body text-center">
+
+                    <a href="/approved" class="text-white">
+                        <h1>@APPROVED</h1>
+                    </a>
+                    <p>Approved</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="text-white">More info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int SUBMITTED = 0;
+    private int RECEIPTED = 53;
+    private int COMPLIANCE = 44;
+    private int APPROVED = 65;
+    protected override async Task OnInitializedAsync()
+    {
+        // Call service to get the production count
+        SUBMITTED = await SubmittedReport_Services.GetSubmittedReportsRowCountAsync();
+    }
+} 
