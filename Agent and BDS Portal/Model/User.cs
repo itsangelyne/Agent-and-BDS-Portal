@@ -7,9 +7,9 @@ namespace Agent_and_BDS_Portal.Model
     {
 
         public int Id { get; set; }
-        public int EmployeeNo { get; set; }
 
         public string Name { get; set; }
+        public string Middle { get; set; }
 
         public string Lastname { get; set; }
 
@@ -18,8 +18,9 @@ namespace Agent_and_BDS_Portal.Model
         public string userType { get; set; }
         public string Status { get; set; }
 
-        public DateTime date { get; set; } = DateTime.Now;
+       
         public string createdBy { get; set; }
+        public DateTime dateCreated { get; set; } = DateTime.Now;
 
     }
 }

@@ -12,24 +12,24 @@ public class Cgl_submittedReport
     public string NameofInsured { get; set; }
     public string CivilStatus { get; set; }
     public string Gender { get; set; }
-    public string Height { get; set; } = string.Empty;
-    public string Weight { get; set; } = string.Empty;
-    public string Address { get; set; } = string.Empty;
+    public string Height { get; set; } 
+    public string Weight { get; set; } 
+    public string Address { get; set; } 
     public long? ContactNumber { get; set; }
-    public string? EmailAddress { get; set; } = string.Empty;
-    public int? Age { get; set; }
+    public string? EmailAddress { get; set; } 
+    public int Age { get; set; }
     public DateTime? DateofBirth { get; set; }
-    public string PlaceofBirth { get; set; } = string.Empty;
-    public string Nationality { get; set; } = string.Empty;
+    public string PlaceofBirth { get; set; } 
+    public string Nationality { get; set; } 
     public long? GovernmentIDNo { get; set; }
-    public string SourceofFunds { get; set; } = string.Empty;
-    public string NatureofSelfEmployment { get; set; } = string.Empty;
-    public string AddressofEmployer { get; set; } = string.Empty;
-    public string OccupationNLivelihood { get; set; } = string.Empty;
+    public string SourceofFunds { get; set; } 
+    public string NatureofSelfEmployment { get; set; }
+    public string AddressofEmployer { get; set; } 
+    public string OccupationNLivelihood { get; set; } 
     public DateTime date { get; set; } = DateTime.Now;
     public long? AmountofInsurance { get; set; }
-    public string TermofLoan { get; set; } = string.Empty;
-    public string Premium { get; set; } = string.Empty;
+    public string TermofLoan { get; set; }
+    public string Premium { get; set; }
     public DateTime? EffectDate { get; set; }
     public string Modeofpayment { get; set; } = string.Empty;
     public string? Rider { get; set; } = string.Empty;

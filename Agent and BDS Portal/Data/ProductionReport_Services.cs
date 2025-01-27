@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Agent_and_BDS_Portal.Context;
-using Microsoft.Data.SqlClient;
-using static Agent_and_BDS_Portal.Context.ApplicationDbContext;
+using Agent_and_BDS_Portal.Model;
 namespace Agent_and_BDS_Portal.Data
 {
     public class ProductionReport_Services
@@ -12,8 +11,12 @@ namespace Agent_and_BDS_Portal.Data
         {
             _applicationContext = applicationDbContext;
         }
-        
+
         // Method to count rows in tbl_cgl_ProductionMonitoringReport
+        public async Task<List<Cgl_ProductionReport>>GetAllProductionMonitoringReportsAsync()
+        {
+            return await _applicationContext.tbl_cgl_ProductionMonitoringReport.ToListAsync();
+        }
         public async Task<int> GetProductionMonitoringRowCountAsync()
         {
             return await _applicationContext.tbl_cgl_ProductionMonitoringReport.CountAsync();
