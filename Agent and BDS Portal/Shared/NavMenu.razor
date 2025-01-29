@@ -50,43 +50,45 @@
 
 	<!--REceipted-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="receipted" @onclick="ToggleReceiptedDropdown">
+		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleReceiptedDropdown">
 			<div>
-				<span class="fa fa-box fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
+				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
 			</div>
 			<i class="fa-solid @(showReceiptedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="summaryreport">
-				<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-chart-area fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="receipted">
-				<span class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-receipt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
-	<!-- Compliance -->
+	
+	<!--Compliance-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
 		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleComplianceDropdown">
 			<div>
-				<span class="fa fa-clipboard-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
 			</div>
 			<i class="fa-solid @(showComplianceDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
 		<div class="nested-menu ps-3 @ComplianceDropdownClass">
-			<NavLink class="nav-link" href="summaryreport">
-				<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			<NavLink class="nav-link" href="compliance">
+				<span class="fas fa-chart-area fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ComplianceDropdownClass">
 			<NavLink class="nav-link" href="receipted">
-				<span class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-receipt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
-
+	
+	
 	<!-- Approved -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
 		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleApprovedDropdown">
