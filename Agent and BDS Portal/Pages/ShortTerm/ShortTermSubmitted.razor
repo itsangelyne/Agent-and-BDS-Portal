@@ -1,0 +1,59 @@
+﻿@page "/ShortTerm/Sbanklist"
+<h3><strong>SUBMITTED</strong></h3>
+
+
+<div class="container mt-0">
+	<!-- Unified Border -->
+	<div class="border p-4" style="background-color: #eaf5e5;">
+		<h3><Strong><center>SHORT TERM</center></Strong></h3>
+		<br />
+		<Label><Strong>Search:</Strong></Label>
+		<input class="form-control" id="myInput" type="text" placeholder="Search..">
+		<br>
+
+		<!-- Table -->
+		<div class="mt-4 table-responsive">
+			<table class="table table-bordered">
+				<thead style="background-color: #F95454 !important;">
+					<tr>
+						<th><i>Release Date</i></th>
+						<th><i>Total Application</i></th>
+						<th class="text-center"><i>Particular</i></th>
+						<th class="text-center">Application</th>
+						<th class="text-center">Receipt</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td>21/01/2025</td>
+						<td>10</td>
+						<td>
+							<button class="btn btn-primary btn-sm" href="Cgl_EditAccount">View Details</button>
+						</td>
+						<td>
+							<a class="btn btn-primary btn-sm" href="application">Application Details</a>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-sm" href="Cgl_EditAccount">View Details</button>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+@code {
+	private string SelectedType { get; set; } = string.Empty;
+	private void HandleTypeChange(ChangeEventArgs e)
+	{
+		SelectedType = e.Value.ToString();
+		// Perform any action based on the selected type
+		Console.WriteLine($"Selected Type: {SelectedType}");
+	}
+
+}
