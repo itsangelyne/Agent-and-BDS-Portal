@@ -7,26 +7,18 @@
 	<div class="border p-4" style="background-color: #eaf5e5;">
 		<img src="images/ck_logo.png" alt="CK Logo" class="img-fluid" style="max-height: 50px; display: block; margin-left: auto; margin-right: auto;" />
 		<br />
-		<!-- Search Bar and Dropdown -->
-		<div class="row align-items-center">
-			<div class="col-md-8 mb-3 mb-md-0">
-				<input class="form-control" id="myInput" type="text" placeholder="Search..">
-			</div>
-		</div>
+		<Label><Strong>Search:</Strong></Label>
+		<input class="form-control" id="myInput" type="text" placeholder="Search..">
+		<br>
 		
 		<!-- Table -->
 		<div class="mt-4 table-responsive">
 			<table class="table table-bordered">
 				<thead style="background-color: #F95454 !important;">
 					<tr>
-						<th style="color:white;">ID</th>
-						<th style="color:white;">Name of Insured</th>
-						<th style="color:white;">Civil Status</th>
-						<th style="color:white;">Gender</th>
-						<th style="color:white;">Contact Number</th>
-						<th style="color:white;">Nationality</th>
-						<th style="color:white;">Occupation & Livelihood</th>
-						<th style="color:white;">Date and Time</th>
+						<th style="color:white;">OR Number</th>
+						<th style="color:white;">OR Date</th>
+						<th style="color:white;">Total Application</th>
 						<th style="color:white;">Status</th>
 						<th style="color:white;">Actions</th>
 					</tr>
@@ -45,17 +37,13 @@
 							<tr>
 								<td>@submitted.id</td>
 								<td>@submitted.NameofInsured</td>
-								<td>@submitted.CivilStatus</td>
-								<td>@submitted.Gender</td>
-								<td>@(submitted.ContactNumber.ToString() ?? "N/A")</td>
-								<td>@submitted.Nationality</td>
-								<td>@submitted.OccupationNLivelihood</td>
-								<td>@submitted.date</td>
+								<td>5</td>
 								<td><span class="badge bg-warning">OR</span></td>
 								<td class="d-flex justify-content-around">
 									<button class="btn btn-primary btn-sm" @onclick="() => OpenDetailsModal(submitted)">View</button>
-									<button class="btn btn-danger btn-sm" @onclick="() => OpenDetailsModal(submitted)">Notice</button>
 								</td>
+								
+								
 							</tr>
 						}
 					}

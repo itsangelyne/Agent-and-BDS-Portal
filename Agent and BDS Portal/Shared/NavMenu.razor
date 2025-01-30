@@ -2,14 +2,17 @@
 @using Microsoft.AspNetCore.Components.Routing
 @inject NavigationManager Navigation
 
-<div class="top-row ps-3 bg-#e51933 navbar-dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href=""><h3>Marketing</h3></a>
-		<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+<div div class="top-row ps-3 bg-#e51933 navbar-dark">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<a class="navbar-brand text-center">
+			<h4 class="mb-0">Marketing</h4>
+		</a>
+		<button title="Navigation menu" class="navbar-toggler position-absolute end-0 me-3" @onclick="ToggleNavMenu">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 	</div>
 </div>
+
 
 <div class="@NavMenuCssClass">
 	<nav class="flex-column"></nav>
@@ -50,14 +53,14 @@
 
 	<!--REceipted-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleReceiptedDropdown">
+		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleReceiptedDropdown">
 			<div>
 				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
 			</div>
 			<i class="fa-solid @(showReceiptedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
-			<NavLink class="nav-link" href="summaryreport">
+			<NavLink class="nav-link" href="receipted">
 				<span class="fas fa-chart-area fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
@@ -70,7 +73,7 @@
 	
 	<!--Compliance-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleComplianceDropdown">
+		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleComplianceDropdown">
 			<div>
 				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
 			</div>
@@ -91,7 +94,7 @@
 	
 	<!-- Approved -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="submitted" @onclick="ToggleApprovedDropdown">
+		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleApprovedDropdown">
 			<div>
 				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
 			</div>
