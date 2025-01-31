@@ -16,20 +16,20 @@
 
 <!-- NAV MENU CONTAINER -->
 <div class="@NavMenuCssClass">
-    <nav class="flex-column"></nav>
+	<nav class="flex-column"></nav>
 
-    <!-- DASHBOARD -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
-            <span class="fa fa-home fa-lg" style="margin-right:20px"></span><b>Dashboard</b>
-        </NavLink>
-    </div>
+	<!-- DASHBOARD -->
+	<div class="nav-item px-3">
+		<NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+			<span class="fa fa-home fa-lg" style="margin-right:20px"></span><b>Dashboard</b>
+		</NavLink>
+	</div>
 </div>
 <!-- Production Dropdown with Submenu -->
 <div class="nav-item px-3">
 	<a class="nav-link d-flex justify-content-between" href="production" @onclick="ToggleProductionDropdown">
 		<div>
-			<span class="fa fa-cogs fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
+			<span class="fa fa-industry" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
 		</div>
 		<i class="fa-solid @(showProductionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 	</a>
@@ -57,7 +57,7 @@
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
 		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleReceiptedDropdown">
 			<div>
-				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
+				<span class="fa fa-stamp fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
 			</div>
 			<i class="fa-solid @(showReceiptedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
@@ -72,26 +72,26 @@
 			</NavLink>
 		</div>
 	</div>
-	
-    <!-- Compliance -->
-    <div class="nested-menu ps-3 @ProductionDropdownClass">
-        <a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleComplianceDropdown">
-            <div>
-                <span class="fas fa-shield-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
-            </div>
-            <i class="fa-solid @(showComplianceDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
-        </a>
-        <div class="nested-menu ps-3 @ComplianceDropdownClass">
-            <NavLink class="nav-link" href="/LongTerm/Lcompliance">
-                <span class="fas fa-check-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
-            </NavLink>
-        </div>
-        <div class="nested-menu ps-3 @ComplianceDropdownClass">
-            <NavLink class="nav-link" href="/ShortTerm/Scompliance">
-                <span class="fas fa-clipboard-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
-            </NavLink>
-        </div>
-    </div>
+
+	<!-- Compliance -->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleComplianceDropdown">
+			<div>
+				<span class="fas fa-shield-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+			</div>
+			<i class="fa-solid @(showComplianceDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ComplianceDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+				<span class="fas fa-check-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ComplianceDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
+				<span class="fas fa-clipboard-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
 
 	<!-- Approved -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
@@ -115,84 +115,150 @@
 </div>
 
 <!--Claims-->
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="claims">
-                <span class="fas fa-file-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims</b>
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="visitation">
-                <span class="fas fa-user-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Visitation</b>
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="target">
-                <span class="fas fa-bullseye fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Targets</b>
-            </NavLink>
-        </div>
-  
-    <!-- PROSPECTS -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="prospects">
-            <span class="fas fa-users fa-lg" style="margin-right:20px"></span><b>Prospects</b>
-        </NavLink>
-    </div>
-           
-    <!-- Report Dropdown with Submenu -->
-    <div class="nav-item px-3">
-        <a class="nav-link d-flex justify-content-between" href="report" @onclick="ToggleReportDropdown">
-            <div>
-                <span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Reports</b>
-            </div>
-            <i class="fa-solid @(showReportDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
-        </a>
-        <div class="nested-menu ps-3 @ReportDropdownClass">
-            <NavLink class="nav-link" href="summaryreport">
-                <span class="fas fa-chart-bar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
-            </NavLink>
-            <NavLink class="nav-link" href="receipted">
-                <span class="fas fa-money-check-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims Paid</b>
-            </NavLink>
-            <NavLink class="nav-link" href="receipted">
-                <span class="fas fa-percentage fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Loss Ratio</b>
-            </NavLink>
-            <NavLink class="nav-link" href="receipted">
-                <span class="fas fa-wallet fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Net Income</b>
-            </NavLink>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="claims">
+		<span class="fas fa-file-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims</b>
+	</NavLink>
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="visitation">
+		<span class="fas fa-user-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Visitation</b>
+	</NavLink>
+</div>
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="target">
+		<span class="fas fa-bullseye fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Targets</b>
+	</NavLink>
+</div>
 
-        </div>
-    </div>
-            
-    <!-- COMMISSION -->
-    <div class="nav-item px-3">
-        <a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleCommissionDropdown">
-            <div>
-                <span class="fas fa-coins fa-lg" style="margin-right:20px"></span><b>Commission</b>
-            </div>
-            <i class="fa-solid @(showCommissionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
-        </a>
-        <div class="nested-menu ps-3 @CommissionDropdownClass">
-            <NavLink class="nav-link" href="/LongTerm/Lcommission">
-                <span class="fas fa-briefcase fa-lg" style="margin-right:20px"></span><b>Long Term</b>
-            </NavLink>
-            <NavLink class="nav-link" href="/ShortTerm/Scommission">
-                <span class="fas fa-dollar-sign fa-lg" style="margin-right:20px"></span><b>Short Term</b>
-            </NavLink>
-        </div>
-    </div>
-    <!-- USERS -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="accountList">
-            <span class="fas fa-user fa-lg" style="margin-right:20px"></span><b>Users</b>
-        </NavLink>
-    </div>
-   
-    <!-- LOGOUT -->
-    <div class="nav-item px-3">
-        <NavLink class="nav-link" href="main">
-            <span class="fas fa-sign-out-alt fa-lg" style="margin-right:20px"></span><b>Logout</b>
-        </NavLink>
-    </div>
+<!-- PROSPECTS -->
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="prospects">
+		<span class="fas fa-users fa-lg" style="margin-right:20px"></span><b>Prospects</b>
+	</NavLink>
+</div>
+
+<!-- Report -->
+<div class="nav-item px-3">
+	<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleReportDropdown">
+		<div>
+			<span class="fa fa-file-invoice fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Report</b>
+		</div>
+		<i class="fa-solid @(showReportDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+	</a>
+
+	<!-- Production Report -->
+	<div class="nested-menu ps-3 @ReportDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleProductionReportDropdown">
+			<div>
+				<span class="fas fa-industry fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
+			</div>
+			<i class="fa-solid @(showProductionReportDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ProductionReportDropdownClass">
+			<NavLink class="nav-link" href="LongTerm/banklist">
+				<span class="fas fa-hand-paper fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ProductionReportDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Sbanklist">
+				<span class="fas fa-file-invoice-dollar" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+
+	<!-- Claims Paid -->
+	<div class="nested-menu ps-3 @ReportDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleClaimsPaidDropdown">
+			<div>
+				<span class="fas fa-money-bill-wave fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims Paid</b>
+			</div>
+			<i class="fa-solid @(showClaimsPaidDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ClaimsPaidDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+				<span class="fas fa-file-alt" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ClaimsPaidDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
+				<span class="fas fa-stopwatch fa-spin fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+
+	<!-- Loss Ratio -->
+	<div class="nested-menu ps-3 @ReportDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleLossRatioDropdown">
+			<div>
+				<span class="fas fa-percentage fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Loss Ratio</b>
+			</div>
+			<i class="fa-solid @(showLossRatioDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @LossRatioDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+				<span class="fas fa-calendar-alt" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @LossRatioDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
+				<span class="fas fa-piggy-bank fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+
+	<!-- Net Income -->
+	<div class="nested-menu ps-3 @ReportDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleNetIncomeDropdown">
+			<div>
+				<span class="fas fa-chart-pie fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Net Income</b>
+			</div>
+			<i class="fa-solid @(showNetIncomeDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @NetIncomeDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+				<span class="fas fa-landmark fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @NetIncomeDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
+				<span class="fas fa-check-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+</div>
+
+
+<!-- COMMISSION -->
+<div class="nav-item px-3">
+	<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleCommissionDropdown">
+		<div>
+			<span class="fas fa-coins fa-lg" style="margin-right:20px"></span><b>Commission</b>
+		</div>
+		<i class="fa-solid @(showCommissionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+	</a>
+	<div class="nested-menu ps-3 @CommissionDropdownClass">
+		<NavLink class="nav-link" href="/LongTerm/Lcommission">
+			<span class="fas fa-briefcase fa-lg" style="margin-right:20px"></span><b>Long Term</b>
+		</NavLink>
+		<NavLink class="nav-link" href="/ShortTerm/Scommission">
+			<span class="fas fa-dollar-sign fa-lg" style="margin-right:20px"></span><b>Short Term</b>
+		</NavLink>
+	</div>
+</div>
+<!-- USERS -->
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="accountList">
+		<span class="fas fa-user fa-lg" style="margin-right:20px"></span><b>Users</b>
+	</NavLink>
+</div>
+
+<!-- LOGOUT -->
+<div class="nav-item px-3">
+	<NavLink class="nav-link" href="main">
+		<span class="fas fa-sign-out-alt fa-lg" style="margin-right:20px"></span><b>Logout</b>
+	</NavLink>
+</div>
 
 
 @code {
@@ -205,6 +271,15 @@
 	private bool showReportDropdown = false;
 	private bool showSubmittedDropdownClass = false;
 	private bool showCommissionDropdown = false;
+
+	<!--Report-->
+
+	private bool showProductionReportDropdown = false;
+	private bool showClaimsPaidDropdown = false;
+	private bool showLossRatioDropdown = false;
+	private bool showNetIncomeDropdown = false;
+
+
 	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 	private string ProductionDropdownClass => showProductionDropdown ? "show" : "d-none";
 	private string ReportDropdownClass => showReportDropdown ? "show" : "d-none";
@@ -214,6 +289,13 @@
 	private string ComplianceDropdownClass => showComplianceDropdown ? "show" : "d-none";
 	private string CommissionDropdownClass => showCommissionDropdown ? "show" : "d-none";
 
+	<!--Report-->
+	private string ProductionReportDropdownClass => showProductionReportDropdown ? "show" : "d-none";
+	private string ClaimsPaidDropdownClass => showClaimsPaidDropdown ? "show" : "d-none";
+	private string LossRatioDropdownClass => showLossRatioDropdown ? "show" : "d-none";
+	private string NetIncomeDropdownClass => showNetIncomeDropdown ? "show" : "d-none";
+
+
 
 	private void ToggleNavMenu()
 	{
@@ -222,6 +304,7 @@
 
 	private void ToggleProductionDropdown()
 	{
+		
 		showReportDropdown = false;
 		showSubmittedDropdown = false;
 		showReceiptedDropdown = false;
@@ -233,6 +316,7 @@
 
 	private void ToggleSubmittedDropdown()
 	{
+		
 		showReportDropdown = false;
 		showReceiptedDropdown = false;
 		showApprovedDropdown = false;
@@ -242,6 +326,7 @@
 	}
 	private void ToggleReportDropdown()
 	{
+	
 		showReceiptedDropdown = false;
 		showProductionDropdown = false;
 		showSubmittedDropdown = false;
@@ -252,6 +337,7 @@
 	}
 	private void ToggleReceiptedDropdown()
 	{
+	
 		showReportDropdown = false;
 		showApprovedDropdown = false;
 		showSubmittedDropdown = false;
@@ -261,6 +347,7 @@
 	}
 	private void ToggleComplianceDropdown()
 	{
+
 		showReceiptedDropdown = false;
 		showReportDropdown = false;
 		showApprovedDropdown = false;
@@ -270,6 +357,7 @@
 	}
 	private void ToggleApprovedDropdown()
 	{
+		
 		showReceiptedDropdown = false;
 		showReportDropdown = false;
 		showSubmittedDropdown = false;
@@ -279,12 +367,46 @@
 	}
 	private void ToggleCommissionDropdown()
 	{
+		
 		showReceiptedDropdown = false;
 		showReportDropdown = false;
 		showSubmittedDropdown = false;
 		showComplianceDropdown = false;
 		showProductionDropdown = false;
 		showCommissionDropdown = !showCommissionDropdown;
+	}
+	private void ToggleProductionReportDropdown()
+	{
+		
+		showClaimsPaidDropdown = false;
+		showLossRatioDropdown = false;
+		showNetIncomeDropdown = false;
+		showProductionReportDropdown = !showProductionReportDropdown;
+	}
+	private void ToggleClaimsPaidDropdown()
+	{
+		
+		showProductionReportDropdown = false;
+		showLossRatioDropdown = false;
+		showNetIncomeDropdown = false;
+		showClaimsPaidDropdown = !showClaimsPaidDropdown;
+
+	} 
+	private void ToggleLossRatioDropdown()
+	{
+		
+		showProductionReportDropdown = false;
+		showClaimsPaidDropdown = false;
+		showNetIncomeDropdown = false;
+		showLossRatioDropdown = !showLossRatioDropdown;
+	}
+
+	private void ToggleNetIncomeDropdown()
+	{
+		showProductionReportDropdown = false;
+		showClaimsPaidDropdown = false;
+		showLossRatioDropdown = false;
+		showNetIncomeDropdown = !showNetIncomeDropdown;
 	}
 
 }

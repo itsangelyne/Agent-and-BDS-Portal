@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
+using MudBlazor.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,11 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<Account_Services>();
 builder.Services.AddScoped<ProductionReport_Services>();
 builder.Services.AddScoped<SubmittedReport_Services>();
+
+
+builder.Services.AddMudServices();
+
+
 builder.Services
     .AddBlazorise(options =>
     {

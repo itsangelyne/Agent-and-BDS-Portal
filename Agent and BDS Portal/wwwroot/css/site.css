@@ -1,5 +1,9 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css/');
 
+/* Disable MudBlazor Typography */
+.mud-typography {
+    font-family: inherit !important;
+}
 
 
 html, body {
