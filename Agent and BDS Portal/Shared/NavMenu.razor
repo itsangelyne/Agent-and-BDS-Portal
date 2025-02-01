@@ -238,12 +238,36 @@
 		<i class="fa-solid @(showCommissionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 	</a>
 	<div class="nested-menu ps-3 @CommissionDropdownClass">
-		<NavLink class="nav-link" href="/LongTerm/Lcommission">
-			<span class="fas fa-briefcase fa-lg" style="margin-right:20px"></span><b>Long Term</b>
-		</NavLink>
-		<NavLink class="nav-link" href="/ShortTerm/Scommission">
-			<span class="fas fa-dollar-sign fa-lg" style="margin-right:20px"></span><b>Short Term</b>
-		</NavLink>
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleForpaymentDropdown">
+			<div>
+				<span class="fas fa-hourglass-half fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>For Payment</b>
+			</div>
+			<i class="fa-solid @(showForpaymentDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @ForpaymentDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcommission">
+				<span class="fas fa-sync-alt fa-lg" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+			<NavLink class="nav-link" href="/ShortTerm/Scommission">
+				<span class="fas fa-bolt fa-lg" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @CommissionDropdownClass">
+			<a class="nav-link d-flex justify-content-between" href="#" @onclick="TogglePaidDropdown">
+				<div>
+					<span class="fas fa-hand-holding-usd fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Paid</b>
+				</div>
+				<i class="fa-solid @(showPaidDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+			</a>
+			<div class="nested-menu ps-3 @PaidDropdownClass">
+				<NavLink class="nav-link" href="/LongTerm/Lcommission">
+					<span class="fas fa-briefcase fa-lg" style="margin-right:20px"></span><b>Long Term</b>
+				</NavLink>
+				<NavLink class="nav-link" href="/ShortTerm/Scommission">
+					<span class="fas fa-handshake fa-lg" style="margin-right:20px"></span><b>Short Term</b>
+				</NavLink>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- USERS -->
@@ -272,6 +296,10 @@
 	private bool showSubmittedDropdownClass = false;
 	private bool showCommissionDropdown = false;
 
+	<!--Commission-->
+	private bool showForpaymentDropdown = false;
+	private bool showPaidDropdown = false;
+
 	<!--Report-->
 
 	private bool showProductionReportDropdown = false;
@@ -295,6 +323,9 @@
 	private string LossRatioDropdownClass => showLossRatioDropdown ? "show" : "d-none";
 	private string NetIncomeDropdownClass => showNetIncomeDropdown ? "show" : "d-none";
 
+	<!--Commission-->
+	private string ForpaymentDropdownClass => showForpaymentDropdown? "show" : "d-none";
+	private string PaidDropdownClass => showPaidDropdown ? "show" : "d-none";
 
 
 	private void ToggleNavMenu()
@@ -304,7 +335,7 @@
 
 	private void ToggleProductionDropdown()
 	{
-		
+
 		showReportDropdown = false;
 		showSubmittedDropdown = false;
 		showReceiptedDropdown = false;
@@ -316,7 +347,7 @@
 
 	private void ToggleSubmittedDropdown()
 	{
-		
+
 		showReportDropdown = false;
 		showReceiptedDropdown = false;
 		showApprovedDropdown = false;
@@ -326,18 +357,15 @@
 	}
 	private void ToggleReportDropdown()
 	{
-	
-		showReceiptedDropdown = false;
-		showProductionDropdown = false;
-		showSubmittedDropdown = false;
-		showApprovedDropdown = false;
-		showComplianceDropdown = false;
-		showCommissionDropdown = false;
+		showClaimsPaidDropdown = false;
+		showLossRatioDropdown = false;
+		showNetIncomeDropdown = false;
+		showProductionReportDropdown = false;
 		showReportDropdown = !showReportDropdown;
 	}
 	private void ToggleReceiptedDropdown()
 	{
-	
+
 		showReportDropdown = false;
 		showApprovedDropdown = false;
 		showSubmittedDropdown = false;
@@ -357,7 +385,7 @@
 	}
 	private void ToggleApprovedDropdown()
 	{
-		
+
 		showReceiptedDropdown = false;
 		showReportDropdown = false;
 		showSubmittedDropdown = false;
@@ -365,19 +393,10 @@
 		showCommissionDropdown = false;
 		showApprovedDropdown = !showApprovedDropdown;
 	}
-	private void ToggleCommissionDropdown()
-	{
-		
-		showReceiptedDropdown = false;
-		showReportDropdown = false;
-		showSubmittedDropdown = false;
-		showComplianceDropdown = false;
-		showProductionDropdown = false;
-		showCommissionDropdown = !showCommissionDropdown;
-	}
+
 	private void ToggleProductionReportDropdown()
 	{
-		
+
 		showClaimsPaidDropdown = false;
 		showLossRatioDropdown = false;
 		showNetIncomeDropdown = false;
@@ -385,7 +404,7 @@
 	}
 	private void ToggleClaimsPaidDropdown()
 	{
-		
+
 		showProductionReportDropdown = false;
 		showLossRatioDropdown = false;
 		showNetIncomeDropdown = false;
@@ -394,7 +413,7 @@
 	} 
 	private void ToggleLossRatioDropdown()
 	{
-		
+
 		showProductionReportDropdown = false;
 		showClaimsPaidDropdown = false;
 		showNetIncomeDropdown = false;
@@ -407,6 +426,22 @@
 		showClaimsPaidDropdown = false;
 		showLossRatioDropdown = false;
 		showNetIncomeDropdown = !showNetIncomeDropdown;
+	}
+	private void ToggleCommissionDropdown()
+	{
+		showPaidDropdown = false;
+		showForpaymentDropdown = false;
+		showCommissionDropdown = !showCommissionDropdown;
+	}
+	private void ToggleForpaymentDropdown()
+	{
+		showPaidDropdown = false;
+		showForpaymentDropdown = !showForpaymentDropdown;
+	}
+	private void TogglePaidDropdown()
+	{
+		showForpaymentDropdown = false;
+		showPaidDropdown = !showPaidDropdown;
 	}
 
 }
