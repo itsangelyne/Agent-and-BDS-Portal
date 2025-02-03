@@ -22,7 +22,7 @@ namespace Agent_and_BDS_Portal.Data
        
 
         // Add New Account
-        public async Task<bool> AddNewAccountAsync(User account)
+       public async Task<bool> AddNewAccountAsync(User account)
         {
             try
             {

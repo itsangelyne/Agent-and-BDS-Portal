@@ -141,63 +141,64 @@
 	private BarChartDataset<double> GetBarChartDataset()
 	{
 		return new()
-		{
-			Label = "Production",
-			Data = GetProductionData(),
-			BackgroundColor = backgroundColors,
-			BorderColor = borderColors,
-			BorderWidth = 1
-		};
+			{
+				Label = "Production",
+				Data = GetProductionData(),
+				BackgroundColor = backgroundColors,
+				BorderColor = borderColors,
+				BorderWidth = 1
+			};
 	}
 
 	// Line Chart dataset
 	private LineChartDataset<double> GetLineChartDataset()
 	{
 		return new LineChartDataset<double>
-		{
-			Label = "2025 vs. 2024 Total Production",
-			Data = RandomizeData(),
-			BackgroundColor = backgroundColors,
-			BorderColor = borderColors,
-			Fill = true,
-			PointRadius = 3,
-			CubicInterpolationMode = "monotone",
-		};
+			{
+				Label = "2025 vs. 2024 Total Production",
+				Data = GetLineChartData(), // Get production data for the line chart
+				BackgroundColor = backgroundColors,
+				BorderColor = borderColors,
+				Fill = true,
+				PointRadius = 3,
+				CubicInterpolationMode = "monotone",
+			};
 	}
 
-	// Labels and colors for the charts
+	// Labels for the charts (Months from January to December)
 	string[] Labels = { "Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-	List<string> backgroundColors = new List<string>
-	{
-		ChartColor.FromRgba(255, 99, 132, 0.2f),
-		ChartColor.FromRgba(54, 162, 235, 0.2f),
-		ChartColor.FromRgba(255, 206, 86, 0.2f),
-		ChartColor.FromRgba(75, 192, 192, 0.2f),
-		ChartColor.FromRgba(153, 102, 255, 0.2f),
-		ChartColor.FromRgba(255, 159, 64, 0.2f)
-	};
-	List<string> borderColors = new List<string>
-	{
-		ChartColor.FromRgba(255, 99, 132, 1f),
-		ChartColor.FromRgba(54, 162, 235, 1f),
-		ChartColor.FromRgba(255, 206, 86, 1f),
-		ChartColor.FromRgba(75, 192, 192, 1f),
-		ChartColor.FromRgba(153, 102, 255, 1f),
-		ChartColor.FromRgba(255, 159, 64, 1f)
-	};
 
-	// Generate random production data for each month (instead of same data for all months)
+	// Colors for the charts
+	List<string> backgroundColors = new List<string>
+{
+	ChartColor.FromRgba(255, 99, 132, 0.2f),
+	ChartColor.FromRgba(54, 162, 235, 0.2f),
+	ChartColor.FromRgba(255, 206, 86, 0.2f),
+	ChartColor.FromRgba(75, 192, 192, 0.2f),
+	ChartColor.FromRgba(153, 102, 255, 0.2f),
+	ChartColor.FromRgba(255, 159, 64, 0.2f)
+};
+
+	List<string> borderColors = new List<string>
+{
+	ChartColor.FromRgba(255, 99, 132, 1f),
+	ChartColor.FromRgba(54, 162, 235, 1f),
+	ChartColor.FromRgba(255, 206, 86, 1f),
+	ChartColor.FromRgba(75, 192, 192, 1f),
+	ChartColor.FromRgba(153, 102, 255, 1f),
+	ChartColor.FromRgba(255, 159, 64, 1f)
+};
+
+	
 	private List<double> GetProductionData()
 	{
 		var r = new Random(DateTime.Now.Millisecond);
 		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();
 	}
-
-	// Randomize data for Line chart
-	List<double> RandomizeData()
+	private List<double> GetLineChartData()
 	{
 		var r = new Random(DateTime.Now.Millisecond);
-		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();
+		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();  
 	}
 
 	// Handle bar chart click events

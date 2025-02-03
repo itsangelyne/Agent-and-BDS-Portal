@@ -8,14 +8,13 @@
 	<!-- Unified Border -->
 	<div class="border p-4" style="background-color: #eaf5e5;">
 		<img src="images/ck_logo.png" alt="CK Logo" class="img-fluid" style="max-height: 50px; display: block; margin-left: auto; margin-right: auto;" />
-		<a class="btn btn-primary btn-sm" href="banklist">Back</a>
-		<Label><Strong>Search:</Strong></Label>
+		
 		<input class="form-control" id="myInput" type="text" placeholder="Search..">
 		<br>
 
 		<div class="mt-4 table-responsive">
 			<table class="table table-bordered">
-				<thead style="background-color: #F95454 !important;">
+				<thead style="background-color: #77B254 !important;">
 					<tr>
 						<th style="color:white;"><i>DCHS</i></th>
 						<th style="color:white;"><i>Name of Bank</i></th>
@@ -44,9 +43,24 @@
 					}
 				</tbody>
 			</table>
+			<div class="row mb-3 g-0">
+				<div class="col-md-6 d-flex justify-content-start">
+					<!-- Previous Button (Left Side) -->
+					<NavLink class="btn btn-outline-success px-4" href="PreviousPage">
+						<span class="oi oi-arrow-left" aria-hidden="true"></span> Back
+					</NavLink>
+				</div>
+				<div class="col-md-6 d-flex justify-content-end">
+					<!-- Next Button (Right Side) -->
+					<NavLink class="btn btn-outline-success px-4" href="NextPage">
+						Next <span class="oi oi-arrow-right" aria-hidden="true"></span>
+					</NavLink>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+
 
 @if (!string.IsNullOrEmpty(message))
 {

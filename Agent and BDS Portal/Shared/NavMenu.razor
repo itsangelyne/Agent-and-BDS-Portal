@@ -33,22 +33,22 @@
 		</div>
 		<i class="fa-solid @(showProductionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 	</a>
-	<!--Submitted-->
+	<!--Pending-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleSubmittedDropdown">
+		<a class="nav-link d-flex justify-content-between" href="" @onclick="TogglePendingDropdown">
 			<div>
-				<span class="fa fa-paper-plane" aria-hidden="true" style="margin-right:20px"></span><b>Submitted</b>
+				<span class="fa fa-paper-plane" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
 			</div>
-			<i class="fa-solid @(showSubmittedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+			<i class="fa-solid @(showPendingDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
-		<div class="nested-menu ps-3 @SubmittedDropdownClass">
+		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="LongTerm/banklist">
-				<span class="fas fa-chart-line fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-chart-line text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
-		<div class="nested-menu ps-3 @SubmittedDropdownClass">
+		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sbanklist">
-				<span class="fas fa-file-invoice-dollar fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-file-invoice-dollar text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
@@ -63,36 +63,15 @@
 		</a>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lreceipted">
-				<span class="fas fa-chart-area fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-chart-area text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sreceipted">
-				<span class="fas fa-receipt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
-
-	<!-- Compliance -->
-	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleComplianceDropdown">
-			<div>
-				<span class="fas fa-shield-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
-			</div>
-			<i class="fa-solid @(showComplianceDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
-		</a>
-		<div class="nested-menu ps-3 @ComplianceDropdownClass">
-			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
-				<span class="fas fa-check-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
-			</NavLink>
-		</div>
-		<div class="nested-menu ps-3 @ComplianceDropdownClass">
-			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
-				<span class="fas fa-clipboard-check fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
-			</NavLink>
-		</div>
-	</div>
-
 	<!-- Approved -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
 		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleApprovedDropdown">
@@ -103,16 +82,100 @@
 		</a>
 		<div class="nested-menu ps-3 @ApprovedDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lapproved">
-				<span class="fas fa-chart-area fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-chart-area text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ApprovedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sapproved">
-				<span class="fas fa-receipt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
+
+<!-- Declined -->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleDeclinedDropdown">
+			<div>
+				<span class="fa fa-times-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
+			</div>
+			<i class="fa-solid @(showDeclinedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+		<div class="nested-menu ps-3 @DeclinedDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lapproved">
+				<span class="fas fa-chart-area text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @DeclinedDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Sapproved">
+				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+
+<!-- REnewal -->
+<div class="nested-menu ps-3 @ProductionDropdownClass">
+	<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleRenewalDropdown">
+		<div>
+				<span class="bi bi-clock-history bi-lg" aria-hidden="true" style="margin-right:20px"></span><b>Renewal</b>
+		</div>
+		<i class="fa-solid @(showRenewalDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+	</a>
+	<div class="nested-menu ps-3 @RenewalDropdownClass">
+		<NavLink class="nav-link" href="/LongTerm/Lapproved">
+				<span class="fas fa-sync-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+		</NavLink>
+	</div>
+	<div class="nested-menu ps-3 @RenewalDropdownClass">
+		<NavLink class="nav-link" href="/ShortTerm/Sapproved">
+				<span class="fa fa-sync-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+		</NavLink>
+	</div>
 </div>
+
+	<!-- Compliance -->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleComplianceDropdown">
+			<div>
+				<span class="fas fa-shield-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+			</div>
+			<i class="fa-solid @(showComplianceDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+
+		<div class="nested-menu ps-3 @ComplianceDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ComplianceDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
+				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+	
+
+	<!-- Terminated -->
+	<div class="nested-menu ps-3 @ProductionDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleTerminatedDropdown">
+			<div>
+				<span class="fas fa-ban fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
+			</div>
+			<i class="fa-solid @(showTerminatedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+		</a>
+
+		<div class="nested-menu ps-3 @TerminatedDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @TerminatedDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
+				<span class="fas fa-clipboard-check text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+			</NavLink>
+		</div>
+	</div>
+	</div>
+
 
 <!--Claims-->
 <div class="nav-item px-3">
@@ -238,7 +301,7 @@
 		<i class="fa-solid @(showCommissionDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 	</a>
 	<div class="nested-menu ps-3 @CommissionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleForpaymentDropdown">
+		<a class="nav-link d-flex justify-content-between" href="/LongTerm/Lcommission" @onclick="ToggleForpaymentDropdown">
 			<div>
 				<span class="fas fa-hourglass-half fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>For Payment</b>
 			</div>
@@ -271,177 +334,258 @@
 	</div>
 </div>
 <!-- USERS -->
+
 <div class="nav-item px-3">
-	<NavLink class="nav-link" href="accountList">
-		<span class="fas fa-user fa-lg" style="margin-right:20px"></span><b>Users</b>
-	</NavLink>
+	<a class="nav-link d-flex justify-content-between" href="accountlist" @onclick="ToggleUserDropdown">
+		<div>
+			<span class="fas fa-users fa-lg" style="margin-right:20px"></span><b>User</b>
+		</div>
+		<i class="fa-solid @(showUserDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
+	</a>
+	<div class="nested-menu ps-3 @UserDropdownClass">
+		<a class="nav-link d-flex justify-content-between" href="/addnewuser" @onclick="ToggleAddUserDropdown">
+			<div>
+				<span class="fas fa-plus fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Add User</b>
+			</div>
+			</a>
+	</div>
 </div>
-
-<!-- LOGOUT -->
-<div class="nav-item px-3">
-	<NavLink class="nav-link" href="main">
-		<span class="fas fa-sign-out-alt fa-lg" style="margin-right:20px"></span><b>Logout</b>
-	</NavLink>
-</div>
-
-
-@code {
-	private bool collapseNavMenu = true;
-	private bool showProductionDropdown = false;
-	private bool showSubmittedDropdown = false;
-	private bool showReceiptedDropdown = false;
-	private bool showApprovedDropdown = false;
-	private bool showComplianceDropdown = false;
-	private bool showReportDropdown = false;
-	private bool showSubmittedDropdownClass = false;
-	private bool showCommissionDropdown = false;
-
-	<!--Commission-->
-	private bool showForpaymentDropdown = false;
-	private bool showPaidDropdown = false;
-
-	<!--Report-->
-
-	private bool showProductionReportDropdown = false;
-	private bool showClaimsPaidDropdown = false;
-	private bool showLossRatioDropdown = false;
-	private bool showNetIncomeDropdown = false;
+			<!-- LOGOUT -->
+			<div class="nav-item px-3">
+				<NavLink class="nav-link" href="main">
+					<span class="fas fa-sign-out-alt fa-lg" style="margin-right:20px"></span><b>Logout</b>
+				</NavLink>
+			</div>
 
 
-	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-	private string ProductionDropdownClass => showProductionDropdown ? "show" : "d-none";
-	private string ReportDropdownClass => showReportDropdown ? "show" : "d-none";
-	private string SubmittedDropdownClass => showSubmittedDropdown ? "show" : "d-none";
-	private string ReceiptedDropdownClass => showReceiptedDropdown ? "show" : "d-none";
-	private string ApprovedDropdownClass => showApprovedDropdown ? "show" : "d-none";
-	private string ComplianceDropdownClass => showComplianceDropdown ? "show" : "d-none";
-	private string CommissionDropdownClass => showCommissionDropdown ? "show" : "d-none";
+			@code {
+				private bool collapseNavMenu = true;
+				private bool showProductionDropdown = false;
+				private bool showPendingDropdown = false;
+				private bool showReceiptedDropdown = false;
+				private bool showApprovedDropdown = false;
+				private bool showComplianceDropdown = false;
+				private bool showReportDropdown = false;
+				private bool showCommissionDropdown = false;
 
-	<!--Report-->
-	private string ProductionReportDropdownClass => showProductionReportDropdown ? "show" : "d-none";
-	private string ClaimsPaidDropdownClass => showClaimsPaidDropdown ? "show" : "d-none";
-	private string LossRatioDropdownClass => showLossRatioDropdown ? "show" : "d-none";
-	private string NetIncomeDropdownClass => showNetIncomeDropdown ? "show" : "d-none";
+				private bool showRenewalDropdown = false;
+				private bool showDeclinedDropdown = false;
+				private bool showTerminatedDropdown = false;
+				<!--Commission-->
+				private bool showForpaymentDropdown = false;
+				private bool showPaidDropdown = false;
 
-	<!--Commission-->
-	private string ForpaymentDropdownClass => showForpaymentDropdown? "show" : "d-none";
-	private string PaidDropdownClass => showPaidDropdown ? "show" : "d-none";
+				<!--Report-->
+
+				private bool showProductionReportDropdown = false;
+				private bool showClaimsPaidDropdown = false;
+				private bool showLossRatioDropdown = false;
+				private bool showNetIncomeDropdown = false;
+
+				<!--User-->
+				private bool showUserDropdown = false;
+				private bool showAddUserDropdown = false;
 
 
-	private void ToggleNavMenu()
-	{
-		collapseNavMenu = !collapseNavMenu;
-	}
+				private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+				private string ProductionDropdownClass => showProductionDropdown ? "show" : "d-none";
+				private string ReportDropdownClass => showReportDropdown ? "show" : "d-none";
+				private string PendingDropdownClass => showPendingDropdown ? "show" : "d-none";
+				private string ReceiptedDropdownClass => showReceiptedDropdown ? "show" : "d-none";
+				private string ApprovedDropdownClass => showApprovedDropdown ? "show" : "d-none";
+				private string ComplianceDropdownClass => showComplianceDropdown ? "show" : "d-none";
+				private string CommissionDropdownClass => showCommissionDropdown ? "show" : "d-none";
 
-	private void ToggleProductionDropdown()
-	{
+				private string DeclinedDropdownClass => showDeclinedDropdown ? "show" : "d-none";
+				private string RenewalDropdownClass => showRenewalDropdown ? "show" : "d-none";
+				private string TerminatedDropdownClass => showTerminatedDropdown ? "show" : "d-none";
 
-		showReportDropdown = false;
-		showSubmittedDropdown = false;
-		showReceiptedDropdown = false;
-		showApprovedDropdown = false;
-		showComplianceDropdown = false;
-		showCommissionDropdown = false;
-		showProductionDropdown = !showProductionDropdown;
-	}
 
-	private void ToggleSubmittedDropdown()
-	{
+				<!--Report-->
+				private string ProductionReportDropdownClass => showProductionReportDropdown ? "show" : "d-none";
+				private string ClaimsPaidDropdownClass => showClaimsPaidDropdown ? "show" : "d-none";
+				private string LossRatioDropdownClass => showLossRatioDropdown ? "show" : "d-none";
+				private string NetIncomeDropdownClass => showNetIncomeDropdown ? "show" : "d-none";
 
-		showReportDropdown = false;
-		showReceiptedDropdown = false;
-		showApprovedDropdown = false;
-		showComplianceDropdown = false;
-		showCommissionDropdown = false;
-		showSubmittedDropdown = !showSubmittedDropdown;
-	}
-	private void ToggleReportDropdown()
-	{
-		showClaimsPaidDropdown = false;
-		showLossRatioDropdown = false;
-		showNetIncomeDropdown = false;
-		showProductionReportDropdown = false;
-		showReportDropdown = !showReportDropdown;
-	}
-	private void ToggleReceiptedDropdown()
-	{
+				<!--Commission-->
+				private string ForpaymentDropdownClass => showForpaymentDropdown? "show" : "d-none";
+				private string PaidDropdownClass => showPaidDropdown ? "show" : "d-none";
 
-		showReportDropdown = false;
-		showApprovedDropdown = false;
-		showSubmittedDropdown = false;
-		showComplianceDropdown = false;
-		showCommissionDropdown = false;
-		showReceiptedDropdown = !showReceiptedDropdown;
-	}
-	private void ToggleComplianceDropdown()
-	{
+				<!--User-->
+				private string UserDropdownClass => showUserDropdown ? "show" : "d-none";
 
-		showReceiptedDropdown = false;
-		showReportDropdown = false;
-		showApprovedDropdown = false;
-		showSubmittedDropdown = false;
-		showCommissionDropdown = false;
-		showComplianceDropdown = !showComplianceDropdown;
-	}
-	private void ToggleApprovedDropdown()
-	{
+				private void ToggleNavMenu()
+				{
+					collapseNavMenu = !collapseNavMenu;
+				}
 
-		showReceiptedDropdown = false;
-		showReportDropdown = false;
-		showSubmittedDropdown = false;
-		showComplianceDropdown = false;
-		showCommissionDropdown = false;
-		showApprovedDropdown = !showApprovedDropdown;
-	}
+				private void ToggleProductionDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showReportDropdown = false;
+					showPendingDropdown = false;
+					showReceiptedDropdown = false;
+					showApprovedDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showProductionDropdown = !showProductionDropdown;
+				}
 
-	private void ToggleProductionReportDropdown()
-	{
+				private void TogglePendingDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showReportDropdown = false;
+					showReceiptedDropdown = false;
+					showApprovedDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showPendingDropdown = !showPendingDropdown;
+				}
 
-		showClaimsPaidDropdown = false;
-		showLossRatioDropdown = false;
-		showNetIncomeDropdown = false;
-		showProductionReportDropdown = !showProductionReportDropdown;
-	}
-	private void ToggleClaimsPaidDropdown()
-	{
+				private void ToggleReportDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showClaimsPaidDropdown = false;
+					showLossRatioDropdown = false;
+					showNetIncomeDropdown = false;
+					showProductionReportDropdown = false;
+					showReportDropdown = !showReportDropdown;
+				}
+				private void ToggleReceiptedDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showReportDropdown = false;
+					showApprovedDropdown = false;
+					showPendingDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showReceiptedDropdown = !showReceiptedDropdown;
+				}
+				private void ToggleComplianceDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showReceiptedDropdown = false;
+					showReportDropdown = false;
+					showApprovedDropdown = false;
+					showPendingDropdown = false;
+					showCommissionDropdown = false;
+					showComplianceDropdown = !showComplianceDropdown;
+				}
+				private void ToggleApprovedDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showReceiptedDropdown = false;
+					showReportDropdown = false;
+					showPendingDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showApprovedDropdown = !showApprovedDropdown;
+				}
+				private void ToggleDeclinedDropdown()
+				{
+					showTerminatedDropdown = false;
+					showRenewalDropdown = false;
+					showReportDropdown = false;
+					showReceiptedDropdown = false;
+					showApprovedDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showDeclinedDropdown = !showDeclinedDropdown;
+				}
 
-		showProductionReportDropdown = false;
-		showLossRatioDropdown = false;
-		showNetIncomeDropdown = false;
-		showClaimsPaidDropdown = !showClaimsPaidDropdown;
+				private void ToggleRenewalDropdown()
+				{
+					showTerminatedDropdown = false;
+					showDeclinedDropdown =false;
+					showReportDropdown = false;
+					showReceiptedDropdown = false;
+					showApprovedDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showRenewalDropdown = !showRenewalDropdown;
+				}
+				private void ToggleProductionReportDropdown()
+				{
+					
+					showClaimsPaidDropdown = false;
+					showLossRatioDropdown = false;
+					showNetIncomeDropdown = false;
+					showProductionReportDropdown = !showProductionReportDropdown;
+				}
+				private void ToggleClaimsPaidDropdown()
+				{
+	
+					showProductionReportDropdown = false;
+					showLossRatioDropdown = false;
+					showNetIncomeDropdown = false;
+					showClaimsPaidDropdown = !showClaimsPaidDropdown;
 
-	} 
-	private void ToggleLossRatioDropdown()
-	{
+				} 
+				private void ToggleLossRatioDropdown()
+				{
 
-		showProductionReportDropdown = false;
-		showClaimsPaidDropdown = false;
-		showNetIncomeDropdown = false;
-		showLossRatioDropdown = !showLossRatioDropdown;
-	}
+					showProductionReportDropdown = false;
+					showClaimsPaidDropdown = false;
+					showNetIncomeDropdown = false;
+					showLossRatioDropdown = !showLossRatioDropdown;
+				}
 
-	private void ToggleNetIncomeDropdown()
-	{
-		showProductionReportDropdown = false;
-		showClaimsPaidDropdown = false;
-		showLossRatioDropdown = false;
-		showNetIncomeDropdown = !showNetIncomeDropdown;
-	}
-	private void ToggleCommissionDropdown()
-	{
-		showPaidDropdown = false;
-		showForpaymentDropdown = false;
-		showCommissionDropdown = !showCommissionDropdown;
-	}
-	private void ToggleForpaymentDropdown()
-	{
-		showPaidDropdown = false;
-		showForpaymentDropdown = !showForpaymentDropdown;
-	}
-	private void TogglePaidDropdown()
-	{
-		showForpaymentDropdown = false;
-		showPaidDropdown = !showPaidDropdown;
-	}
+				private void ToggleNetIncomeDropdown()
+				{
+					showProductionReportDropdown = false;
+					showClaimsPaidDropdown = false;
+					showLossRatioDropdown = false;
+					showNetIncomeDropdown = !showNetIncomeDropdown;
+				}
+				private void ToggleCommissionDropdown()
+				{
+					showPaidDropdown = false;
+					showForpaymentDropdown = false;
+					showCommissionDropdown = !showCommissionDropdown;
+				}
+				private void ToggleForpaymentDropdown()
+				{
+					showPaidDropdown = false;
+					showForpaymentDropdown = !showForpaymentDropdown;
+				}
+				private void TogglePaidDropdown()
+				{
+					showForpaymentDropdown = false;
+					showPaidDropdown = !showPaidDropdown;
+				}
+				private void ToggleUserDropdown(){
+
+					showAddUserDropdown = false;
+					showUserDropdown = !showUserDropdown;
+				}
+				private void ToggleAddUserDropdown(){
+
+					
+					showAddUserDropdown = !showAddUserDropdown;
+				}
+				private void ToggleTerminatedDropdown(){
+
+					showDeclinedDropdown =false;
+					showRenewalDropdown = false;
+					showReportDropdown = false;
+					showPendingDropdown = false;
+					showReceiptedDropdown = false;
+					showApprovedDropdown = false;
+					showComplianceDropdown = false;
+					showCommissionDropdown = false;
+					showTerminatedDropdown = !showTerminatedDropdown;
+				}
 
 }

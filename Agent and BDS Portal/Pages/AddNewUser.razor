@@ -1,0 +1,95 @@
+﻿@page "/addnewuser"
+@using Agent_and_BDS_Portal.Data
+@using Agent_and_BDS_Portal.Context
+@inject IJSRuntime JS
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@NewUser" OnValidSubmit="HandleSubmit">
+                    <DataAnnotationsValidator />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">First Name</label>
+                                <InputText class="form-control" @bind-Value="NewUser.FirstName" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Middle Name</label>
+                                <InputText class="form-control" @bind-Value="NewUser.MiddleName" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Last Name</label>
+                                <InputText class="form-control" @bind-Value="NewUser.LastName" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <InputText class="form-control" @bind-Value="NewUser.Username" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <InputText class="form-control" type="password" @bind-Value="NewUser.Password" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">User Type</label>
+                                <InputSelect class="form-select" @bind-Value="NewUser.UserType">
+                                    <option value="Admin">Admin</option>
+                                    <option value="User">User</option>
+                                </InputSelect>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <InputSelect class="form-select" @bind-Value="NewUser.Status">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </InputSelect>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Created By</label>
+                                <InputText class="form-control" @bind-Value="NewUser.CreatedBy" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date Created</label>
+                                <InputDate class="form-control" @bind-Value="NewUser.DateCreated" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private UserModel NewUser = new UserModel();
+
+    private async Task HandleSubmit()
+    {
+        Console.WriteLine($"User Added: {NewUser.FirstName} {NewUser.LastName}");
+        await JS.InvokeVoidAsync("closeModal", "addUserModal");
+    }
+
+    public class UserModel
+    {
+        public string FirstName { get; set; } = string.Empty;
+        public string MiddleName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string UserType { get; set; } = "User";
+        public string Status { get; set; } = "Active";
+        public string CreatedBy { get; set; } = "Admin";
+        public DateTime DateCreated { get; set; } = DateTime.Now;
+    }
+}
