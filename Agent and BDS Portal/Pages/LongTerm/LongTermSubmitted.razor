@@ -1,22 +1,28 @@
-﻿@page "/LongTerm/banklist"
+﻿@page "/LongTerm/submittedlist"
+@using Agent_and_BDS_Portal.Data
+@using Agent_and_BDS_Portal.Model
+@inject CGL_CreditDebit_Services creditdebitServices
 <h3><strong>SUBMITTED</strong></h3>
 
 
 <div class="container mt-0">
 	<!-- Unified Border -->
-	<div class="border p-4" style="background-color: #eaf5e5;">
-		<h3><Strong><center>LONG TERM</center></Strong></h3>
-		<br />
-		<Label><Strong>Search:</Strong></Label>
-		<input class="form-control" id="myInput" type="text" placeholder="Search..">
-		<br>
-		
+	<div class="border p-4" style="background-color: #ffff;">
+		<h3 class="text-center font-weight-bold"><strong>LONG TERM</strong></h3>
+
+		<!-- Search Bar -->
+		<label class="font-weight-bold">Search:</label>
+		<input class="form-control" placeholder="Search...">
+
 		<!-- Table -->
 		<div class="mt-4 table-responsive">
 			<table class="table table-bordered">
-				<thead style="background-color: #77B254 !important;">
+				<thead style="background-color: #77B254;">
 					<tr>
-						<th style="color:white;">Release Date</th>
+						<th style="color:white;">Submitted Date</th>
+						<th style="color:white;">DCHS From</th>
+						<th style="color:white;">DCHS To</th>
+
 						<th style="color:white;">Total Application</th>
 						<th style="color:white;">Particular</th>
 						<th style="color:white;">Application</th>
@@ -24,20 +30,25 @@
 					</tr>
 				</thead>
 				<tbody>
+					@if (SubObj == null || !SubObj.Any())
+					{
+						<tr>
+							<td colspan="10" class="text-center">No records found.</td>
+						</tr>
+					}
+					@foreach (var creditdebit in SubObj)
+					{
+						<tr>
+							<td>@creditdebit.Submitted_Date.ToString("MM/dd/yyyy")</td>
+							<td>@creditdebit.DCHS_From</td>
+							<td>@creditdebit.DCHS_To</td>
+							<td>@creditdebit.Total_Application</td>
 
-					<tr>
-						<td>21/01/2025</td>
-						<td>10</td>
-						<td>
-							<button class="btn btn-primary btn-sm" href="Cgl_EditAccount">View Details</button>
-						</td>	
-						<td>
-							<a class="btn btn-primary btn-sm" href="application">Application Details</a>
-						</td>
-						<td>
-							<button class="btn btn-primary btn-sm" href="Cgl_EditAccount">View Details</button>
-						</td>
-					</tr>
+							<td><a class="btn btn-outline-success btn-sm" href="Cgl_EditAccount">View Details</a></td>
+							<td><a class="btn btn-outline-success btn-sm" href="application">Application Details</a></td>
+							<td><a class="btn btn-outline-success btn-sm" href="Cgl_EditAccount">View Details</a></td>
+						</tr>
+					}
 
 				</tbody>
 			</table>
@@ -46,14 +57,24 @@
 </div>
 
 
-
 @code {
-		private string SelectedType { get; set; } = string.Empty;
-		private void HandleTypeChange(ChangeEventArgs e)
-		{
-			SelectedType = e.Value.ToString();
-			// Perform any action based on the selected type
-			Console.WriteLine($"Selected Type: {SelectedType}");
-		}
+	private List<CGL_CreditDebit>? SubObj = new List<CGL_CreditDebit>();
+
+	private string SelectedType { get; set; } = string.Empty;
+	
+	protected override async Task OnInitializedAsync()
+	{
+		var result = await creditdebitServices.GetAllCGL_CreditDebitAsync();
+		SubObj = result ?? new List<CGL_CreditDebit>();
+		//SubObj = result.Where(x => string.Equals(x.Type, "Long Term", StringComparison.OrdinalIgnoreCase)).ToList();
+
+	}
+	
+	private void HandleTypeChange(ChangeEventArgs e)
+	{
+		SelectedType = e.Value.ToString();
+		
+		Console.WriteLine($"Selected Type: {SelectedType}");
+	}
 
 }

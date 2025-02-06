@@ -11,15 +11,6 @@ namespace Agent_and_BDS_Portal.Data
             _applicationContext = applicationDbContext;
         }
         // Get All Submitted Reports
-        public async Task<List<Cgl_submittedReport>> GetAllSubmittedReportsAsync()
-        {
-            return await _applicationContext.tbl_cgl_SubmittedReport.ToListAsync();
-        }
-        // Get Row Count for Submitted Reports
-        public async Task<int> GetSubmittedReportsRowCountAsync()
-        {
-            return await _applicationContext.tbl_cgl_SubmittedReport.CountAsync();
-        }
-
+       
     }
 }

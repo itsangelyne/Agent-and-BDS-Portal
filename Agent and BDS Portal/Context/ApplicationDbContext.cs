@@ -11,9 +11,15 @@ namespace Agent_and_BDS_Portal.Context
         {
         }
 
-        public DbSet<User> tbl_Account { get; set; }
-        public DbSet<Cgl_submittedReport> tbl_cgl_SubmittedReport { get; set; }
-        public DbSet<Cgl_ProductionReport> tbl_cgl_ProductionMonitoringReport { get; set; }
+        public DbSet<User> CGL_Bank_Account_Information { get; set; }
+        //public DbSet<Cgl_submittedReport> tbl_cgl_SubmittedReport { get; set; }
+        //public DbSet<Cgl_ProductionReport> tbl_cgl_ProductionMonitoringReport { get; set; }
+
+
+        public DbSet<CGL_CreditDebit> CGL_CreditDebit { get; set; }
+        public DbSet<CGL_Policy_Holder> CGL_Policy_Holder { get; set; }
+        public DbSet<CGL_Particulars> CGL_Particulars { get; set; }
+        public DbSet<CGL_Insured> CGL_INSURED { get; set; }
 
     }
 

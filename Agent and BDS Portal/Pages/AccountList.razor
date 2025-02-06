@@ -20,12 +20,12 @@
                 <table class="table table-bordered">
                     <thead style="background-color: #F95454 !important;">
                         <tr>
-                            <th style="color:white;">ID</th>
-                            <th style="color:white;">Name</th>
+                            
+                            <th style="color:white;">First Name</th>
                             <th style="color:white;">Middle</th>
                             <th style="color:white;">LastName</th>
-                            <th style="color:white;">UserName</th>
-                            <th style="color:white;">UserType</th>
+                            <th style="color:white;">Date of Birth</th>
+                            <th style="color:white;">User Level</th>
                             <th style="color:white;">Status</th>
 
                             <th style="color:white;" colspan="2" class="text-center">Actions</th>
@@ -43,13 +43,13 @@
                             @foreach (var account in AccObj)
                             {
                                 <tr>
-                                    <td>@account.Id</td>
-                                    <td>@account.Name</td>
-                                    <td>@account.Middle</td>
-                                    <td>@account.Lastname</td>
-                                    <td>@account.userName</td>
-                                    <td>@account.userType</td>
-                                    <td><span class="badge bg-success">@account.Status</span></td>
+                                    
+                                    <td>@account.First_Name</td>
+                                    <td>@account.Middle_Name</td>
+                                    <td>@account.Last_Name</td>
+                                    <td>@account.Date_Of_Birth.ToString("MM/dd/yyyy")</td>
+                                    <td>@account.User_Level</td>
+                                    <td><span class="badge bg-success">Active</span></td>
 
                                     <td>
                                         <!-- Add New User button opens the modal for a new user -->
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-@if (IsModalOpen)
+@*@if (IsModalOpen)
 {
     <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -155,7 +155,7 @@
             </div>
         </div>
     </div>
-}
+}*@
 
 @code {
 

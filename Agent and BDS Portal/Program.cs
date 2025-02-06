@@ -17,9 +17,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<Account_Services>();
-builder.Services.AddScoped<ProductionReport_Services>();
-builder.Services.AddScoped<SubmittedReport_Services>();
+//builder.Services.AddScoped<ProductionReport_Services>();
+//builder.Services.AddScoped<SubmittedReport_Services>();
 
+
+builder.Services.AddScoped<CGL_CreditDebit_Services>();
+builder.Services.AddScoped<CGL_Policy_Holder_Services>();
+builder.Services.AddScoped<CGL_Particulars_Services>();
+builder.Services.AddScoped<CGL_Insured_Services>();
 
 builder.Services.AddMudServices();
 

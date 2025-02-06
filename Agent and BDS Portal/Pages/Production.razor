@@ -2,7 +2,7 @@
 @using Agent_and_BDS_Portal.Data;
 @using Microsoft.EntityFrameworkCore;
 
-@inject SubmittedReport_Services SubmittedReport_Services ;
+@*inject SubmittedReport_Services SubmittedReport_Services;*@
 
 
 <h3><i><b>Production</b></i></h3>
@@ -77,9 +77,9 @@
     private int RECEIPTED = 53;
     private int COMPLIANCE = 44;
     private int APPROVED = 65;
-    protected override async Task OnInitializedAsync()
-    {
+    //protected override async Task OnInitializedAsync()
+    //{
         // Call service to get the production count
-        SUBMITTED = await SubmittedReport_Services.GetSubmittedReportsRowCountAsync();
-    }
+       // SUBMITTED = await SubmittedReport_Services.GetSubmittedReportsRowCountAsync();
+    //}
 } 

@@ -191,13 +191,13 @@
 
 
 
-    protected override async Task OnInitializedAsync()
-    {
+    //protected override async Task OnInitializedAsync()
+   // {
         // Call service to get the production count
-        PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
-        CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
-        LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
-        SUBMITTED = await SubmittedReport_Services.GetSubmittedReportsRowCountAsync();
+       // PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+        //CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+        //LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+        //SUBMITTED = await SubmittedReport_Services.GetSubmittedReportsRowCountAsync();
 
     }
 }

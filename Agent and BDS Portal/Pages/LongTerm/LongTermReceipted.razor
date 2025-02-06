@@ -227,11 +227,11 @@
 		IsModalOpen = false;
 	}
 
-	protected override async Task OnInitializedAsync()
-	{
-		SubObj = await accountServices.GetAllSubmittedReportsAsync();
+	//protected override async Task OnInitializedAsync()
+	//{
+		//SubObj = await accountServices.GetAllSubmittedReportsAsync();
 
-	}
+	//}
 	private string SelectedType { get; set; } = string.Empty;
 
 	private void HandleTypeChange(ChangeEventArgs e)

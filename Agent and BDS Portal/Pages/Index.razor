@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using Agent_and_BDS_Portal.Data
-@inject ProductionReport_Services Cgl_Services ;
+@*inject ProductionReport_Services Cgl_Services ;*@
 @using BChart = Blazorise.Charts.ChartType
 @using MChart = MudBlazor.ChartType
 @layout MainLayout
@@ -215,11 +215,10 @@
 	private int LOSSRATIO = 0;
 	private int NETINCOME = 44;
 
-	protected override async Task OnInitializedAsync()
-	{
+	//protected override async Task OnInitializedAsync()
+	//{
 		// Call service to get the production count
-		PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
-		CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
-		LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+		//PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+		//CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+		//LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
 	}
-}

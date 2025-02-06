@@ -16,31 +16,10 @@ namespace Agent_and_BDS_Portal.Data
         // Get All Account List
         public async Task<List<User>> GetAllAccountsAsync()
         {
-            return await _applicationContext.tbl_Account.ToListAsync();
+            return await _applicationContext.CGL_Bank_Account_Information.ToListAsync();
         }
 
-       
 
-        // Add New Account
-       public async Task<bool> AddNewAccountAsync(User account)
-        {
-            try
-            {
-                await _applicationContext.tbl_Account.AddAsync(account);
-                await _applicationContext.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        // Update an Account
-        public async Task UpdateAccountAsync(User account)
-        {
-            _applicationContext.tbl_Account.Update(account);
-            await _applicationContext.SaveChangesAsync();
-        }
-    }
+        // Add New Account - nasa note codes
+    }   
 }

@@ -3,16 +3,17 @@ using Agent_and_BDS_Portal.Context;
 using Agent_and_BDS_Portal.Model;
 namespace Agent_and_BDS_Portal.Data
 {
-    public class ProductionReport_Services
+    public class CGL_Insured_Services
     {
         private readonly ApplicationDbContext _applicationContext;
 
-        public ProductionReport_Services(ApplicationDbContext applicationDbContext)
+        public CGL_Insured_Services(ApplicationDbContext applicationDbContext)
         {
             _applicationContext = applicationDbContext;
         }
-
-        // Method to count rows in tbl_cgl_ProductionMonitoringReport
+        public async Task<List<CGL_Insured>> GetAllCGL_INSUREDAsync()
+        {
+            return await _applicationContext.CGL_INSURED.ToListAsync();
+        }
     }
 }
-
