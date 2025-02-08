@@ -7,8 +7,9 @@
 
 <div class="container mt-0">
     <!-- Unified Border -->
-    <div class="border p-4" style="background-color: #ffff;">
-        <h3 class="text-center font-weight-bold"><strong>SHORT TERM</strong></h3>
+    <div class="border p-4" style="background-color: #ffff; box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);">
+
+        <h3 class="text-center font-weight-bold"><strong>LONG TERM</strong></h3>
 
         <!-- Search Bar -->
         <label class="font-weight-bold">Search:</label>
@@ -30,32 +31,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (!filteredList.Any())
+                    @if (InsuredObj == null || !InsuredObj.Any())
                     {
                         <tr>
-                            <td colspan="8" class="text-center text-danger">No records found.</td>
+                            <td colspan="8" class="text-center">No records found.</td>
                         </tr>
                     }
-                    else
+                    @foreach (var insured in filteredList)
                     {
-                        @foreach (var insured in filteredList)
-                        {
-                            <tr>
-                                <td class="hover-cell text-center">@insured.DCHS</td>
-                                <td class="hover-cell text-center">@insured.First_Name</td>
-                                <td class="hover-cell text-center">@insured.Middle_Name</td>
-                                <td class="hover-cell text-center">@insured.Last_Name</td>
-                                <td class="hover-cell text-center">@insured.Age</td>
-                                <td class="hover-cell text-center">@insured.Gender</td>
-                                <td class="hover-cell text-center">@insured.Type</td>
-                                <td>
-                                    <a class="btn btn-outline-success btn-sm" @onclick="() => OpenDetailsModal(insured)">View Details</a>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td class="hover-cell text-center">@insured.DCHS</td>
+                            <td class="hover-cell text-center">@insured.First_Name</td>
+                            <td class="hover-cell text-center">@insured.Middle_Name</td>
+                            <td class="hover-cell text-center">@insured.Last_Name</td>
+                            <td class="hover-cell text-center">@insured.Age</td>
+                            <td class="hover-cell text-center">@insured.Gender</td>
+                            <td class="hover-cell text-center">@insured.Type</td>
+                            <td>
+                                <a class="btn btn-outline-success btn-sm" @onclick="() => OpenDetailsModal(insured)">View Details</a>
+                            </td>
+                        </tr>
+                         
                     }
                 </tbody>
             </table>
+            
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body" style="max-width: 100%; width: auto;">
+                <div class="modal-body modal-body" style="max-width: 100%; width: auto;">
                     <form>
                         <div class="row mb-3">
                             <div class="col-sm-6">
@@ -84,6 +84,101 @@
                             <div class="col-sm-6">
                                 <label for="policyHolder" class="form-label fw-bold">DCHS:</label>
                                 <input type="text" class="form-control" id="policyHolder" @bind="@SelectedDetail.DCHS" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Firstname:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.First_Name" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Lastname:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Last_Name" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="policyHolder" class="form-label fw-bold">Suffix:</label>
+                                <input type="text" class="form-control" id="policyHolder" @bind="@SelectedDetail.Suffix" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="nameofinsured" class="form-label fw-bold">Civil Status:</label>
+                                <input type="text" class="form-control" id="nameofinsured" @bind="@SelectedDetail.Civil_Status" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Gender:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Gender" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="nameofinsured" class="form-label fw-bold">Height:</label>
+                                <input type="text" class="form-control" id="nameofinsured" @bind="@SelectedDetail.Height" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Weight:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Weight" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Address:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Address" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="nameofinsured" class="form-label fw-bold">Contact Number:</label>
+                                <input type="text" class="form-control" id="nameofinsured" @bind="@SelectedDetail.Contact_Number" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Email Address:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Email_Address" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Age:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Age" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="nameofinsured" class="form-label fw-bold">Date of Birth:</label>
+                                <input type="text" class="form-control" id="nameofinsured" @bind="@SelectedDetail.Date_Of_Birth" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Place_Of_Birth:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Place_Of_Birth" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Nationality:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Nationality" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">TIN_SSS_GSIS_No:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.TIN_SSS_GSIS_NO" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Sources_Of_Funds:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Source_Of_Funds" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Nature of Self Employment:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Nature_of_Self_Employment_Business" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Address of Business or Employer:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Address_Of_Business_or_Employer" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Occupation and Livelihood:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Occupation_And_Livelihood" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Pregnant:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Pregnant" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">How Many Months:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.How_Many_Months" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="civilstatus" class="form-label fw-bold">Image:</label>
+                                <input type="text" class="form-control" id="civilstatus" @bind="@SelectedDetail.Image" />
                             </div>
                             <div class="col-sm-6">
                                 <label for="civilstatus" class="form-label fw-bold">Term Type:</label>
@@ -105,30 +200,39 @@
 
 @code {
     private string searchQuery = string.Empty;
+
+    
     private List<CGL_Insured> InsuredObj { get; set; } = new List<CGL_Insured>();
+
+   
     private List<CGL_Insured> filteredList => InsuredObj
         .Where(p => string.IsNullOrEmpty(searchQuery) ||
                     p.DCHS.Contains(searchQuery, StringComparison.OrdinalIgnoreCase) ||
                     p.First_Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase) ||
                     p.Last_Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
         .ToList();
+
     private bool IsModalOpen = false;
     private CGL_Insured SelectedDetail = new CGL_Insured();
 
+    
     private void OpenDetailsModal(CGL_Insured detail)
     {
         SelectedDetail = detail;
         IsModalOpen = true;
     }
 
+   
     private void CloseDetailsModal()
     {
         IsModalOpen = false;
     }
 
+    // On page load, get the insured data
     protected override async Task OnInitializedAsync()
     {
         var result = await insuredServices.GetAllCGL_INSUREDAsync();
-        InsuredObj = result?.Where(x => string.Equals(x.Type, "Short Term", StringComparison.OrdinalIgnoreCase)).ToList() ?? new List<CGL_Insured>();
+        InsuredObj = result ?? new List<CGL_Insured>();
+        InsuredObj = result.Where(x => string.Equals(x.Type, "Short Term", StringComparison.OrdinalIgnoreCase)).ToList();
     }
 }
