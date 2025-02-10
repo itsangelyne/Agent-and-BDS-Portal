@@ -1,8 +1,9 @@
-﻿@page "/"
+﻿@page "/cgldashboard"
 @using Agent_and_BDS_Portal.Data
-@*inject ProductionReport_Services Cgl_Services ;*@
+
 @using BChart = Blazorise.Charts.ChartType
 @using MChart = MudBlazor.ChartType
+@inject NavigationManager NavigationManager
 @layout MainLayout
 
 <h3>Summary Report</h3>

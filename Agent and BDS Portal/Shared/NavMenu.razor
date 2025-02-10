@@ -1,6 +1,5 @@
-﻿@page "/navMenu"
-@using Microsoft.AspNetCore.Components.Routing
-@inject NavigationManager Navigation
+﻿@using Microsoft.AspNetCore.Components.Routing
+@inject NavigationManager NavigationManager
 
 <div div class="top-row ps-3 bg-#e51933 navbar-dark">
 	<div class="container-fluid d-flex justify-content-center align-items-center">
@@ -20,7 +19,7 @@
 
 	<!-- DASHBOARD -->
 	<div class="nav-item px-3">
-		<NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+		<NavLink class="nav-link" href="cgldashboard" Match="NavLinkMatch.All">
 			<span class="fa fa-home fa-lg" style="margin-right:20px"></span><b>Dashboard</b>
 		</NavLink>
 	</div>
@@ -35,7 +34,7 @@
 	</a>
 	<!--Pending-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="" @onclick="TogglePendingDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="TogglePendingDropdown">
 			<div>
 				<span class="fa fa-paper-plane" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
 			</div>
@@ -55,7 +54,7 @@
 
 	<!--REceipted-->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleReceiptedDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleReceiptedDropdown">
 			<div>
 				<span class="fa fa-stamp fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
 			</div>
@@ -74,7 +73,7 @@
 	</div>
 	<!-- Approved -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleApprovedDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleApprovedDropdown">
 			<div>
 				<span class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
 			</div>
@@ -94,7 +93,7 @@
 
 <!-- Declined -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleDeclinedDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleDeclinedDropdown">
 			<div>
 				<span class="fa fa-times-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
 			</div>
@@ -114,7 +113,7 @@
 
 <!-- REnewal -->
 <div class="nested-menu ps-3 @ProductionDropdownClass">
-	<a class="nav-link d-flex justify-content-between" href="" @onclick="ToggleRenewalDropdown">
+	<a class="nav-link d-flex justify-content-between" @onclick="ToggleRenewalDropdown">
 		<div>
 				<span class="bi bi-clock-history bi-lg" aria-hidden="true" style="margin-right:20px"></span><b>Renewal</b>
 		</div>
@@ -124,7 +123,7 @@
 		<NavLink class="nav-link" href="/LongTerm/Lapproved">
 				<span class="fas fa-sync-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 		</NavLink>
-	</div>
+	</div> 
 	<div class="nested-menu ps-3 @RenewalDropdownClass">
 		<NavLink class="nav-link" href="/ShortTerm/Sapproved">
 				<span class="fa fa-sync-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
@@ -134,7 +133,7 @@
 
 	<!-- Compliance -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleComplianceDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleComplianceDropdown">
 			<div>
 				<span class="fas fa-shield-alt fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
 			</div>
@@ -156,7 +155,7 @@
 
 	<!-- Terminated -->
 	<div class="nested-menu ps-3 @ProductionDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleTerminatedDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleTerminatedDropdown">
 			<div>
 				<span class="fas fa-ban fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
 			</div>
@@ -203,7 +202,7 @@
 
 <!-- Report -->
 <div class="nav-item px-3">
-	<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleReportDropdown">
+	<a class="nav-link d-flex justify-content-between" @onclick="ToggleReportDropdown">
 		<div>
 			<span class="fa fa-file-invoice fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Report</b>
 		</div>
@@ -212,7 +211,7 @@
 
 	<!-- Production Report -->
 	<div class="nested-menu ps-3 @ReportDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleProductionReportDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleProductionReportDropdown">
 			<div>
 				<span class="fas fa-industry fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Production</b>
 			</div>
@@ -232,7 +231,7 @@
 
 	<!-- Claims Paid -->
 	<div class="nested-menu ps-3 @ReportDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleClaimsPaidDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleClaimsPaidDropdown">
 			<div>
 				<span class="fas fa-money-bill-wave fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Claims Paid</b>
 			</div>
@@ -252,7 +251,7 @@
 
 	<!-- Loss Ratio -->
 	<div class="nested-menu ps-3 @ReportDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleLossRatioDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleLossRatioDropdown">
 			<div>
 				<span class="fas fa-percentage fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Loss Ratio</b>
 			</div>
@@ -272,7 +271,7 @@
 
 	<!-- Net Income -->
 	<div class="nested-menu ps-3 @ReportDropdownClass">
-		<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleNetIncomeDropdown">
+		<a class="nav-link d-flex justify-content-between" @onclick="ToggleNetIncomeDropdown">
 			<div>
 				<span class="fas fa-chart-pie fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Net Income</b>
 			</div>
@@ -294,7 +293,7 @@
 
 <!-- COMMISSION -->
 <div class="nav-item px-3">
-	<a class="nav-link d-flex justify-content-between" href="#" @onclick="ToggleCommissionDropdown">
+	<a class="nav-link d-flex justify-content-between" @onclick="ToggleCommissionDropdown">
 		<div>
 			<span class="fas fa-coins fa-lg" style="margin-right:20px"></span><b>Commission</b>
 		</div>
@@ -316,7 +315,7 @@
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @CommissionDropdownClass">
-			<a class="nav-link d-flex justify-content-between" href="#" @onclick="TogglePaidDropdown">
+			<a class="nav-link d-flex justify-content-between" @onclick="TogglePaidDropdown">
 				<div>
 					<span class="fas fa-hand-holding-usd fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Paid</b>
 				</div>
