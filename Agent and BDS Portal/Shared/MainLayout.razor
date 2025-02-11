@@ -22,7 +22,7 @@
 @code {
     private bool ShowSidebar()
     {
-        return !IsLoginPage() && !NavigationManager.Uri.EndsWith("/lineofbusiness");
+        return !IsLoginPage() && !NavigationManager.Uri.EndsWith("/lineofbusiness") && !NavigationManager.Uri.EndsWith("/banklist");
     }
 
     private bool IsLoginPage()

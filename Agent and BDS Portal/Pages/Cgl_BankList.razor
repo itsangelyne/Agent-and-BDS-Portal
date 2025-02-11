@@ -1,5 +1,23 @@
-﻿<h3>BankList</h3>
+﻿@page "/banklist"
 
-@code {
+@inject NavigationManager NavigationManager
+<h1 class="text-center"><b>BANK LIST</b></h1>
 
+<div class="background-overlay"></div>
+<div class="lob-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <Label><Strong>REGION 04A</Strong></Label><br />
+            <Label><Strong>Province: Quezon</Strong></Label>
+            <button class="btn btn-outline-success mb-2 w-100" >Bayanihan Bank</button>
+            <button class="btn btn-outline-success mb-2 w-100" @onclick="NavigateToCreditGroupLifePlans">Rural Bank of Candelaria, INC.</button>
+            <button class="btn btn-outline-success mb-2 w-100" id="gyrtbtn">Grand Agri Rural Bank, INC.</button>
+        </div>   
+    </div>
+</div>
+@code{
+private void NavigateToCreditGroupLifePlans()
+    {
+        NavigationManager.NavigateTo("/cgldashboard");
+    }
 }

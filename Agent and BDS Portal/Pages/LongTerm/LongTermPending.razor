@@ -13,8 +13,10 @@
         <h3 class="text-center font-weight-bold"><strong>LONG TERM</strong></h3>
 
         <!-- Search Bar -->
-        <input type="text" @bind="searchQuery" class="form-control" placeholder="Search..." />
-
+        <div class="input-group mb-3 shadow-sm">
+            <span class="input-group-text bg-light">🔍</span>
+            <input type="text" @bind="searchQuery" class="form-control" placeholder="Search..." />
+        </div>
         <!-- Table -->
         <div class="mt-4 table-responsive">
             <table class="table table-bordered table-hover">
