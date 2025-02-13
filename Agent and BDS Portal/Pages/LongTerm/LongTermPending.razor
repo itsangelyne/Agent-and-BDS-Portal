@@ -12,9 +12,24 @@
         <h3 class="text-center font-weight-bold"><strong>LONG TERM</strong></h3>
 
         <!-- Search Bar -->
+        
         <div class="input-group mb-3 shadow-sm">
             <span class="input-group-text bg-light">🔍</span>
-            <input type="text" @bind="searchQuery" class="form-control" placeholder="Search..." />
+
+            <!-- Search Input -->
+            <input type="text" @bind="searchQuery" class="form-control" style="max-width: 500px; margin-right: 10px;" placeholder="Search..." />
+
+            <!-- Label in Between -->
+            <span class="input-group-text bg-light">Filter By:</span>
+
+            <!-- Dropdown List -->
+            <select @bind="selectedFilter" class="form-select" style="max-width: 500px; margin-right: 10px;">
+                <option value="date">2024</option>
+                <option value="date">2025</option>
+                <option value="gross">2026</option>
+                <option value="net">2027</option>
+                <option value="total">2028</option>
+            </select>
         </div>
 
         <!-- Table -->
@@ -122,6 +137,8 @@
 </div>
 
 @code {
+
+    private string selectedFilter = "date";
     private string searchQuery = string.Empty;
     private List<CGL_CreditDebit> CreditdebitObj { get; set; } = new List<CGL_CreditDebit>();
     private List<CGL_Insured> InsuredObj { get; set; } = new List<CGL_Insured>();
@@ -134,9 +151,10 @@
         => (CreditdebitObj?.Where(p => string.IsNullOrEmpty(searchQuery) ||
             (DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy-MM-dd" },
                 CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
-                && p.Submitted_Date.Date == searchDate.Date) ||
+                && p.Submitted_Date.Date == searchDate.Date) || 
             (searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
         .ToList()) ?? new List<CGL_CreditDebit>();
+
 
     private List<CGL_CreditDebit> pagedList
         => filteredList.Skip((currentPage - 1) * page).Take(page).ToList();
@@ -148,6 +166,9 @@
         // Fetch creditdebit and insured data
         var creditDebitResult = await creditdebitServices.GetAllCGL_CreditDebitAsync();
         var insuredResult = await insuredServices.GetAllCGL_INSUREDAsync();
+
+        InsuredObj = insuredResult?.Where(x => x.Type?.Equals("Long Term", StringComparison.OrdinalIgnoreCase) == true).ToList() ?? new();
+
 
         // Store in lists
         CreditdebitObj = creditDebitResult ?? new List<CGL_CreditDebit>();
