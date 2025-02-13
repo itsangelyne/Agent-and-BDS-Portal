@@ -20,6 +20,7 @@ namespace Agent_and_BDS_Portal.Context
         public DbSet<CGL_Policy_Holder> CGL_Policy_Holder { get; set; }
         public DbSet<CGL_Particulars> CGL_Particulars { get; set; }
         public DbSet<CGL_Insured> CGL_INSURED { get; set; }
+        public DbSet<CGL_Receipted> CGL_Receipted { get; set; }
 
     }
 
