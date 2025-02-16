@@ -9,6 +9,7 @@
         <div class="col-md-6">
             <Label><Strong>REGION 04A</Strong></Label><br />
             <Label><Strong>Province: Quezon</Strong></Label>
+            <button class="btn btn-outline-success mb-2 w-100" @onclick ="CBLICBANK">CBLIC Bank</button>
             <button class="btn btn-outline-success mb-2 w-100" >Bayanihan Bank</button>
             <button class="btn btn-outline-success mb-2 w-100" @onclick="NavigateToCreditGroupLifePlans">Rural Bank of Candelaria, INC.</button>
             <button class="btn btn-outline-success mb-2 w-100" id="gyrtbtn">Grand Agri Rural Bank, INC.</button>
@@ -16,8 +17,18 @@
     </div>
 </div>
 @code{
-private void NavigateToCreditGroupLifePlans()
+    private void CBLICBANK()
     {
-        NavigationManager.NavigateTo("/cgldashboard");
+        NavigationManager.NavigateTo($"/LongTerm/Lpendinglist?bankName=CBLIC%20Bank");
+        //NavigationManager.NavigateTo("/LongTerm/Lpendinglist");
     }
+
+    private void NavigateToCreditGroupLifePlans()
+    {
+        NavigationManager.NavigateTo("/LongTerm/Lpendinglist");
+    }
+
+  
+
+    
 }

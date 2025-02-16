@@ -1,6 +1,7 @@
 ﻿@* @page "/LongTerm/Lreceipted"
 @using Agent_and_BDS_Portal.Data
 @using Agent_and_BDS_Portal.Model
+@using System.Globalization
 @inject CGL_Receipted_Services receiptedServices
 
 <h3><Strong>RECEIPTED</Strong></h3>
@@ -41,8 +42,8 @@
 						@foreach (var receipted in filteredList)
 						{
 							<tr>
-								<td>@receipted.id</td>
-								<td>@receipted.Date</td>
+								<td>00</td>
+								<td>jfnsfnsd</td>
 								<td>5</td>
 								<td><span class="badge bg-warning">Received</span></td>
 								<td class="d-flex justify-content-around">
@@ -223,9 +224,6 @@
 			(searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
 		.ToList()) ?? new List<CGL_Receipted>();
 
-
-
-
 	private bool IsModalOpen = false;
 
 	private Cgl_submittedReport SelectedDetail = new Cgl_submittedReport();
@@ -265,4 +263,4 @@
 
 
 	}
-} *@
+}  *@

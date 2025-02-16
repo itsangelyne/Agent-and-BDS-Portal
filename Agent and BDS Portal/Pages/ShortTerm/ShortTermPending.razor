@@ -11,24 +11,16 @@
     <div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
         <h3 class="text-center font-weight-bold"><strong>SHORT TERM</strong></h3>
 
-        <!-- Search Bar -->
-
+        <!-- Search and Filter -->
         <div class="input-group mb-3 shadow-sm">
             <span class="input-group-text bg-light">🔍</span>
-
-            <!-- Search Input -->
             <input type="text" @bind="searchQuery" class="form-control" style="max-width: 500px; margin-right: 10px;" placeholder="Search..." />
-
-            <!-- Label in Between -->
             <span class="input-group-text bg-light">Filter By:</span>
-
-            <!-- Dropdown List -->
             <select @bind="selectedFilter" class="form-select" style="max-width: 500px; margin-right: 10px;">
-                <option value="date">2024</option>
-                <option value="date">2025</option>
-                <option value="gross">2026</option>
-                <option value="net">2027</option>
-                <option value="total">2028</option>
+                <option value="date"></option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
             </select>
         </div>
 
@@ -37,7 +29,9 @@
             <table class="table table-bordered table-hover">
                 <thead style="background-color: #77B254;">
                     <tr>
-                        <th class="text-center text-white">Release Date</th>
+                        <th class="text-center text-white" style="cursor: pointer;" @onclick="ToggleSortOrder">
+                            Release Date <i class="bi @(isDescending ? "bi-arrow-down" : "bi-arrow-up")"></i>
+                        </th>
                         <th class="text-center text-white">Gross</th>
                         <th class="text-center text-white">Net</th>
                         <th class="text-center text-white">Total Application</th>
@@ -67,11 +61,10 @@
                                 </td>
                             </tr>
 
-                            <!-- Display names based on matching DCHS -->
                             @if (SelectedDCHS == creditdebit.DCHS_To)
                             {
                                 var matchedInsuredList = InsuredObj
-                                .Where(i => i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From)
+                                .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Short Term")
                                 .ToList();
 
                                 <tr>
@@ -81,19 +74,19 @@
                                             <table class="table table-bordered">
                                                 <thead class="table-success">
                                                     <tr>
-                                                        <th class="text-center">DCHS</th>
+                                                        <th class="text-center">ID Insured</th>
                                                         <th class="text-center">Full Name</th>
-
                                                         <th class="text-center">Age</th>
                                                         <th class="text-center">Gender</th>
-                                                        <th class="text-center">Contact Number</th>
+                                                        <th class="text-center">Type</th>
+                                                        <th class="text-center">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @if (!matchedInsuredList.Any())
                                                     {
                                                         <tr>
-                                                            <td class="text-center">No insured data available.</td>
+                                                            <td colspan="6" class="text-center">No insured data available.</td>
                                                         </tr>
                                                     }
                                                     else
@@ -101,11 +94,16 @@
                                                         @foreach (var insured in matchedInsuredList)
                                                         {
                                                             <tr>
-                                                                <td class="text-center">@insured.DCHS</td>
+                                                                <td class="text-center">@insured.ID_Insured</td>
                                                                 <td class="text-center">@insured.First_Name @insured.Last_Name</td>
                                                                 <td class="text-center">@insured.Age</td>
                                                                 <td class="text-center">@insured.Gender</td>
-                                                                <td class="text-center">@insured.Contact_Number</td>
+                                                                <td class="text-center">@insured.Type</td>
+                                                                <td class="text-center">
+                                                                    <button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured)">
+                                                                        View
+                                                                    </button>
+                                                                </td>
                                                             </tr>
                                                         }
                                                     }
@@ -119,24 +117,70 @@
                     }
                 </tbody>
             </table>
-
-            <!-- Pagination -->
-            <div class="d-flex justify-content-between align-items-center my-3">
-                <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">
-                    <span class="oi oi-arrow-left" aria-hidden="true"></span> Previous
-                </button>
-
-                <strong>Page @currentPage of @totalPages</strong>
-
-                <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">
-                    Next <span class="oi oi-arrow-right" aria-hidden="true"></span>
-                </button>
+        </div>
+        {
+        <div class="modal fade show d-block" style="background: rgba(0, 0, 0, 0.5);" tabindex="-1">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Insured Details</h5>
+                        <button type="button" class="btn-close" @onclick="CloseModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>ID Insured</strong></label>
+                            <input type="text" class="form-control" value="@selectedInsured?.ID_Insured" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Full Name</strong></label>
+                            <input type="text" class="form-control" value="@($"{selectedInsured?.First_Name} {selectedInsured?.Last_Name}")" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Age</strong></label>
+                            <input type="text" class="form-control" value="@selectedInsured?.Age" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Gender</strong></label>
+                            <input type="text" class="form-control" value="@selectedInsured?.Gender" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Type</strong></label>
+                            <input type="text" class="form-control" value="@selectedInsured?.Type" readonly />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" @onclick="CloseModal">Close</button>
+                    </div>
+                </div>
             </div>
+        </div>
+        }
+
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">Previous</button>
+            <strong>Page @currentPage of @totalPages</strong>
+            <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
         </div>
     </div>
 </div>
 
 @code {
+
+    private bool showModal = false;
+    private CGL_Insured selectedInsured = new CGL_Insured();
+
+    private void OpenModal(CGL_Insured insured)
+    {
+        selectedInsured = insured;
+        showModal = true;
+    }
+
+    private void CloseModal()
+    {
+        showModal = false;
+    }
 
     private string selectedFilter = "date";
     private string searchQuery = string.Empty;
@@ -146,53 +190,45 @@
     private int page = 5; // Number of items per page
     private int currentPage = 1;
     private int totalPages => (int)Math.Ceiling((double)filteredList.Count / page);
+    private bool isDescending = true;
 
     private List<CGL_CreditDebit> filteredList
-        => (CreditdebitObj?.Where(p => string.IsNullOrEmpty(searchQuery) ||
-            (DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy" },
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
-                && p.Submitted_Date.Date == searchDate.Date) ||
-            (searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
-        .ToList()) ?? new List<CGL_CreditDebit>();
+        => (CreditdebitObj?
+            .Where(p => string.IsNullOrEmpty(searchQuery) ||
+                (DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" },
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
+                    && p.Submitted_Date.Date == searchDate.Date) ||
+                (searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
+            .OrderBy(p => isDescending ? -p.Submitted_Date.Ticks : p.Submitted_Date.Ticks)
+            .ToList()) ?? new List<CGL_CreditDebit>();
 
-
-    private List<CGL_CreditDebit> pagedList
-        => filteredList.Skip((currentPage - 1) * page).Take(page).ToList();
+    private List<CGL_CreditDebit> pagedList => filteredList.Skip((currentPage - 1) * page).Take(page).ToList();
 
     private string? SelectedDCHS = null;
 
     protected override async Task OnInitializedAsync()
     {
-        // Fetch creditdebit and insured data
-        var creditDebitResult = await creditdebitServices.GetAllCGL_CreditDebitAsync();
-        var insuredResult = await insuredServices.GetAllCGL_INSUREDAsync();
-       
-        CreditdebitObj = creditDebitResult ?? new List<CGL_CreditDebit>();
+        var creditDebitList = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
+        var insuredList = await insuredServices.GetAllCGL_INSUREDAsync() ?? new List<CGL_Insured>();
 
-       
-        InsuredObj = insuredResult?.Where(x =>
-            x.Type?.Equals("Short Term", StringComparison.OrdinalIgnoreCase) == true
-        ).ToList() ?? new List<CGL_Insured>();
+        InsuredObj = insuredList.Where(x => x.Type?.Equals("Short Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
+
+        CreditdebitObj = (from cd in creditDebitList
+                          join ins in insuredList on cd.DCHS_To equals ins.DCHS
+                          where ins.Type == "Short Term"
+                          select new CGL_CreditDebit
+                              {
+                                  Submitted_Date = cd.Submitted_Date,
+                                  Gross_Pay = cd.Gross_Pay,
+                                  Net_Pay = cd.Net_Pay,
+                                  Total_Application = cd.Total_Application,
+                                  DCHS_To = cd.DCHS_To
+                              }).ToList();
     }
 
-    private void ToggleDetails(string dchsNumber)
-    {
-        SelectedDCHS = (SelectedDCHS == dchsNumber) ? null : dchsNumber;
-    }
+    private void ToggleDetails(string dchsNumber) => SelectedDCHS = (SelectedDCHS == dchsNumber) ? null : dchsNumber;
 
-    private void NextPage()
-    {
-        if (currentPage < totalPages)
-        {
-            currentPage++;
-        }
-    }
-
-    private void PreviousPage()
-    {
-        if (currentPage > 1)
-        {
-            currentPage--;
-        }
-    }
+    private void ToggleSortOrder() => isDescending = !isDescending;
+    private void NextPage() { if (currentPage < totalPages) currentPage++; }
+    private void PreviousPage() { if (currentPage > 1) currentPage--; }
 }

@@ -15,6 +15,7 @@ namespace Agent_and_BDS_Portal.Data
         {
             return await _applicationContext.CGL_CreditDebit.ToListAsync();
         }
+        
 
     }
 }
