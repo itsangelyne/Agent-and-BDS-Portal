@@ -14,10 +14,10 @@ namespace Agent_and_BDS_Portal.Model
         public string DCHS_To { get; set; }
         public DateTime Period_From { get; set; }
         public DateTime Period_To { get; set; }
-        public decimal Gross_Pay { get; set; }
-        public decimal Net_Pay { get; set; }
+        public double Gross_Pay { get; set; }
+        public double Net_Pay { get; set; }
         public int Total_Application { get; set; }
-        public  decimal Total_Coverage { get; set; }
+        public double Total_Coverage { get; set; }
         public DateTime Submitted_Date { get; set; }
         public string Submitted_By { get; set; }
         public string Receipt { get; set; }
