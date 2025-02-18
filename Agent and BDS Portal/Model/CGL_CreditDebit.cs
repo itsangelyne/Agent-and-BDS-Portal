@@ -22,5 +22,8 @@ namespace Agent_and_BDS_Portal.Model
         public string Submitted_By { get; set; }
         public string Receipt { get; set; }
 
+        public virtual ICollection<CGL_Insured> CreditDebitInsured { get; set; }
+        public virtual ICollection<CGL_Coverage> CreditDebitCoverage { get; set; }
+
     }
 }

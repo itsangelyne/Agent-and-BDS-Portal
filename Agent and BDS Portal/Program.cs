@@ -26,6 +26,7 @@ builder.Services.AddScoped<CGL_Policy_Holder_Services>();
 builder.Services.AddScoped<CGL_Particulars_Services>();
 builder.Services.AddScoped<CGL_Insured_Services>();
 builder.Services.AddScoped<CGL_Receipted_Services>();
+builder.Services.AddScoped<CGL_Coverage_Services>();
 
 builder.Services.AddMudServices();
 
