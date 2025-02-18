@@ -5,8 +5,9 @@
 @inject CGL_Insured_Services insuredServices
 @inject CGL_CreditDebit_Services creditdebitServices
 @inject CGL_Coverage_Services coverageServices
+@inject CGL_Policy_Holder_Services policyholderServices
 
-<h3><strong>Pending</strong></h3>
+<h3><strong>@selectedPolicyHolder.Policy_Holder_Name</strong></h3>
 
 <div class="container mt-0">
     <div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
@@ -35,20 +36,29 @@
                         </th>
                         <th class="text-center text-white">Gross</th>
                         <th class="text-center text-white">Net</th>
+                        <th class="text-center text-white">Total Coverage</th>
                         <th class="text-center text-white">Total Application</th>
                         <th class="text-center text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var creditDebit in creditdebitDataList)
+                    @if (!pagedList.Any())
                     {
-                        @if (SelectedDCHS == creditdebit.ReleaseDate)
+                        <tr>
+                            <td colspan="6" class="text-center">No data available.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var creditdebit in pagedList)
                         {
                             <tr>
                                 <td class="hover-cell text-center">@creditdebit.Submitted_Date.ToString("MM/dd/yyyy")</td>
                                 <td class="hover-cell text-center">@creditdebit.Gross_Pay</td>
                                 <td class="hover-cell text-center">@creditdebit.Net_Pay</td>
+                                <td class="hover-cell text-center">@creditdebit.Total_Coverage</td>
                                 <td class="hover-cell text-center">@creditdebit.Total_Application</td>
+
                                 <td class="text-center">
                                     <button class="btn btn-outline-success btn-sm" @onclick="() => ToggleDetails(creditdebit.DCHS_To)">
                                         View Application
@@ -62,19 +72,22 @@
                                 .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Short Term")
                                 .ToList();
 
-                                var matchedcoverageList = CoverageObj
-                                .Where(c => matchedInsuredList.Select(i => i.ID_Insured).Contains(c.ID_Insured))
+                                var matchedCoverageList = CoverageObj
+                                .Where(c => matchedInsuredList.Any(i => i.ID_Insured == c.ID_Insured))
                                 .ToList();
 
-
+                                var matchedPolicyHolderList = PolicyHolderObj
+                                .Where(p => matchedInsuredList.Any(i => i.ID_Policy_Holder == p.ID_Policy_Holder))
+                                .ToList();
 
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="6">
                                         <div class="p-3 border rounded bg-light">
                                             <h5 class="text-center"><strong>Insured Individuals</strong></h5>
                                             <table class="table table-bordered">
                                                 <thead class="table-success">
                                                     <tr>
+                                                        <th class="text-center">Bank</th>
                                                         <th class="text-center">Full Name</th>
                                                         <th class="text-center">Amount of Insured</th>
                                                         <th class="text-center">Term of Loan</th>
@@ -83,18 +96,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @if (!creditDebit.InsuredList.Any())
+                                                    @if (!matchedInsuredList.Any())
                                                     {
                                                         <tr>
-                                                            <td colspan="5" class="text-center">No insured data available.</td>
+                                                            <td colspan="6" class="text-center">No insured data available.</td>
                                                         </tr>
                                                     }
                                                     else
                                                     {
-                                                        @foreach (var insured in creditDebit.InsuredList)
+                                                        @foreach (var insured in matchedInsuredList)
                                                         {
-                                                            var coverage = matchedcreditDebit.coverageList.FirstOrDefault(c => c.ID_Insured == insured.ID_Insured);
+                                                            var coverage = matchedCoverageList.FirstOrDefault(c => c.ID_Insured == insured.ID_Insured);
+                                                            var policyholder = matchedPolicyHolderList.FirstOrDefault(p => p.ID_Policy_Holder == insured.ID_Policy_Holder);
+
                                                             <tr>
+                                                                <td class="text-center">@policyholder?.Policy_Holder_Name</td>
                                                                 <td class="text-center">@insured.First_Name @insured.Last_Name</td>
                                                                 <td class="text-center">@coverage?.Amount_Of_Insured</td>
                                                                 <td class="text-center">@coverage?.Term_Of_Loan</td>
@@ -115,27 +131,25 @@
                             }
                         }
                     }
-                   
                 </tbody>
             </table>
         </div>
-    
-<!-- Pagination should be placed between the sections -->
-<div class="d-flex justify-content-between align-items-center my-3">
-    <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">Previous</button>
-    <strong>Page @currentPage of @totalPages</strong>
-    <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
-</div>
-</div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">Previous</button>
+            <strong>Page @currentPage of @totalPages</strong>
+            <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
+        </div>
     </div>
-   
+</div>
 @if (showModal)
 {
     <div class="modal fade show d-block" style="background: rgba(0, 0, 0, 0.5);" tabindex="-1">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content p-4" style="background-color: #fff; border-radius: 10px;">
                 <div class="modal-header border-bottom">
-                    <h4 class="modal-title fw-bold">Name:@selectedInsured.First_Name @selectedInsured.Last_Name</h4>
+                    <h4 class="modal-title fw-bold">@selectedInsured.First_Name @selectedInsured.Last_Name</h4>
                     <button type="button" class="btn-close" @onclick="CloseModal"></button>
                 </div>
                 <div class="modal-body">
@@ -280,7 +294,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div id="otherDetails" class="tab-content" style="display: none;">
                         <div class="table-responsive p-3 border rounded bg-light">
                             <div class="row mb-3">
@@ -348,66 +362,16 @@
     </div>
 }
 
-   
-    <script>
-                function showTab(tabId, selectedButton) {
-                    let buttons = document.querySelectorAll(".btn-group button");
-                    buttons.forEach(button => {
-                        button.classList.remove("active-tab");
-                        button.classList.add("inactive-tab");
-                    });
-
-                    selectedButton.classList.add("active-tab");
-                    selectedButton.classList.remove("inactive-tab");
-
-                    // Hide both tabs first
-                    document.getElementById("personalInfo").style.display = "none";
-                    document.getElementById("otherDetails").style.display = "none";
-
-                    // Show the selected tab
-                    document.getElementById(tabId).style.display = "block";
-                }
-            </script>
-
-            <style>
-                .btn-group {
-                    display: flex;
-                    background: #f1f1f1;
-                    border-radius: 50px;
-                }
-
-                    .btn-group .btn {
-                        border: none;
-                        transition: 0.3s;
-                    }
-
-                .active-tab {
-                    background: white;
-                    font-weight: bold;
-                    color: black;
-                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-                }
-
-                .inactive-tab {
-                    background: none;
-                    color: gray;
-                }
-            </style>
-        
-
-
-    
 
 
 @code {
-
-    
-
     private bool showModal = false;
     private CGL_Insured? selectedInsured = null;
+    private CGL_Policy_Holder? selectedPolicyHolder = null;
 
     private void OpenModal(CGL_Insured insured)
     {
+        
         selectedInsured = insured;
         showModal = true;
     }
@@ -418,12 +382,12 @@
         showModal = false;
     }
 
-
     private string selectedFilter = "date";
     private string searchQuery = string.Empty;
     private List<CGL_CreditDebit> CreditdebitObj { get; set; } = new List<CGL_CreditDebit>();
     private List<CGL_Insured> InsuredObj { get; set; } = new List<CGL_Insured>();
     private List<CGL_Coverage> CoverageObj { get; set; } = new List<CGL_Coverage>();
+    private List<CGL_Policy_Holder> PolicyHolderObj { get; set; } = new List<CGL_Policy_Holder>();
 
     private int page = 5; // Number of items per page
     private int currentPage = 1;
@@ -446,26 +410,32 @@
 
     protected override async Task OnInitializedAsync()
     {
-        creditDebitList = await creditdebitServices.GetAllCGL_CreditDebitAsync(DateTime.Now.AddMonths(-1), DateTime.Now);
-       
-        var insuredList = await insuredServices.GetAllCGL_INSUREDAsync() ?? new List<CGL_Insured>();
-        var coverageList = await coverageServices.GetAllCGL_CoverageAsync() ?? new List<CGL_Coverage>();
+        try
+        {
+            var creditDebitList = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
+            var insuredList = await insuredServices.GetAllCGL_INSUREDAsync() ?? new List<CGL_Insured>();
+            var coverageList = await coverageServices.GetAllCGL_CoverageAsync() ?? new List<CGL_Coverage>();
+            var policyholderList = await policyholderServices.GetAllPolicyHolderAsync() ?? new List<CGL_Policy_Holder>();
 
-      
-        InsuredObj = insuredList.Where(x => x.Type?.Equals("Short Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
-     
-        CoverageObj = coverageList;
-        CreditdebitObj = (from cd in creditDebitList
-                          join ins in insuredList on cd.DCHS_To equals ins.DCHS
-                          where ins.Type == "Short Term"
-                          select new CGL_CreditDebit
-                              {
-                                  Submitted_Date = cd.Submitted_Date,
-                                  Gross_Pay = cd.Gross_Pay,
-                                  Net_Pay = cd.Net_Pay,
-                                  Total_Application = cd.Total_Application,
-                                  DCHS_To = cd.DCHS_To
-                              }).ToList();
+            InsuredObj = insuredList.Where(x => x.Type?.Equals("Short Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
+
+            CreditdebitObj = (from cd in creditDebitList
+                              join ins in insuredList on cd.DCHS_To equals ins.DCHS
+                              where ins.Type == "Short Term"
+                              select new CGL_CreditDebit
+                                  {
+                                      Submitted_Date = cd.Submitted_Date,
+                                      Gross_Pay = cd.Gross_Pay,
+                                      Net_Pay = cd.Net_Pay,
+                                      Total_Application = cd.Total_Application,
+                                      DCHS_To = cd.DCHS_To
+                                  }).ToList();
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions (e.g., log the error)
+            Console.WriteLine($"Error loading data: {ex.Message}");
+        }
     }
 
     private void ToggleDetails(string dchsNumber) => SelectedDCHS = (SelectedDCHS == dchsNumber) ? null : dchsNumber;
@@ -473,4 +443,4 @@
     private void ToggleSortOrder() => isDescending = !isDescending;
     private void NextPage() { if (currentPage < totalPages) currentPage++; }
     private void PreviousPage() { if (currentPage > 1) currentPage--; }
-} 
+}

@@ -1,0 +1,26 @@
+﻿body {
+.btn-group
+
+{
+    display: flex;
+    background: #f1f1f1;
+    border-radius: 50px;
+}
+
+.btn-group .btn {
+    border: none;
+    transition: 0.3s;
+}
+
+.active-tab {
+    background: white;
+    font-weight: bold;
+    color: black;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.inactive-tab {
+    background: none;
+    color: gray;
+}
+

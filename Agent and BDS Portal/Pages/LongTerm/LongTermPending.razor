@@ -64,10 +64,10 @@
                                 </td>
                             </tr>
 
-                            @if (SelectedDCHS == creditdebit.Period_From)
+                            @if (SelectedDCHS == creditdebit.DCHS_From)
                             {
                                 var matchedInsuredList = InsuredObj
-                                .Where(i => (i.DCHS == creditdebit.Period_To || i.DCHS == creditdebit.Period_From) && i.Type == "Long Term")
+                                .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Long Term")
                                 .ToList();
 
                                 var matchedcoverageList = CoverageObj
