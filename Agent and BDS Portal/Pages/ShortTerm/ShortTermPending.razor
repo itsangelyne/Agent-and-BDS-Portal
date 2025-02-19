@@ -1,5 +1,6 @@
 ﻿@page "/ShortTerm/Spendinglist"
 @using Agent_and_BDS_Portal.Data
+@using Agent_and_BDS_Portal.Context
 @using Agent_and_BDS_Portal.Model
 @using System.Globalization
 @inject CGL_Insured_Services insuredServices
@@ -10,21 +11,21 @@
 <h3><strong>@selectedPolicyHolder.Policy_Holder_Name</strong></h3>
 
 <div class="container mt-0">
-    <div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <h3 class="text-center font-weight-bold"><strong>SHORT TERM</strong></h3>
+	<div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+		<h3 class="text-center font-weight-bold"><strong>SHORT TERM</strong></h3>
 
-        <!-- Search and Filter -->
-        <div class="input-group mb-3 shadow-sm">
-            <span class="input-group-text bg-light">🔍</span>
-            <input type="text" @bind="searchQuery" class="form-control" style="max-width: 500px; margin-right: 10px;" placeholder="Search..." />
-            <span class="input-group-text bg-light">Filter By:</span>
-            <select @bind="selectedFilter" class="form-select" style="max-width: 500px; margin-right: 10px;">
-                <option value="date"></option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-            </select>
-        </div>
+		<!-- Search and Filter -->
+		<div class="input-group mb-3 shadow-sm">
+			<span class="input-group-text bg-light">🔍</span>
+			<input type="text" @bind="searchQuery" class="form-control" style="max-width: 500px; margin-right: 10px;" placeholder="Search..." />
+			<span class="input-group-text bg-light">Filter By:</span>
+			<select @bind="selectedFilter" class="form-select" style="max-width: 500px; margin-right: 10px;">
+				<option value="date"></option>
+				<option value="2024">2024</option>
+				<option value="2025">2025</option>
+				<option value="2026">2026</option>
+			</select>
+		</div>
 
         <!-- Table -->
         <div class="mt-4 table-responsive">
@@ -66,11 +67,11 @@
                                 </td>
                             </tr>
 
-                            @if (SelectedDCHS == creditdebit.DCHS_To)
-                            {
-                                var matchedInsuredList = InsuredObj
-                                .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Short Term")
-                                .ToList();
+							@if (SelectedDCHS == creditdebit.DCHS_To)
+							{
+								var matchedInsuredList = InsuredObj
+								.Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Short Term")
+								.ToList();
 
                                 var matchedCoverageList = CoverageObj
                                 .Where(c => matchedInsuredList.Any(i => i.ID_Insured == c.ID_Insured))
@@ -164,135 +165,81 @@
                         </div>
                     </div>
 
-                    <div id="personalInfo" class="tab-content">
-                        <div class="table-responsive p-4 border rounded bg-light">
-                            <div class="row mb-4">
-                                <!-- ID Insured -->
-                                <div class="col-md-auto d-flex align-items-center justify-content-center">
-                                    <label class="form-label"><strong>ID Insured</strong></label>
-                                </div>
-                                <div class="col-md">
-                                    <input type="text" class="form-control" style="max-width: 200px; width: 100%;" value="@selectedInsured.ID_Insured" readonly />
-                                </div>
-
-                                <!-- Full Name -->
-                                <div class="col-md-auto d-flex align-items-center justify-content-center">
-                                    <label class="form-label"><strong>Full Name</strong></label>
-                                </div>
-                                <div class="col-md">
-                                    <input type="text" class="form-control" style="max-width: 500px; width: 200%;" value="@selectedInsured.First_Name @selectedInsured.Last_Name" readonly />
-                                </div>
-
-                                <!-- Suffix -->
-                                <div class="col-md-auto d-flex align-items-center justify-content-center">
-                                    <label class="form-label"><strong>Suffix</strong></label>
-                                </div>
-                                <div class="col-md">
-                                    <input type="text" class="form-control" style="max-width: 200px; width: 100%;" value="@selectedInsured.Suffix" readonly />
-                                </div>
-
-                                <!-- Civil Status -->
-                                <div class="col-md-auto d-flex align-items-center justify-content-center">
-                                    <label class="form-label"><strong>Civil Status</strong></label>
-                                </div>
-                                <div class="col-md">
-                                    <input type="text" class="form-control" value="@selectedInsured.Civil_Status" readonly />
-                                </div>
-
-                                <!-- Gender -->
-                                <div class="col-md-auto d-flex align-items-center justify-content-center">
-                                    <label class="form-label"><strong>Gender</strong></label>
-                                </div>
-                                <div class="col-md">
-                                    <input type="text" class="form-control" value="@selectedInsured.Gender" readonly />
-                                </div>
-
-                                <!-- Height -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Height</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Height" readonly />
-                                </div>
-
-                                <!-- Weight -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Weight</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Weight" readonly />
-                                </div>
-
-                                <!-- Address -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Address</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Address" readonly />
-                                </div>
-
-                                <!-- Contact Number -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Contact Number</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Contact_Number" readonly />
-                                </div>
-
-                                <!-- Email -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Email</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Email_Address" readonly />
-                                </div>
-
-                                <!-- Age -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Age</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Age" readonly />
-                                </div>
-
-                                <!-- Date of Birth -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Date of Birth</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Date_Of_Birth.ToString("MM/dd/yyyy")" readonly />
-                                </div>
-
-                                <!-- Place of Birth -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Place of Birth</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Place_Of_Birth" readonly />
-                                </div>
-
-                                <!-- Nationality -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Nationality</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Nationality" readonly />
-                                </div>
-
-                                <!-- TIN/SSS/GSIS -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>TIN/SSS/GSIS</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.TIN_SSS_GSIS_NO" readonly />
-                                </div>
-
-                                <!-- Source of Funds -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Source of Funds</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Source_Of_Funds" readonly />
-                                </div>
-
-                                <!-- Nature of Self-employment/Business -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Nature of Self-employment/Business</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Nature_of_Self_Employment_Business" readonly />
-                                </div>
-
-                                <!-- Address of Business or Employer -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Address of Business or Employer</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Address_Of_Business_or_Employer" readonly />
-                                </div>
-
-                                <!-- Occupation & Livelihood -->
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Occupation & Livelihood</strong></label>
-                                    <input type="text" class="form-control" value="@selectedInsured.Occupation_And_Livelihood" readonly />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+						<!-- Personal Info -->
+						<div id="personalInfo" class="tab-content">
+							<div class="table-responsive p-3 border rounded bg-light">
+								<div class="row mb-3">
+									<div class="col-md-4">
+										<label class="form-label"><strong>ID Insured</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.ID_Insured" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Full Name</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.First_Name @selectedInsured.Last_Name" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Suffix</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Suffix" readonly />
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-4">
+										<label class="form-label"><strong>Civil Status</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Civil_Status" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Gender</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Gender" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Height</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Height" readonly />
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-4">
+										<label class="form-label"><strong>Weight</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Weight" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Address</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Address" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Contact Number</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Contact_Number" readonly />
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-4">
+										<label class="form-label"><strong>Email</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Email_Address" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Age</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Age" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Date of Birth</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Date_Of_Birth" readonly />
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-md-4">
+										<label class="form-label"><strong>Place of Birth</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Place_Of_Birth" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>Nationality</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.Nationality" readonly />
+									</div>
+									<div class="col-md-4">
+										<label class="form-label"><strong>TIN/SSS/GSIS</strong></label>
+										<input type="text" class="form-control" value="@selectedInsured.TIN_SSS_GSIS_NO" readonly />
+									</div>
+								</div>
+							</div>
+						</div>
 
 
                     <div id="otherDetails" class="tab-content" style="display: none;">
@@ -329,32 +276,27 @@
                                     <input type="text" class="form-control" value="" readonly />
                                 </div>
 
-                                <h4><label><strong style="display: block; text-align: center;">Beneficiaries</strong></label></h4>
+								<h4><strong><center>Beneficiaries</center></strong></h4>
+								<div class="row mb-3">
+									<div class="col-md-4" style="padding-right: 20px;">
+										<label class="form-label"><strong>Full Name</strong></label>
+										<input type="text" class="form-control" style="max-width: 500px; width: 100%;" value="" readonly />
+									</div>
 
-                                <div class="row mb-3">
-                                    <div class="col-md-7">
-                                        <label class="form-label"><strong>Full Name</strong></label>
-                                        <input type="text" class="form-control" style="max-width: 500px; width: 100%;" value="" readonly />
-                                    </div>
+									<div class="col-md-4" style="padding-left: 20px;">
+										<label class="form-label"><strong>Age</strong></label>
+										<input type="text" class="form-control" style="max-width: 400px; width: 100%;" value="" readonly />
+									</div>
+								</div>
 
-                                    <div class="col-md-5">
-                                        <label class="form-label"><strong>Age</strong></label>
-                                        <input type="text" class="form-control" style="max-width: 400px; width: 100%;" value="" readonly />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-7">
-                                        <label class="form-label"><strong>Relationship to insured</strong></label>
-                                        <input type="text" class="form-control" style="max-width: 500px; width: 100%;" value="" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer d-flex justify-content-end">
-                        <button class="btn btn-success" @onclick="CloseModal">Done</button>
-                    </div>
+								<div class="col-md-4">
+									<label class="form-label"><strong>Relationship to the Insured</strong></label>
+									<input type="text" class="form-control" style="width: 200%; max-width: 500px;" value="" readonly />
+								</div>
+							</div>
+						</div>
+					</div>
 
                 </div>
             </div>
@@ -376,11 +318,10 @@
         showModal = true;
     }
 
-    private void CloseModal()
-    {
-        selectedInsured = null;
-        showModal = false;
-    }
+	private void CloseModal()
+	{
+		showModal = false;
+	}
 
     private string selectedFilter = "date";
     private string searchQuery = string.Empty;
@@ -389,24 +330,24 @@
     private List<CGL_Coverage> CoverageObj { get; set; } = new List<CGL_Coverage>();
     private List<CGL_Policy_Holder> PolicyHolderObj { get; set; } = new List<CGL_Policy_Holder>();
 
-    private int page = 5; // Number of items per page
-    private int currentPage = 1;
-    private int totalPages => (int)Math.Ceiling((double)filteredList.Count / page);
-    private bool isDescending = true;
+	private int page = 5; // Number of items per page
+	private int currentPage = 1;
+	private int totalPages => (int)Math.Ceiling((double)filteredList.Count / page);
+	private bool isDescending = true;
 
-    private List<CGL_CreditDebit> filteredList
-        => (CreditdebitObj?
-            .Where(p => string.IsNullOrEmpty(searchQuery) ||
-                (DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" },
-                    CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
-                    && p.Submitted_Date.Date == searchDate.Date) ||
-                (searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
-            .OrderBy(p => isDescending ? -p.Submitted_Date.Ticks : p.Submitted_Date.Ticks)
-            .ToList()) ?? new List<CGL_CreditDebit>();
+	private List<CGL_CreditDebit> filteredList
+		=> (CreditdebitObj?
+			.Where(p => string.IsNullOrEmpty(searchQuery) ||
+				(DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" },
+					CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
+					&& p.Submitted_Date.Date == searchDate.Date) ||
+				(searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
+			.OrderBy(p => isDescending ? -p.Submitted_Date.Ticks : p.Submitted_Date.Ticks)
+			.ToList()) ?? new List<CGL_CreditDebit>();
 
-    private List<CGL_CreditDebit> pagedList => filteredList.Skip((currentPage - 1) * page).Take(page).ToList();
+	private List<CGL_CreditDebit> pagedList => filteredList.Skip((currentPage - 1) * page).Take(page).ToList();
 
-    private string? SelectedDCHS = null;
+	private string? SelectedDCHS = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -438,7 +379,7 @@
         }
     }
 
-    private void ToggleDetails(string dchsNumber) => SelectedDCHS = (SelectedDCHS == dchsNumber) ? null : dchsNumber;
+	private void ToggleDetails(string dchsNumber) => SelectedDCHS = (SelectedDCHS == dchsNumber) ? null : dchsNumber;
 
     private void ToggleSortOrder() => isDescending = !isDescending;
     private void NextPage() { if (currentPage < totalPages) currentPage++; }
