@@ -67,17 +67,42 @@ a, .btn-link {
 
     .blazor-error-boundary::after {
         content: "An error has occurred."
-}
-.nav-link span {
-    margin-right: 10px; 
+    }
 
+.nav-link span {
+    margin-right: 10px;
 }
+
 .hover-cell:hover {
     background-color: #CDE990; /* Light hover effect */
 }
 
+/*Modal*/
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
+.form-group label {
+    width: 200px; /* Consistent width for labels */
+    font-weight: bold;
+}
 
+.form-group input {
+    flex-grow: 1; /* Ensures proper alignment */
+    padding: 5px;
+}
 
+.short-input {
+    width: 100px; /* Short for numbers */
+}
 
+.medium-input {
+    width: 200px; /* Medium for moderate-length text */
+}
+
+.long-input {
+    width: 200%; /* Long for names and addresses */
+}
 
