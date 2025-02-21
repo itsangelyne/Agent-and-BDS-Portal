@@ -23,6 +23,13 @@ namespace Agent_and_BDS_Portal.Context
         public DbSet<CGL_Receipted> CGL_Receipted { get; set; }
         public DbSet<CGL_Coverage> CGL_Coverage { get; set; }
 
+        public DbSet<CGL_Health_Question> CGL_Health_Question { get; set; }
+        public DbSet<CGL_Substandard_Rating> CGL_Substandard_Rating { get; set; }
+        public DbSet<CGL_Health_Answer> CGL_Health_Answer { get; set; }
+
+        public DbSet<CGL_COC> CGL_COC { get; set; }
+        public DbSet<CGL_Beneficiary> CGL_Beneficiary { get; set; }
+
     }
 
 }

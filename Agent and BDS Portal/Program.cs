@@ -27,6 +27,10 @@ builder.Services.AddScoped<CGL_Particulars_Services>();
 builder.Services.AddScoped<CGL_Insured_Services>();
 builder.Services.AddScoped<CGL_Coverage_Services>();
 builder.Services.AddScoped<CGL_Receipted_Services>();
+builder.Services.AddScoped<CGL_Health_Question_Services>();
+builder.Services.AddScoped<CGL_Substandard_Rating_Services>();
+builder.Services.AddScoped<CGL_Health_Answer_Services>();
+builder.Services.AddScoped<CGL_COC>();
 
 builder.Services.AddMudServices();
 
