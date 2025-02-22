@@ -13,12 +13,11 @@
 
 <div class="container mt-0">
     <div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <h3 class="text-center font-weight-bold"><Strong>COMPLIANCE</Strong></h3>
-        
+        <h3 class="text-center font-weight-bold"><strong>COMPLIANCE</strong></h3>
 
         <!-- Search and Filter -->
         <div class="input-group mb-3 shadow-sm">
-            <span class="input-group-text bg-light">🔍</span>
+            <span class="input-group-text bg-light" @bind="searchQuery">🔍</span>
             <input type="text" @bind="searchQuery" class="form-control" style="max-width: 500px; margin-right: 10px;" placeholder="Search..." />
             <span class="input-group-text bg-light">Filter By:</span>
             <select @bind="selectedFilter" class="form-select" style="max-width: 500px; margin-right: 10px;">
@@ -29,120 +28,73 @@
             </select>
         </div>
 
-        <!-- Table -->
+      
+            @* // Table *@
         <div class="mt-4 table-responsive">
             <table class="table table-bordered table-hover">
                 <thead style="background-color: #77B254;">
                     <tr>
                         <th class="text-center text-white" style="cursor: pointer;" @onclick="ToggleSortOrder">
-                            Release Date <i class="bi @(isDescending ? "bi-arrow-down" : "bi-arrow-up")"></i>
+                            Bank Name <i class="bi @(isDescending ? "bi-arrow-down" : "bi-arrow-up")"></i>
                         </th>
-                        <th class="text-center text-white">Gross</th>
-                        <th class="text-center text-white">Net</th>
-                        <th class="text-center text-white">Total Coverage</th>
-                        <th class="text-center text-white">Total Application</th>
+                        <th class="text-center text-white">Full Name</th>
+                        <th class="text-center text-white">Application Status</th>
+                      
                         <th class="text-center text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (!pagedList.Any())
+
+                   @*  @if (SelectedDCHS == creditdebit.DCHS_To)
                     {
-                        <tr>
-                            <td colspan="6" class="text-center">No data available.</td>
-                        </tr>
-                    }
-                    else
-                    {
-                        @foreach (var creditdebit in pagedList)
+                        // Fetch matched insured individuals based on DCHS_To or DCHS_From
+                        var matchedInsuredList = InsuredObj
+                        .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Long Term")
+                        .ToList();
+
+                        // Fetch matched coverage based on insured individuals
+                        var matchedCoverageList = CoverageObj
+                        .Where(c => matchedInsuredList.Any(i => i.ID_Insured == c.ID_Insured))
+                        .ToList();
+
+                        // Fetch matched policy holders based on insured individuals
+                        var matchedPolicyHolderList = PolicyHolderObj
+                        .Where(p => matchedInsuredList.Any(i => i.ID_Policy_Holder == p.ID_Policy_Holder))
+                        .ToList(); 
+
+                        if (!matchedInsuredList.Any())
                         {
                             <tr>
-                                <td class="hover-cell text-center">@creditdebit.Submitted_Date.ToString("MM/dd/yyyy")</td>
-                                <td class="hover-cell text-center">@creditdebit.Gross_Pay</td>
-                                <td class="hover-cell text-center">@creditdebit.Net_Pay</td>
-                                <td class="hover-cell text-center">@creditdebit.Total_Coverage</td>
-                                <td class="hover-cell text-center">@creditdebit.Total_Application</td>
-
-                                <td class="text-center">
-                                    <button class="btn btn-outline-success btn-sm" @onclick="() => ToggleDetails(creditdebit.DCHS_To)">
-                                        View Application
-                                    </button>
-                                </td>
+                                <td colspan="6" class="text-center">No insured data available.</td>
                             </tr>
-
-                            @if (SelectedDCHS == creditdebit.DCHS_To)
+                        }
+                        else
+                        {
+                            @foreach (var insured in matchedInsuredList)
                             {
-                                // Fetch matched insured individuals based on DCHS_To or DCHS_From
-                                var matchedInsuredList = InsuredObj
-                                .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Long Term")
-                                .ToList();
-
-                                // Fetch matched coverage based on insured individuals
-                                var matchedCoverageList = CoverageObj
-                                .Where(c => matchedInsuredList.Any(i => i.ID_Insured == c.ID_Insured))
-                                .ToList();
-
-                                // Fetch matched policy holders based on insured individuals
-                                var matchedPolicyHolderList = PolicyHolderObj
-                                .Where(p => matchedInsuredList.Any(i => i.ID_Policy_Holder == p.ID_Policy_Holder))
-                                .ToList();
-                                var matchedCreditDebitList = CreditdebitObj
-                                .Where(p => matchedInsuredList.Any(i => i.ID_Policy_Holder == p.ID_Policy_Holder))
-                                .ToList();
+                                var coverage = matchedCoverageList.FirstOrDefault(c => c.ID_Insured == insured.ID_Insured);
+                                var policyholder = matchedPolicyHolderList.FirstOrDefault(p => p.ID_Policy_Holder == insured.ID_Policy_Holder);
 
                                 <tr>
-                                    <td colspan="6">
-                                        <div class="p-3 border rounded bg-light">
-                                            <h5 class="text-center"><strong>Insured Individuals</strong></h5>
-                                            <table class="table table-bordered">
-                                                <thead class="table-success">
-                                                    <tr>
-                                                        <th class="text-center">Bank</th>
-                                                        <th class="text-center">Full Name</th>
-                                                        <th class="text-center">Amount of Insured</th>
-                                                        <th class="text-center">Term of Loan</th>
-                                                        <th class="text-center">Premium</th>
-                                                        <th class="text-center">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (!matchedInsuredList.Any())
-                                                    {
-                                                        <tr>
-                                                            <td colspan="6" class="text-center">No insured data available.</td>
-                                                        </tr>
-                                                    }
-                                                    else
-                                                    {
-                                                        @foreach (var insured in matchedInsuredList)
-                                                        {
-                                                            var coverage = matchedCoverageList.FirstOrDefault(c => c.ID_Insured == insured.ID_Insured);
-                                                            var policyholder = matchedPolicyHolderList.FirstOrDefault(p => p.ID_Policy_Holder == insured.ID_Policy_Holder);
-
-                                                            <tr>
-                                                                <td class="text-center">@policyholder?.Policy_Holder_Name</td>
-                                                                <td class="text-center">@insured.First_Name @insured.Last_Name</td>
-                                                                <td class="text-center">@coverage?.Amount_Of_Insured</td>
-                                                                <td class="text-center">@coverage?.Term_Of_Loan</td>
-                                                                <td class="text-center">@coverage?.Premium</td>
-                                                                <td class="text-center">
-                                                                    <button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured, coverage)">
-                                                                        View
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        }
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <td class="text-center">@policyholder?.Policy_Holder_Name</td>
+                                    <td class="text-center">@($"{insured.First_Name} {insured.Last_Name}")</td>
+                                    <td class="text-center">@coverage?.Amount_Of_Insured</td>
+                                    <td class="text-center">@coverage?.Term_Of_Loan</td>
+                                    <td class="text-center">@coverage?.Premium</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured, coverage)">
+                                            View
+                                        </button>
                                     </td>
                                 </tr>
                             }
                         }
-                    }
+                    }*@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
 
         <!-- Pagination -->
         <div class="d-flex justify-content-between align-items-center my-3">
@@ -150,9 +102,8 @@
             <strong>Page @currentPage of @totalPages</strong>
             <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
         </div>
-    </div>
-</div>
-
+ 
+      
 @if (showModal)
 {
     <div class="modal fade show d-block" style="background: rgba(0, 0, 0, 0.5);" tabindex="-1">
