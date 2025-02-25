@@ -1,8 +1,10 @@
 ﻿@page "/cgldashboard"
 @using Agent_and_BDS_Portal.Data
-
+@using Agent_and_BDS_Portal.Context
+@using Agent_and_BDS_Portal.Model
 @using BChart = Blazorise.Charts.ChartType
 @using MChart = MudBlazor.ChartType
+@inject CGL_Policy_Holder_Services policyholderServices
 @inject NavigationManager NavigationManager
 @layout MainLayout
 
@@ -73,12 +75,12 @@
 
 <div class="container mt-2">
 	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
-		<h2><b>Agent</b></h2>
+		<h2><b>Notification</b></h2>
 		<div class="mt-4 table-responsive">
 			<table class="table table-bordered">
 				<thead style="background-color: #d9eee2 !important;">
 					<tr>
-						<th>Bank</th>
+						
 						<th>Bank Name</th>
 						<th>Name</th>
 						<th>Type of Term</th>
@@ -211,10 +213,10 @@
 	}
 
 	// Initialize values
-	private int PRODUCTION = 0;
-	private int CLAIMSPAID = 0;
-	private int LOSSRATIO = 0;
-	private int NETINCOME = 44;
+	private int PRODUCTION = 1034000;
+	private int CLAIMSPAID = 20000;
+	private int LOSSRATIO = 828282;
+	private int NETINCOME = 238923;
 
 	//protected override async Task OnInitializedAsync()
 	//{

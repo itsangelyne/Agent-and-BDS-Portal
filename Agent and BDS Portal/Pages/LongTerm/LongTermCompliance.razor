@@ -4,6 +4,8 @@
 @using Agent_and_BDS_Portal.Model
 @using System.Globalization
 @inject CGL_Insured_Services insuredServices
+@inject CGL_Insured_Status_Services insuredstatusServices
+@inject CGL_Substandard_Rating_Services substandardstatusServices
 @inject CGL_CreditDebit_Services creditdebitServices
 @inject CGL_Coverage_Services coverageServices
 @inject CGL_Policy_Holder_Services policyholderServices
@@ -29,7 +31,7 @@
         </div>
 
       
-            @* // Table *@
+            @* /*Table * *@
         <div class="mt-4 table-responsive">
             <table class="table table-bordered table-hover">
                 <thead style="background-color: #77B254;">
@@ -39,251 +41,60 @@
                         </th>
                         <th class="text-center text-white">Full Name</th>
                         <th class="text-center text-white">Application Status</th>
-                      
                         <th class="text-center text-white">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                   @*  @if (SelectedDCHS == creditdebit.DCHS_To)
+                    @if (!pagedList.Any())
                     {
-                        // Fetch matched insured individuals based on DCHS_To or DCHS_From
-                        var matchedInsuredList = InsuredObj
-                        .Where(i => (i.DCHS == creditdebit.DCHS_To || i.DCHS == creditdebit.DCHS_From) && i.Type == "Long Term")
-                        .ToList();
-
-                        // Fetch matched coverage based on insured individuals
-                        var matchedCoverageList = CoverageObj
-                        .Where(c => matchedInsuredList.Any(i => i.ID_Insured == c.ID_Insured))
-                        .ToList();
-
-                        // Fetch matched policy holders based on insured individuals
-                        var matchedPolicyHolderList = PolicyHolderObj
-                        .Where(p => matchedInsuredList.Any(i => i.ID_Policy_Holder == p.ID_Policy_Holder))
-                        .ToList(); 
-
-                        if (!matchedInsuredList.Any())
+                        <tr>
+                            <td colspan="4" class="text-center">No data available.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var insured in pagedList)
                         {
                             <tr>
-                                <td colspan="6" class="text-center">No insured data available.</td>
+                                <td class="hover-cell text-center">CBLIC</td>
+                                <td class="hover-cell text-center">Ange</td>
+                                 <td class="text-center">For checking</td> 
+                                <td class="text-center">
+                                    <button class="btn btn-outline-success btn-sm" @onclick="() => ToggleDetails(insured.DCHS_To)">
+                                        View Application
+                                    </button>
+                                </td>
                             </tr>
-                        }
-                        else
-                        {
-                            @foreach (var insured in matchedInsuredList)
+                            @if (SelectedDCHS == insured.DCHS_To)
                             {
-                                var coverage = matchedCoverageList.FirstOrDefault(c => c.ID_Insured == insured.ID_Insured);
-                                var policyholder = matchedPolicyHolderList.FirstOrDefault(p => p.ID_Policy_Holder == insured.ID_Policy_Holder);
-
-                                <tr>
-                                    <td class="text-center">@policyholder?.Policy_Holder_Name</td>
-                                    <td class="text-center">@($"{insured.First_Name} {insured.Last_Name}")</td>
-                                    <td class="text-center">@coverage?.Amount_Of_Insured</td>
-                                    <td class="text-center">@coverage?.Term_Of_Loan</td>
-                                    <td class="text-center">@coverage?.Premium</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured, coverage)">
-                                            View
-                                        </button>
-                                    </td>
-                                </tr>
+                                // Fetch matched insured individuals based on DCHS_To or DCHS_From
+                                var matchedInsuredList = InsuredObj
+                                .Where(i => (i.DCHS == insured.DCHS_To || i.DCHS == insured.DCHS_From) && i.Type == "Long Term")
+                                .ToList();
                             }
                         }
-                    }*@
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-        <!-- Pagination -->
+<!-- Pagination -->
         <div class="d-flex justify-content-between align-items-center my-3">
             <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">Previous</button>
             <strong>Page @currentPage of @totalPages</strong>
             <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
         </div>
- 
-      
-@if (showModal)
-{
-    <div class="modal fade show d-block" style="background: rgba(0, 0, 0, 0.5);" tabindex="-1">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content p-4" style="background-color: #fff; border-radius: 10px;">
-                <div class="modal-header border-bottom">
-                    <h4 class="modal-title fw-bold">@($"{selectedInsured?.First_Name ?? ""} {selectedInsured?.Last_Name ?? ""}")</h4>
-                    <button type="button" class="btn-close" @onclick="CloseModal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="btn-group bg-light p-1 rounded-pill" role="group">
-                            <button type="button" class="btn rounded-pill px-4 active-tab" onclick="showTab('personalInfo', this)">
-                                Personal Information
-                            </button>
-                            <button type="button" class="btn rounded-pill px-4 inactive-tab" onclick="showTab('otherDetails', this)">
-                                Other Information
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Personal Information Tab -->
-                    <div id="personalInfo" class="tab-content">
-                        <div class="table-responsive p-4 border rounded bg-light">
-                            <div class="row mb-4">
-                                <!-- ID Insured -->
-                                <div class="col-md-auto d-flex align-items-center justify-content-center">
-                                    <label class="form-label"><strong>ID Insured</strong></label>
-                                </div>
-                                <div class="col-md">
-                                    <input type="text" class="form-control" style="max-width: 200px; width: 100%;" value="@selectedInsured.ID_Insured" readonly />
-                                </div>
-
-                                <div class="container">
-                                    <!-- Full Name -->
-                                    <div class="form-group">
-                                        <label>Full Name</label>
-                                        <input type="text" class="form-control long-input" value="@($"{selectedInsured.First_Name} {selectedInsured.Last_Name}")" readonly />
-                                    </div>
-
-                                    <!-- Suffix -->
-                                    <div class="form-group">
-                                        <label>Suffix</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Suffix" readonly />
-                                    </div>
-
-                                    <!-- Civil Status -->
-                                    <div class="form-group">
-                                        <label>Civil Status</label>
-                                        <input type="text" class="form-control medium-input" value="@selectedInsured.Civil_Status" readonly />
-                                    </div>
-
-                                    <!-- Gender -->
-                                    <div class="form-group">
-                                        <label>Gender</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Gender" readonly />
-                                    </div>
-
-                                    <!-- Height & Weight
-                                        <div class="form-group">
-                                        <label>Height</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Height" readonly />
-                                        <label style="margin-left: 20px;">Weight</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Weight" readonly />
-                                    </div>
-
-                                    <!-- Address -->
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <input type="text" class="form-control long-input" value="@selectedInsured.Address" readonly />
-                                    </div>
-
-                                    <!-- Contact Number -->
-                                    <div class="form-group">
-                                        <label>Contact Number</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Contact_Number" readonly />
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="text" class="form-control medium-input" value="@selectedInsured.Email_Address" readonly />
-                                    </div>
-
-                                    <!-- Age & Date of Birth -->
-                                    <div class="form-group">
-                                        <label>Age</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Age" readonly />
-                                        <label style="margin-left: 10px;">Date of Birth</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.Date_Of_Birth.ToString("MM/dd/yyyy")" readonly />
-                                    </div>
-
-                                    <!-- Place of Birth -->
-                                    <div class="form-group">
-                                        <label>Place of Birth</label>
-                                        <input type="text" class="form-control medium-input" value="@selectedInsured.Place_Of_Birth" readonly />
-                                    </div>
-
-                                    <!-- Nationality -->
-                                    <div class="form-group">
-                                        <label>Nationality</label>
-                                        <input type="text" class="form-control medium-input" value="@selectedInsured.Nationality" readonly />
-                                    </div>
-
-                                    <!-- TIN/SSS/GSIS -->
-                                    <div class="form-group">
-                                        <label>TIN/SSS/GSIS</label>
-                                        <input type="text" class="form-control short-input" value="@selectedInsured.TIN_SSS_GSIS_NO" readonly />
-                                    </div>
-
-                                    <!-- Source of Funds -->
-                                    <div class="form-group">
-                                        <label>Source of Funds</label>
-                                        <input type="text" class="form-control medium-input" value="@selectedInsured.Source_Of_Funds" readonly />
-                                    </div>
-
-                                    <!-- Business Nature -->
-                                    <div class="form-group">
-                                        <label>Nature of Business</label>
-                                        <input type="text" class="form-control long-input" value="@selectedInsured.Nature_of_Self_Employment_Business" readonly />
-                                    </div>
-
-                                    <!-- Employer Address -->
-                                    <div class="form-group">
-                                        <label>Employer Address</label>
-                                        <input type="text" class="form-control long-input" value="@selectedInsured.Address_Of_Business_or_Employer" readonly />
-                                    </div>
-
-                                    <!-- Occupation & Livelihood -->
-                                    <div class="form-group">
-                                        <label>Occupation & Livelihood</label>
-                                        <input type="text" class="form-control medium-input" value="@selectedInsured.Occupation_And_Livelihood" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Other Information Tab -->
-                        <div id="otherDetails" class="tab-content" style="display: none;">
-                            <div class="table-responsive p-3 border rounded bg-light">
-                                <h4 class="text-center"><strong>Coverage</strong></h4>
-                                <div class="col-md-6">
-                                    <label class="form-label"><strong>Amount of Insurance</strong></label>
-                                    <input type="text" class="form-control" value="@selectedCoverage.Amount_Of_Insured" readonly />
-                                </div>
-
-                                <h4 class="text-center"><strong>Beneficiaries</strong></h4>
-                                <div class="row mb-3">
-                                    <div class="col-md-7">
-                                        <label class="form-label"><strong>Full Name</strong></label>
-                                        <input type="text" class="form-control" style="max-width: 500px; width: 100%;" value="" readonly />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label"><strong>Age</strong></label>
-                                        <input type="text" class="form-control" style="max-width: 500px; width: 100%;" value="" readonly />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label"><strong>Relationship to the Insured Policyholder/Creditor</strong></label>
-                                        <input type="text" class="form-control" style="max-width: 500px; width: 100%;" value="" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal Footer -->
-                        <div class="modal-footer d-flex justify-content-end">
-                            <button class="btn btn-success" @onclick="CloseModal">Done</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-}
+  
 
 @code {
+
+
     private bool showModal = false;
     private CGL_Insured selectedInsured = null;
     private CGL_Coverage selectedCoverage = null;
-    private CGL_Policy_Holder? selectedPolicyHolder = null;
+    private CGL_Policy_Holder selectedPolicyHolder = null;
 
     private void OpenModal(CGL_Insured insured, CGL_Coverage coverage)
     {
@@ -306,6 +117,7 @@
     private List<CGL_Insured> InsuredObj { get; set; } = new List<CGL_Insured>();
     private List<CGL_Coverage> CoverageObj { get; set; } = new List<CGL_Coverage>();
     private List<CGL_Policy_Holder> PolicyHolderObj { get; set; } = new List<CGL_Policy_Holder>();
+    private List<CGL_Health_Question> HealthQuestionObj { get; set; } = new List<CGL_Health_Question>();
 
     private int page = 5; // Number of items per page
     private int currentPage = 1;
@@ -331,9 +143,10 @@
         try
         {
             var creditDebitList = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
-            var insuredList = await insuredServices.GetAllCGL_INSUREDAsync() ?? new List<CGL_Insured>();
+            var insuredList = await insuredServices.GetAllINSUREDAsync() ?? new List<CGL_Insured>();
             var coverageList = await coverageServices.GetAllCGL_CoverageAsync() ?? new List<CGL_Coverage>();
             var policyholderList = await policyholderServices.GetAllPolicyHolderAsync() ?? new List<CGL_Policy_Holder>();
+            var healthquestionList = await healthquestionServices.GetAllCGL_Health_QuestionAsync() ?? new List<CGL_Health_Question>();
 
             // Initialize InsuredObj
             InsuredObj = insuredList.Where(x => x.Type?.Equals("Long Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
@@ -349,6 +162,9 @@
             .ToList();
             CreditdebitObj = creditDebitList
             .Where(p => creditDebitList.Any(i => i.Total_Application == p.Total_Application))
+            .ToList();
+            HealthQuestionObj = healthquestionList
+            .Where(p => healthquestionList.Any(i => i.ID == p.ID))
             .ToList();
 
             // Populate CreditdebitObj

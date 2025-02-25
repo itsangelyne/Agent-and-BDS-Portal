@@ -11,7 +11,7 @@ namespace Agent_and_BDS_Portal.Data
         {
             _applicationContext = applicationDbContext;
         }
-        public async Task<List<CGL_Insured>> GetAllCGL_INSUREDAsync()
+        public async Task<List<CGL_Insured>> GetAllINSUREDAsync()
         {
             return await _applicationContext.CGL_INSURED.ToListAsync();
         }

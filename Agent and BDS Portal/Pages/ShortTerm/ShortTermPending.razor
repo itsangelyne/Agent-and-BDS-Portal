@@ -214,7 +214,7 @@
         {
             // Fetch data from services
             var creditDebitList = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
-            var insuredList = await insuredServices.GetAllCGL_INSUREDAsync() ?? new List<CGL_Insured>();
+            var insuredList = await insuredServices.GetAllINSUREDAsync() ?? new List<CGL_Insured>();
             var coverageList = await coverageServices.GetAllCGL_CoverageAsync() ?? new List<CGL_Coverage>();
             var policyholderList = await policyholderServices.GetAllPolicyHolderAsync() ?? new List<CGL_Policy_Holder>();
 

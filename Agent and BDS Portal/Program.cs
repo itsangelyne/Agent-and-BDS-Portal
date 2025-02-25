@@ -32,7 +32,7 @@ builder.Services.AddScoped<CGL_Substandard_Rating_Services>();
 builder.Services.AddScoped<CGL_Health_Answer_Services>();
 builder.Services.AddScoped<CGL_COC_Services>();
 builder.Services.AddScoped<CGL_Beneficiary_Services>();
-builder.Services.AddScoped<CGL_Insurance_Status_Services>();
+builder.Services.AddScoped<CGL_Insured_Status_Services>();
 
 builder.Services.AddMudServices();
 

@@ -11,7 +11,7 @@ namespace Agent_and_BDS_Portal.Data
             {
                 _applicationContext = applicationDbContext;
             }
-            public async Task<List<CGL_Beneficiary>> GetAllCGL_BeneficiaryAsync()
+            public async Task<List<CGL_Beneficiary>> GetAllBeneficiaryAsync()
             {
                 return await _applicationContext.CGL_Beneficiary.ToListAsync();
             }
