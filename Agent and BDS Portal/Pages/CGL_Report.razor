@@ -1,0 +1,245 @@
+﻿@page "/report"
+@using Agent_and_BDS_Portal.Data
+@using Microsoft.EntityFrameworkCore;
+@* @inject ProductionReport_Services Cgl_Services;
+@inject SubmittedReport_Services SubmittedReport_Services ; *@
+
+
+
+<div class="container mt-3">
+	<h3 class="text-center fw-bold mb-4"> SUMMARY REPORT</h3>
+	<div class="row g-4">
+		<!--Production-->
+		<div class="col-12 col-md-6 col-lg-4">
+			<div class="card shadow-sm rounded" style="z-index: -1;">
+				<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+					Production
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6 border-end">
+							<h6 class="fw-bold mb-1">Long Term</h6>
+							<p class="mb-0" style="font-size:24px;">c</p>
+						</div>
+						<div class="col-6">
+							<h6 class="fw-bold mb-1">Short Term</h6>
+							<p class="mb-0" style="font-size:24px;">xx</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- CLAIMS PAID -->
+		<div class="col-12 col-md-6 col-lg-4">
+			<div class="card shadow-sm rounded" style="z-index: -1;">
+				<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+					Claims Paid
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6 border-end">
+							<h6 class="fw-bold mb-1">Long Term</h6>
+							<p class="mb-0" style="font-size:24px;">c</p>
+						</div>
+						<div class="col-6">
+							<h6 class="fw-bold mb-1">Short Term</h6>
+							<p class="mb-0" style="font-size:24px;">xx</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- LOSS RATIO -->
+		<div class="col-12 col-md-6 col-lg-4">
+			<div class="card shadow-sm rounded" style="z-index: -1;">
+				<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+					Loss Ratio
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6 border-end">
+							<h6 class="fw-bold mb-1">Long Term</h6>
+							<p class="mb-0" style="font-size:24px;">c</p>
+						</div>
+						<div class="col-6">
+							<h6 class="fw-bold mb-1">Short Term</h6>
+							<p class="mb-0" style="font-size:24px;">xx</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Net Income -->
+		<div class="col-12 col-md-6 col-lg-4">
+			<div class="card shadow-sm rounded" style="z-index: -1;">
+				<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+					Net Income
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6 border-end">
+							<h6 class="fw-bold mb-1">Long Term</h6>
+							<p class="mb-0" style="font-size:24px;">c</p>
+						</div>
+						<div class="col-6">
+							<h6 class="fw-bold mb-1">Short Term</h6>
+							<p class="mb-0" style="font-size:24px;">xx</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="container mt-3">
+	<h3 class="text-center fw-bold mb-4"> PRODUCTION</h3>
+	<div class="row g-4">
+		<!--Production-->
+		<div class="col-12 col-md-6 col-lg-4">
+			<div class="card shadow-sm rounded" style="z-index: -1;">
+				<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+					Submitted
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6 border-end">
+							<h6 class="fw-bold mb-1">Long Term</h6>
+							<p class="mb-0" style="font-size:24px;">c</p>
+						</div>
+						<div class="col-6">
+							<h6 class="fw-bold mb-1">Short Term</h6>
+							<p class="mb-0" style="font-size:24px;">xx</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+<div class="col-12 col-md-6 col-lg-4">
+	<div class="card shadow-sm rounded" style="z-index: -1;">
+		<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+			Receipted
+		</div>
+		<div class="card-body">
+			<div class="row text-center">
+				<div class="col-6 border-end">
+					<h6 class="fw-bold mb-1">Long Term</h6>
+					<p class="mb-0" style="font-size:24px;">c</p>
+				</div>
+				<div class="col-6">
+					<h6 class="fw-bold mb-1">Short Term</h6>
+					<p class="mb-0" style="font-size:24px;">xx</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4">
+	<div class="card shadow-sm rounded" style="z-index: -1;">
+		<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+			Compliance
+		</div>
+		<div class="card-body">
+			<div class="row text-center">
+				<div class="col-6 border-end">
+					<h6 class="fw-bold mb-1">Long Term</h6>
+					<p class="mb-0" style="font-size:24px;">c</p>
+				</div>
+				<div class="col-6">
+					<h6 class="fw-bold mb-1">Short Term</h6>
+					<p class="mb-0" style="font-size:24px;">xx</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4">
+	<div class="card shadow-sm rounded" style="z-index: -1;">
+		<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+			Approved
+		</div>
+		<div class="card-body">
+			<div class="row text-center">
+				<div class="col-6 border-end">
+					<h6 class="fw-bold mb-1">Long Term</h6>
+					<p class="mb-0" style="font-size:24px;">c</p>
+				</div>
+				<div class="col-6">
+					<h6 class="fw-bold mb-1">Short Term</h6>
+					<p class="mb-0" style="font-size:24px;">xx</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-3">
+	<h3 class="text-center fw-bold mb-4"> Commission</h3>
+	<div class="row g-3">
+		<!--Commission-->
+		<div class="col-12 col-md-6 col-lg-4">
+			<div class="card shadow-sm rounded" style="z-index: -1;">
+				<div class="card-header text-white text-center fw-bold" style="background-color: #57855E; font-size: 20px;">
+					Client
+				</div>
+				<div class="card-body">
+					<div class="row text-center">
+						<div class="col-6 border-end">
+							<h6 class="fw-bold mb-1">For Paid</h6>
+							<p class="mb-0" style="font-size:24px;">c</p>
+						</div>
+						<div class="col-6">
+							<h6 class="fw-bold mb-1">Paid</h6>
+							<p class="mb-0" style="font-size:24px;">xx</p>
+						</div>
+							@* 	<div class="card-footer" style="background-color: #28a745;">
+									<a href="#" class="text-white">More info</a>
+								</div>
+
+							</div> *@
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	</div>
+</div>
+
+
+
+
+
+@code {
+	private int PRODUCTION = 0;
+	private int CLAIMSPAID = 0;
+	private int LOSSRATIO = 0;
+	private int NETINCOME = 44;
+
+
+	private int SUBMITTED = 0;
+	private int RECEIPTED = 53;
+	private int COMPLIANCE = 44;
+	private int APPROVED = 65;
+
+	private int Client = 44;
+	private int BDS = 65;
+
+
+
+	//protected override async Task OnInitializedAsync()
+	// {
+	// Call service to get the production count
+	// PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+	//CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+	//LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+	//SUBMITTED = await SubmittedReport_Services.GetSubmittedReportsRowCountAsync();
+}
+
