@@ -42,37 +42,37 @@
 		</a>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/banklist">
-				<span class="fas fa-chart-line text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
+				<span class="fas fa-hourglass-half text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lreceipted">
-				<span class="fas fa-chart-area text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
+				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lapproved">
-				<span class="fas fa-chart-area text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
+				<span class="fa fa-thumbs-up text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lapproved">
-				<span class="fas fa-chart-area text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
+				<span class="fa fa-times-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
-			<NavLink class="nav-link" href="/LongTerm/renewal">
+			<NavLink class="nav-link" href="/LongTerm/Lrenewal">
 				<span class="fas fa-sync-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Renewal</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
-				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+				<span class="fas fa-file-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
-				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
+				<span class="fas fa-ban text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
 			</NavLink>
 		</div>
 		
@@ -91,32 +91,32 @@
 		
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Spending">
-				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
+				<span class="fas fa-ellipsis-h text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sreceiptedlist">
-				<span class="fas fa-file-invoice-dollar text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
+				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Receipted</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sapproved">
-				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
+				<span class="fa fa-thumbs-up text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sdeclined">
-				<span class="fas fa-receipt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
+				<span class="fa fa-times-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
-				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+				<span class="fas fa-clipboard-check text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sterminated">
-				<span class="fas fa-clipboard-check text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
+				<span class="fas fa-ban text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
 			</NavLink>
 		</div>
 	</div>
@@ -293,7 +293,7 @@
 	<div class="nested-menu ps-3 @UserDropdownClass">
 		<a class="nav-link d-flex justify-content-between" href="/addnewuser" @onclick="ToggleAddUserDropdown">
 			<div>
-				<span class="fas fa-plus fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Add User</b>
+				<span class="fas fa-plus fa-lg" aria-hidden="true" style="margin-right:10px"></span><b>Add User</b>
 			</div>
 			</a>
 	</div>
@@ -302,7 +302,7 @@
 <div class="nav-item px-3">
 	<a class="nav-link d-flex justify-content-between" href="/" @onclick="ToggleLogoutDropdown">
 		<div>
-				<span class="fas fa-sign-out-alt fa-lg" style="margin-right:10px"></span><b> Logout</b>
+				<span class="fas fa-sign-out-alt fa-lg" style="margin-right:20px"></span><b> Logout</b>
 		</div>
 		</a>
 </div>

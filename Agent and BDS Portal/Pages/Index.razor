@@ -8,7 +8,7 @@
 @inject NavigationManager NavigationManager
 @layout MainLayout
 
-<h3>Summary Report</h3>
+<h3><strong>Dashboard</strong></h3><hr />
 <div class="container mt-3">
 	<!-- Unified Border -->
 	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
@@ -74,47 +74,62 @@
 </div>
 
 <div class="container mt-2">
-	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
-		<h2><b>Notification</b></h2>
-		<div class="mt-4 table-responsive">
-			<table class="table table-bordered">
-				<thead style="background-color: #d9eee2 !important;">
+	<div class="border p-3" style="background-color: #eaf5e5; border-radius: 9px;">
+		<h4 class="mb-3 text-center"><b>Top Agent</b></h4>
+		<div class="table-responsive">
+			<table class="table table-bordered text-center" style="table-layout: fixed; width: 100%;">
+				<thead style="background-color: #BAD8B6;">
 					<tr>
-						
-						<th>Bank Name</th>
 						<th>Name</th>
-						<th>Type of Term</th>
-						<th>Cost</th>
-						<th>Due Date</th>
-						<th>Status</th>
+						<th>Line of Business</th>
+
 					</tr>
 				</thead>
-				<tbody>
+				
 					<tr>
-						<td>1045</td>
-						<td>--</td>
-						<td>Trix</td>
-						<td>Long Term</td>
-						<td>100000</td>
-						<td>08-27-2001</td>
-						<td><span class="badge bg-secondary">PENDING</span></td>
+						<td><span class="badge bg-success">Yna</span></td>
+						<td>CGL</td>
 					</tr>
-				</tbody>
-				<tbody>
 					<tr>
-						<td>1045</td>
-						<td>--</td>
-						<td>Angelyne</td>
-						<td>Short Term</td>
-						<td>100000</td>
-						<td>09-28-2002</td>
-						<td><span class="badge bg-success">COMPLETED</span></td>
+						<td><span class="badge bg-success">Trixia</span></td>
+						<td>CGL</td>
 					</tr>
-				</tbody>
+				
 			</table>
 		</div>
 	</div>
 </div>
+
+<div class="container mt-2">
+	<div class="border p-3" style="background-color: #eaf5e5; border-radius: 9px;">
+		<h4 class="mb-3 text-center"><b>Top Region</b></h4>
+		<div class="table-responsive">
+			<table class="table table-bordered text-center" style="table-layout: fixed; width: 100%;">
+				<thead style="background-color: #BAD8B6;">
+					<tr>
+						<th>Region</th>
+						<th>Province</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				
+					<tr>
+						<td><span class="badge bg-danger">Region 04A</span></td>
+						<td>Batangas</td>
+					<td>43743247123</td>
+					</tr>
+					<tr>
+						<td><span class="badge bg-danger">Mimaropa</span></td>
+						<td>Mindoro</td>
+					<td>24223546235</td>
+					</tr>
+				
+				
+			</table>
+		</div>
+	</div>
+</div>
+
 
 @code {
 	// Chart components for Bar and Line charts
@@ -168,40 +183,40 @@
 			};
 	}
 
-	// Labels for the charts (Months from January to December)
-	string[] Labels = { "Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+	// Labels for the charts (Months from January to October)
+	string[] Labels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct" };
 
 	// Colors for the charts
 	List<string> backgroundColors = new List<string>
-{
-	ChartColor.FromRgba(255, 99, 132, 0.2f),
-	ChartColor.FromRgba(54, 162, 235, 0.2f),
-	ChartColor.FromRgba(255, 206, 86, 0.2f),
-	ChartColor.FromRgba(75, 192, 192, 0.2f),
-	ChartColor.FromRgba(153, 102, 255, 0.2f),
-	ChartColor.FromRgba(255, 159, 64, 0.2f)
-};
+	{
+		ChartColor.FromRgba(255, 99, 132, 0.2f),
+		ChartColor.FromRgba(54, 162, 235, 0.2f),
+		ChartColor.FromRgba(255, 206, 86, 0.2f),
+		ChartColor.FromRgba(75, 192, 192, 0.2f),
+		ChartColor.FromRgba(153, 102, 255, 0.2f),
+		ChartColor.FromRgba(255, 159, 64, 0.2f)
+	};
 
 	List<string> borderColors = new List<string>
-{
-	ChartColor.FromRgba(255, 99, 132, 1f),
-	ChartColor.FromRgba(54, 162, 235, 1f),
-	ChartColor.FromRgba(255, 206, 86, 1f),
-	ChartColor.FromRgba(75, 192, 192, 1f),
-	ChartColor.FromRgba(153, 102, 255, 1f),
-	ChartColor.FromRgba(255, 159, 64, 1f)
-};
-
+	{
+		ChartColor.FromRgba(255, 99, 132, 1f),
+		ChartColor.FromRgba(54, 162, 235, 1f),
+		ChartColor.FromRgba(255, 206, 86, 1f),
+		ChartColor.FromRgba(75, 192, 192, 1f),
+		ChartColor.FromRgba(153, 102, 255, 1f),
+		ChartColor.FromRgba(255, 159, 64, 1f)
+	};
 
 	private List<double> GetProductionData()
 	{
-		var r = new Random(DateTime.Now.Millisecond);
-		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();
+		var r = new Random();
+		return Labels.Select(_ => r.Next(30, 100) * r.NextDouble()).ToList();
 	}
+
 	private List<double> GetLineChartData()
 	{
-		var r = new Random(DateTime.Now.Millisecond);
-		return Labels.Select(month => r.Next(30, 100) * r.NextDouble()).ToList();
+		var r = new Random();
+		return Labels.Select(_ => r.Next(30, 100) * r.NextDouble()).ToList();
 	}
 
 	// Handle bar chart click events
