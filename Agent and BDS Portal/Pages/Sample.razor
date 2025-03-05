@@ -1,0 +1,254 @@
+﻿@page "/cards"
+
+@using Agent_and_BDS_Portal.Data
+@inject NavigationManager NavigationManager
+
+
+<div class="modal d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><b>Borrower's Details:</b></h5>
+                <button type="button" class="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="coverage-tab" data-bs-toggle="tab" href="#coverage" role="tab" aria-controls="coverage" aria-selected="true">Coverage Details</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="other-details-tab" data-bs-toggle="tab" href="#other-details" role="tab" aria-controls="other-details" aria-selected="false">Other Details</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="coverage" role="tabpanel" aria-labelledby="coverage-tab">
+                        <form>
+                            <div class="border rounded p-3 mb-3">
+                                <div class="col-md mb-3">
+                                    <label for="bankName" class="form-label">Name of Bank</label>
+                                    <input type="text" class="form-control" id="bankName" readonly />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="bankBranch" class="form-label">Branch</label>
+                                        <input type="text" class="form-control" id="bankBranch" readonly />
+                                    </div>
+                                    <div class="col-md-9 mb-3">
+                                        <label for="bankAddress" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="bankAddress" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="dbcr" class="form-label">DB/CR</label>
+                                        <input type="number" class="form-control" id="dbcr" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="ORDate" class="form-label">OR Date</label>
+                                        <input type="date" class="form-control" id="ORDate" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="ORNumber" class="form-label">OR Number</label>
+                                        <input type="number" class="form-control" id="ORNumber" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border rounded p-3 mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" readonly />
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="middleName" class="form-label">Middle Name</label>
+                                        <input type="text" class="form-control" id="middleName" readonly />
+                                    </div>
+                                    <div class="col-sm-1 mb-3">
+                                        <label for="suffix" class="form-label">Suffix</label>
+                                        <input type="text" class="form-control" id="suffix" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border rounded p-3 mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="loan" class="form-label">Amount of Loan</label>
+                                        <input type="text" class="form-control" id="loan" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="term" class="form-label">Loan Term</label>
+                                        <input type="text" class="form-control" id="term" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="effective" class="form-label">Effectivity Date</label>
+                                        <input type="date" class="form-control" id="effective" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="dueDate" class="form-label">Due Date</label>
+                                        <input type="date" class="form-control" id="dueDate" readonly />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="termination" class="form-label">Termination Date</label>
+                                        <input type="date" class="form-control" id="termination" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                               
+
+
+
+
+
+
+
+
+<h1 class="text-center my-4"><b>LINE OF BUSINESS</b></h1>
+
+<div class="lob-container">
+    <div class="row justify-content-center row-cols-1 row-cols-md-2 g-4">
+        <div class="col" @onclick="NavigateToCreditGroupLifePlans">
+            <div class="lob-card red">
+                <div class="number">1</div>
+                <div class="content-box">
+                    <div class="ribbon">Alalay Sa Buhay Plan</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col" @onclick="NavigateToCreditGroupLifePlans">
+            <div class="lob-card orange">
+                <div class="number">2</div>
+                <div class="content-box">
+                    <div class="ribbon">Credit Group Life Plans</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col" @onclick="NavigateToGYRT">
+            <div class="lob-card teal">
+                <div class="number">3</div>
+                <div class="content-box">
+                    <div class="ribbon">Group Yearly Renewable Term Plans</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col" @onclick="NavigateToMortgageRedemption">
+            <div class="lob-card blue">
+                <div class="number">4</div>
+                <div class="content-box">
+                    <div class="ribbon">Mortgage Redemption Plans</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col" @onclick="NavigateToStandardPlans">
+            <div class="lob-card gray">
+                <div class="number">5</div>
+                <div class="content-box">
+                    <div class="ribbon">Standard Plans</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col" @onclick="NavigateToDecsPlans">
+            <div class="lob-card green">
+                <div class="number">6</div>
+                <div class="content-box">
+                    <div class="ribbon">DECS Plans</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .lob-container {
+        padding: 20px;
+    }
+
+    .lob-card {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background: white;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .number {
+        font-size: 80px;
+        font-weight: bold;
+        color: white;
+        background: rgba(0, 0, 0, 0.7);
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 20px;
+    }
+
+    .content-box {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .ribbon {
+        background: #333;
+        color: white;
+        padding: 5px 10px;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .red .number {
+        background: #e74c3c;
+    }
+
+    .orange .number {
+        background: #f39c12;
+    }
+
+    .teal .number {
+        background: #1abc9c;
+    }
+
+    .blue .number {
+        background: #3498db;
+    }
+
+    .gray .number {
+        background: #7f8c8d;
+    }
+
+    .green .number {
+        background: #2ecc71;
+    }
+</style>
+
+@code {
+    private void NavigateToCreditGroupLifePlans() => NavigationManager.NavigateTo("/cgldashboard");
+    private void NavigateToGYRT() => NavigationManager.NavigateTo("/gyrtdashboard");
+    private void NavigateToMortgageRedemption() => NavigationManager.NavigateTo("/mortgageredemptiondashboard");
+    private void NavigateToStandardPlans() => NavigationManager.NavigateTo("/standardplansdashboard");
+    private void NavigateToDecsPlans() => NavigationManager.NavigateTo("/decsplansdashboard");
+}
+

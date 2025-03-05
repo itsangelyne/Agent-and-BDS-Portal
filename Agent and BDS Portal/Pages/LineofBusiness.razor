@@ -1,34 +1,231 @@
 ﻿@page "/lineofbusiness"
 @using Agent_and_BDS_Portal.Data
-
 @inject NavigationManager NavigationManager
 
 
-<h1 class="text-center"><b>LINE OF BUSINESS</b></h1>
 
-<div class="background-overlay"></div>
+<h3 class="text-center" style="font-family: 'Diplomata', serif; font-size: 38px; letter-spacing: 4px; line-height: 1.3;"><b>LINE OF BUSINESS</b></h3>
+
+
+<hr />
+
 <div class="lob-container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <button class="btn btn-outline-success mb-2 w-100" >Alalay Sa Buhay Plan</button>
-            <button class="btn btn-outline-success mb-2 w-100" @onclick="NavigateToCreditGroupLifePlans">Credit Group Life Plans</button>
-            <button class="btn btn-outline-success mb-2 w-100" id="gyrtbtn">Group Yearly Renewable Term Plans</button>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-outline-success mb-2 w-100" id="">Mortgage Redemption Plans</button>
-            <button class="btn btn-outline-success mb-2 w-100" id="spbtn">Standard Plans</button>
-            <button class="btn btn-outline-success mb-2 w-100" id="dpbtn">DECS Plans</button>
-        </div>
-    </div>
+	<div class="row justify-content-center row-cols-1 row-cols-md-2 g-4">
+		<div class="col" @onclick="NavigateToAlalaySaBuhayPlan">
+			<div class="lob-card green">
+				<div class="number">1</div>
+				<div class="content-box">
+					<div class="ribbon" style="font-size: 20px;">Alalay Sa Buhay Plan</div>
+					<p></p>
+				</div>
+				@*  <div class="icon-box">
+                    <div class="stamp-icon">
+                        <i class="fas fa-user"></i> <!-- You can change this icon -->
+                    </div>
+
+                </div> *@
+			</div>
+		</div>
+
+
+		<div class="col" @onclick="NavigateToCreditGroupLifePlans">
+			<div class="lob-card green">
+				<div class="number">2</div>
+				<div class="content-box">
+					<div class="ribbon" style="font-size: 20px;">Credit Group Life Plans</div>
+
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="col" @onclick="NavigateToGYRT">
+			<div class="lob-card green">
+				<div class="number">3</div>
+				<div class="content-box">
+					<div class="ribbon" style="font-size: 20px;">Group Yearly Renewable Term Plans</div>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="col" @onclick="NavigateToMortgageRedemption">
+			<div class="lob-card green">
+				<div class="number">4</div>
+				<div class="content-box">
+					<div class="ribbon" style="font-size: 20px;">Mortgage Redemption Plans</div>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="col" @onclick="NavigateToStandardPlans">
+			<div class="lob-card green">
+				<div class="number">5</div>
+				<div class="content-box">
+					<div class="ribbon" style="font-size: 20px;">Standard Plans</div>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="col" @onclick="NavigateToDecsPlans">
+			<div class="lob-card green">
+				<div class="number">6</div>
+				<div class="content-box">
+					<div class="ribbon" style="font-size: 20px;">DECS Plans</div>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
+<style>
+
+	.lob-container {
+		padding: 40px;
+		background: #f0f0f0; /* Light gray background */
+	}
+
+	.lob-card {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 20px;
+		background: white;
+		box-shadow: 3px 3px 10px rgba(81, 146, 89, 1);
+		border-radius: 8px;
+		cursor: pointer;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+		.lob-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+		}
+
+	.number {
+		font-size: 80px;
+		font-weight: bold;
+		color: white;
+		width: 100px;
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		margin-right: 20px;
+		transition: transform 0.3s ease;
+	}
+
+	.lob-card:hover .number {
+		transform: scale(1.1);
+	}
+
+	.content-box {
+		background: white;
+		padding: 20px;
+		border-radius: 8px;
+		width: 100%;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.ribbon {
+		/*  background: #064635; */
+		color: black;
+		padding: 5px 10px;
+		font-weight: bold;
+		display: inline-block;
+	}
+
+	/* Number Box Colors */
+	/* .red .number {
+		background: linear-gradient(to bottom, #e74c3c, #c0392b);
+	}
+
+	.orange .number {
+		background: linear-gradient(to bottom, #f39c12, #d68910);
+	}
+
+	.teal .number {
+		background: linear-gradient(to bottom, #1abc9c, #16a085);
+	}
+
+	.blue .number {
+		background: linear-gradient(to bottom, #3498db, #2980b9);
+	}
+
+	.gray .number {
+		background: linear-gradient(to bottom, #7f8c8d, #636e72);
+	}
+	 */
+	.green .number {
+		background: linear-gradient(to bottom, #2ecc71, #27ae60);
+	}
+
+	
+	/* Sticker Icon */
+	.icon-box {
+		position: absolute;
+		top: 50%;
+		right: 15px;
+		transform: translateY(-50%);
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.sticker-icon {
+		width: 70px;
+		height: 70px;
+		background-color: #d1d1d1; /* Gray sticker */
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 30px;
+		color: black;
+		font-weight: bold;
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+		position: relative;
+		overflow: hidden;
+	}
+
+		/* Folded Sticker Corner */
+		.sticker-icon::after {
+			content: "";
+			position: absolute;
+			bottom: -5px;
+			right: -5px;
+			width: 30%;
+			height: 30%;
+			background: rgba(255, 255, 255, 0.5);
+			clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
+			transform: rotate(10deg);
+		}
+
+	/* Info Icon */
+	.info-icon {
+		font-size: 20px;
+		color: black;
+		background: white;
+		border-radius: 50%;
+		padding: 5px;
+		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	}
+
+	.diplomata-regular {
+		font-family: "Diplomata", serif;
+		font-weight: 400;
+		font-style: normal;
+	}
+
+
+</style>
+
 @code {
-    private void NavigateToCreditGroupLifePlans()
-    {
-        NavigationManager.NavigateTo("/cgldashboard"); 
-    
-       
-    }
-
-
+	private void NavigateToCreditGroupLifePlans() => NavigationManager.NavigateTo("/cgldashboard");
+	private void NavigateToGYRT() => NavigationManager.NavigateTo("/gyrtdashboard");
+	private void NavigateToMortgageRedemption() => NavigationManager.NavigateTo("/mortgageredemptiondashboard");
+	private void NavigateToStandardPlans() => NavigationManager.NavigateTo("/standardplansdashboard");
+	private void NavigateToDecsPlans() => NavigationManager.NavigateTo("/decsplansdashboard");
+	private void NavigateToAlalaySaBuhayPlan() => NavigationManager.NavigateTo("/AlalaySaBuhayPlan");
 }
+

@@ -3,45 +3,35 @@
 @* @inherits LayoutComponentBase *@
 @inject NavigationManager NavigationManager
 
-<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="card" style="width: 350px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <div class="card-body p-4">
-            <div class="row mb-3">
-                <div class="col-12 text-center">
-                    <img src="images/ck_logo.png" alt="CK Logo" class="img-fluid" style="max-height: 70px;" />
-                </div>
-            </div>
+<div class="login-container">
+    <div class="left-side">
+        <div class="wave"></div>
+    </div>
+    
+    <div class="right-side">
+        <img src="images/ck_logo.png" alt="CK Logo" class="logo" style="">
+        <div class="login-box">
+            <h2 style="color:#064635;">L O G I N</h2>
 
-            <!-- Login Form -->
             <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
-                <div class="mb-3 row">
-                    <label for="username" class="col-sm-3 col-form-label text-nowrap">Username</label>
-                    <div class="col-sm-9">
-                        <InputText id="username" class="form-control" @bind-Value="loginModel.Username" placeholder="Enter your username" />
-                    </div>
+                <label for="password"><strong>Email</strong></label>
+                <InputText id="email" class="form-control" @bind-Value="loginModel.Username" placeholder="Email" />
+                <br />
+                <label for="password"><strong>Password</strong></label>
+                <InputText id="password" class="form-control" type="password" @bind-Value="loginModel.Password" placeholder="Password" />
+
+                <div class="forgot-password">
+                    <a href="#">Forgot your password?</a>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="password" class="col-sm-3 col-form-label text-nowrap">Password</label>
-                    <div class="col-sm-9">
-                        <InputText id="password" class="form-control" type="password" @bind-Value="loginModel.Password" placeholder="Enter your password" />
-                    </div>
-                </div>
-
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-outline-success">
-                        <i class="oi oi-account-login"></i> Login
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-success">Log In</button>
             </EditForm>
-
-            <div class="text-center mt-3">
-                <a href="#" class="text-decoration-none">Forgot Password?</a>
-            </div>
            
         </div>
+
     </div>
 </div>
+
 
 @code {
     private LoginModel loginModel = new();

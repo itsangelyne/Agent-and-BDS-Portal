@@ -8,14 +8,37 @@
 @inject NavigationManager NavigationManager
 @layout MainLayout
 
-<h3><strong>Dashboard</strong></h3><hr />
+
+<div class="input-group mb-3">
+	<div class="d-flex justify-content-between align-items-center w-100">
+		<h3><strong>Dashboard</strong></h3>
+
+		<!-- Filter Dropdown-->
+		<div class="d-flex align-items-center" style="max-width: 400px;">
+		@* 	<h6 style="text-align: center;"><strong>@GetLineOfBusiness()</strong></h6> *@
+		<span class="input-group-text">Filter:</span>
+		
+		<select @bind="selectedFilter" class="form-select ms-2">
+			<option value="" disabled selected>Line of Business</option>
+			<option value="alalay">Alalay Sa Buhay Plan</option>
+			<option value="credit">Credit Group Life Plans</option>
+			<option value="gytr">Group Yearly Renewable Term Plans</option>
+			<option value="mortgage">Mortgage Redemption Plans</option>
+			<option value="standard">Standard Plans</option>
+			<option value="decs">DECS Plan</option>
+		</select>
+		</div>
+	</div>
+</div>
+
+<hr />
 <div class="container mt-3">
 	<!-- Unified Border -->
 	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
 		<div class="row">
 			<!-- PRODUCTION -->
 			<div class="col-xs-4 col-lg-3">
-				<div class="card text-white bg-primary mb-0" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+				<div class="card text-white bg-primary mb-3" style="border-radius: 9px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 					<div class="card-body text-center">
 						<a href="/summaryreport" class="text-white"><h1>@PRODUCTION</h1></a>
 						<p>Production</p>
@@ -58,34 +81,82 @@
 
 <div class="container mt-2">
 	<div class="border p-4" style="background-color: #eaf5e5; border-radius: 9px;">
-		<!-- Row for Both Charts -->
-		<div class="d-flex justify-content-between" style="gap: 10px;">
-			<!-- blazorise Bar Chart -->
-			<div class="chart-container" style="width: 48%; background-color: #f9f9f9; border-radius: 9px; padding: 10px;">
-				<Chart @ref="barChart" Type="BChart.Bar" TItem="double" Clicked="@OnClicked" style="width: 100%; height: 350px;" />
-			</div>
+		<h6 style="text-align: center;"><strong>Credit Group Life Plans (CGL)</strong></h6><br />
 
-			<!-- Line Chart -->
-			<div class="chart-container" style="width: 48%; background-color: #f9f9f9; border-radius: 9px; padding: 10px;">
-				<LineChart @ref="lineChart" TItem="double" style="width: 100%; height: 350px;" />
+		<!-- Row for Both Charts -->
+		<div class="d-flex justify-content-between align-items-start" style="gap:5px; margin-top: 10px;">
+
+			<!-- Bar Chart -->
+			<div class="chart-container"
+				 style="width: 48%; height: 300px; background-color: white;
+                    border-radius: 9px; padding: 10px; position: relative;">
+
+				<!-- Title -->
+				<div style="width: 100%; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px;">
+					Total Production
+				</div>
+
+				
+				<button style="position: absolute; top: 10px; right: 10px;
+                           background: none; border: none; cursor: pointer;">
+					<i class="fas fa-ellipsis-v"></i>
+				</button>
+
+				<!-- Bar Chart -->
+				<div style="width: 100%; height: calc(100% - 30px); display: flex; align-items: center; justify-content: center;">
+					<Chart @ref="barChart" Type="BChart.Bar" TItem="double" 
+						   style="width: 100%; height: 100%;" />
+				</div>
+		</div>
+
+			<!-- Pie Chart -->
+			<div class="chart-container"
+				 style="width: 48%; height: 300px; background-color: white;
+           border-radius: 9px; padding: 10px;
+           position: relative; display: flex;
+           flex-direction: column; align-items: center;">
+
+				<!-- Title -->
+				<div style="width: 100%; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px;">
+					2025 vs. 2024
+				</div>
+
+				
+				<button style="position: absolute; top: 10px; right: 10px;
+                   background: none; border: none; cursor: pointer;">
+					<i class="fas fa-ellipsis-v"></i> 
+				</button>
+
+				<!-- Pie Chart -->
+				<div style="display: flex; justify-content: center;">
+					<Chart @ref="PieChart" Type="BChart.Pie" TItem="double" style="max-width: 250px; max-height: 300px;" />
+				</div>
 			</div>
+			
 		</div>
 	</div>
 </div>
+				
+				@* <div style="margin-top: 15px;">
+					<div style="color: #EAB308; font-weight: bold;">● 2025</div>
+					<div style="color: #DC2626; font-weight: bold;">● 2024</div>
+				</div> *@
+		
+			
 
+@* <!-- Top Agent Table -->
 <div class="container mt-2">
 	<div class="border p-3" style="background-color: #eaf5e5; border-radius: 9px;">
 		<h4 class="mb-3 text-center"><b>Top Agent</b></h4>
 		<div class="table-responsive">
 			<table class="table table-bordered text-center" style="table-layout: fixed; width: 100%;">
-				<thead style="background-color: #BAD8B6;">
+				<thead style="background-color: #77B254;">
 					<tr>
 						<th>Name</th>
 						<th>Line of Business</th>
-
 					</tr>
 				</thead>
-				
+				<tbody>
 					<tr>
 						<td><span class="badge bg-success">Yna</span></td>
 						<td>CGL</td>
@@ -94,47 +165,118 @@
 						<td><span class="badge bg-success">Trixia</span></td>
 						<td>CGL</td>
 					</tr>
-				
+				</tbody>
 			</table>
 		</div>
 	</div>
-</div>
+</div> *@
 
+@* <body class="p-6 bg-gray-100">
+
+    <!-- Card Container -->
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl mx-auto">
+        
+        <!-- Title -->
+        <h2 class="text-lg font-bold mb-4">Top Countries</h2>
+        
+        <!-- Map and Country Stats -->
+        <div class="flex flex-col md:flex-row items-center">
+
+            <!-- World Map (Placeholder) -->
+            <div class="relative w-full md:w-2/3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/800px-World_map_-_low_resolution.svg.png" 
+                     alt="World Map" class="w-full opacity-80">
+                
+                <!-- Data Points -->
+                <div class="absolute top-1/4 left-1/4 bg-purple-700 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    3831
+                </div>
+                <div class="absolute top-1/3 right-1/4 bg-purple-700 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    941
+                </div>
+                <div class="absolute bottom-1/4 left-1/3 bg-purple-700 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    9875
+                </div>
+                <div class="absolute bottom-1/3 right-1/3 bg-purple-700 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    370
+                </div>
+            </div>
+
+            <!-- Country Statistics -->
+            <div class="mt-6 md:mt-0 md:ml-6 w-full md:w-1/3">
+                <ul class="text-gray-700">
+                    <li class="flex justify-between"><span>Tegal, Indonesia</span> <strong>4914</strong></li>
+                    <li class="flex justify-between"><span>Surakarta, Indonesia</span> <strong>2190</strong></li>
+                    <li class="flex justify-between"><span>Chicago, United States</span> <strong>129</strong></li>
+                    <li class="flex justify-between"><span>Jayapura, Indonesia</span> <strong>103</strong></li>
+                    <li class="flex justify-between"><span>Tokyo, Japan</span> <strong>98</strong></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+	</body>
+ *@
+
+<!-- Top Region Table -->
 <div class="container mt-2">
 	<div class="border p-3" style="background-color: #eaf5e5; border-radius: 9px;">
 		<h4 class="mb-3 text-center"><b>Top Region</b></h4>
 		<div class="table-responsive">
 			<table class="table table-bordered text-center" style="table-layout: fixed; width: 100%;">
-				<thead style="background-color: #BAD8B6;">
+				<thead style="background-color: #77B254;">
 					<tr>
 						<th>Region</th>
 						<th>Province</th>
 						<th>Total</th>
 					</tr>
 				</thead>
-				
+				<tbody>
 					<tr>
 						<td><span class="badge bg-danger">Region 04A</span></td>
 						<td>Batangas</td>
-					<td>43743247123</td>
+						<td>43,743,247,123</td>
 					</tr>
 					<tr>
 						<td><span class="badge bg-danger">Mimaropa</span></td>
 						<td>Mindoro</td>
-					<td>24223546235</td>
+						<td>24,223,546,235</td>
 					</tr>
-				
-				
+				</tbody>
+
 			</table>
+			
 		</div>
 	</div>
 </div>
 
-
 @code {
-	// Chart components for Bar and Line charts
+
+	private string selectedFilter = "";
+	
+
+	private string GetLineOfBusiness()
+	{
+		return selectedFilter switch
+		{
+			"alalay" => "Alalay Sa Buhay Plan",
+			"credit" => "Credit Group Life Plans",
+			"gytr" => "Group Yearly Renewable Term Plans",
+			"mortgage" => "Mortgage Redemption Plans",
+			"standard" => "Standard Plans",
+			"decs" => "DECS Plan",
+			_ => "Select a Business Line"
+		};
+	}
+	private void UpdateSelectedFilter(ChangeEventArgs e)
+	{
+		selectedFilter = e.Value.ToString();
+		StateHasChanged();
+	}
+	// Chart components for Bar and Pie charts
 	Chart<double> barChart;
-	LineChart<double> lineChart;
+	Chart<double> PieChart;
 
 	// Initialize values for charts
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -147,85 +289,99 @@
 
 	async Task HandleRedraw()
 	{
-		// Redraw both charts with data
+		// Set width and height
+		var chartOptions = new Blazorise.Charts.ChartOptions
+			{
+				Responsive = true,
+				MaintainAspectRatio = false
+			};
+
 		await barChart.Clear();
 		await barChart.AddLabelsDatasetsAndUpdate(Labels, GetBarChartDataset());
 
-		await lineChart.Clear();
-		await lineChart.AddLabelsDatasetsAndUpdate(Labels, GetLineChartDataset());
+		await PieChart.Clear();
+		await PieChart.AddLabelsDatasetsAndUpdate(PieLabels, GetPieChartDataset());
+
+
 	}
 
-	// Bar Chart dataset
+
+	// Bar Chart Dataset
 	private BarChartDataset<double> GetBarChartDataset()
 	{
 		return new()
 			{
-				Label = "Production",
+				// Label = "Production",
 				Data = GetProductionData(),
 				BackgroundColor = backgroundColors,
-				BorderColor = borderColors,
-				BorderWidth = 1
+				// BorderColor = borderColors,
+				// BorderWidth = 1
 			};
 	}
 
-	// Line Chart dataset
-	private LineChartDataset<double> GetLineChartDataset()
+	// Pie Chart Dataset 
+	private PieChartDataset<double> GetPieChartDataset()
 	{
-		return new LineChartDataset<double>
+		return new()
 			{
-				Label = "2025 vs. 2024 Total Production",
-				Data = GetLineChartData(), // Get production data for the line chart
-				BackgroundColor = backgroundColors,
-				BorderColor = borderColors,
-				Fill = true,
-				PointRadius = 3,
-				CubicInterpolationMode = "monotone",
+				 
+				Data = GetPieChartComparisonData(),
+				BackgroundColor = backgroundPieColors, // Fix: Use Pie Colors
+				BorderColor = borderColors
 			};
 	}
 
-	// Labels for the charts (Months from January to October)
+	// Labels for the Bar Chart (Months from January to October)
 	string[] Labels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct" };
 
-	// Colors for the charts
+	// Labels for the Pie Chart (2024 vs. 2025)
+	
+	string[] PieLabels = { "2024", "2025" };
+
+	// Colors for the Pie Chart 
+	List<string> backgroundPieColors = new List<string>
+	{
+		ChartColor.FromRgba(223, 106, 106, 1), 
+		ChartColor.FromRgba(161, 196, 90, 1)   
+	};
+
+	// Colors for the Bar Chart
 	List<string> backgroundColors = new List<string>
 	{
-		ChartColor.FromRgba(255, 99, 132, 0.2f),
-		ChartColor.FromRgba(54, 162, 235, 0.2f),
-		ChartColor.FromRgba(255, 206, 86, 0.2f),
-		ChartColor.FromRgba(75, 192, 192, 0.2f),
-		ChartColor.FromRgba(153, 102, 255, 0.2f),
-		ChartColor.FromRgba(255, 159, 64, 0.2f)
+		ChartColor.FromRgba(223, 106, 106, 1),
+		ChartColor.FromRgba(161, 196, 90, 1)
 	};
 
 	List<string> borderColors = new List<string>
 	{
-		ChartColor.FromRgba(255, 99, 132, 1f),
-		ChartColor.FromRgba(54, 162, 235, 1f),
-		ChartColor.FromRgba(255, 206, 86, 1f),
-		ChartColor.FromRgba(75, 192, 192, 1f),
-		ChartColor.FromRgba(153, 102, 255, 1f),
-		ChartColor.FromRgba(255, 159, 64, 1f)
+		ChartColor.FromRgba(255, 99, 132, 1f), 
+		ChartColor.FromRgba(54, 162, 235, 1f)  
 	};
 
+	// Random Production Data for Bar Chart
 	private List<double> GetProductionData()
 	{
 		var r = new Random();
 		return Labels.Select(_ => r.Next(30, 100) * r.NextDouble()).ToList();
 	}
 
-	private List<double> GetLineChartData()
+	// Fixed Data for Pie Chart
+	private List<double> GetPieChartComparisonData()
 	{
-		var r = new Random();
-		return Labels.Select(_ => r.Next(30, 100) * r.NextDouble()).ToList();
+		// Example data for two years
+		var production2024 = 50000;
+		var production2025 = 75000;
+
+		return new List<double> { production2024, production2025 };
 	}
 
-	// Handle bar chart click events
-	Task OnClicked(ChartMouseEventArgs e)
-	{
-		var model = e.Model as BarChartModel;
-		Console.WriteLine($"Handling event for {nameof(BarChartModel)}: x:{model.X} y:{model.Y}");
-		return Task.CompletedTask;
-	}
+	// // Handle bar chart click events
+	// Task OnClicked(ChartMouseEventArgs e)
+	// {
+	// 	var model = e.Model as BarChartModel;
+	// 	Console.WriteLine($"Handling event for {nameof(BarChartModel)}: x:{model.X} y:{model.Y}");
+	// 	return Task.CompletedTask;
+	// }
 
 	// Initialize values
 	private int PRODUCTION = 1034000;
@@ -233,11 +389,13 @@
 	private int LOSSRATIO = 828282;
 	private int NETINCOME = 238923;
 
-	//protected override async Task OnInitializedAsync()
-	//{
+	protected override async Task OnInitializedAsync()
+	{
+
 	// Call service to get the production count
 	//PRODUCTION = await Cgl_Services.GetProductionMonitoringRowCountAsync();
 	//CLAIMSPAID = await Cgl_Services.GetProductionMonitoringRowCountAsync();
 	//LOSSRATIO = await Cgl_Services.GetProductionMonitoringRowCountAsync();
+}
 }
 

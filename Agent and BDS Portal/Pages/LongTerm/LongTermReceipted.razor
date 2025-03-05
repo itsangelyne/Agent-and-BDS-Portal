@@ -1,17 +1,18 @@
-﻿@* @page "/LongTerm/Lreceipted"
+﻿@page "/LongTerm/Lreceipted"
 @using Agent_and_BDS_Portal.Data
 @using Agent_and_BDS_Portal.Model
 @using System.Globalization
 @inject CGL_Receipted_Services receiptedServices
 
-<h3><Strong>RECEIPTED</Strong></h3>
+<h3><Strong>LONG TERM</Strong></h3>
 
 
 <div class="container mt-0">
 	<!-- Unified Border -->
 	<div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
 
-		<h3 class="text-center font-weight-bold"><strong>LONG TERM</strong></h3>
+		<h3 class="text-center font-weight-bold"><strong>RECEIPTED</strong></h3>
+		<h5 class="text-center font-weight-bold"><strong><u>Bank Name: CBLIC</u></strong></h5>
 
 		<!-- Search Bar -->
 		<div class="input-group mb-3 shadow-sm">
@@ -26,30 +27,34 @@
 						<th style="color:white;">OR Number</th>
 						<th style="color:white;">OR Date</th>
 						<th style="color:white;">Total Application</th>
-						<th style="color:white;">Status</th>
-						<th style="color:white;">Actions</th>
+						<th style="color:white;">Image</th>
+						
 					</tr>
 				</thead>
 				<tbody>
-					@if (filteredList == null || !filteredList.Any())
+					@if (!pagedList.Any())
 					{
 						<tr>
-							<td colspan="3" class="text-center">No data available.</td>
+							<td colspan="6" class="text-center">No data available.</td>
 						</tr>
 					}
 					else
 					{
-						@foreach (var receipted in filteredList)
+						@foreach (var creditDebit in pagedList)
 						{
-							<tr>
-								<td>00</td>
-								<td>jfnsfnsd</td>
-								<td>5</td>
-								<td><span class="badge bg-warning">Received</span></td>
-								<td class="d-flex justify-content-around">
-									<button class="btn btn-primary btn-sm" @onclick="() => OpenDetailsModal(receipted)">View</button>
-								</td>
+							var insured = InsuredObj.FirstOrDefault(i => i.DCHS == creditDebit.DCHS_To);
+							var policyholder = PolicyHolderObj.FirstOrDefault(p => p.ID_Policy_Holder == insured?.ID_Policy_Holder);
+							var insuredStatus = Insured_StatusObj.FirstOrDefault(s => s.ID_Insured == insured?.ID_Insured);
 
+							<tr>
+								<td class="text-center">87632</td>
+								<td class="text-center">@creditDebit.Submitted_Date.ToString("yyyy-MM-dd")</td>
+								
+								<td class="text-center">@creditDebit.Total_Application</td>
+							
+								<td class="text-center">
+									<button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured)">View</button>
+								</td>
 							</tr>
 						}
 					}
@@ -63,204 +68,55 @@
 
 
 
-@if (IsModalOpen)
-{
-	<div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
-			<div class="modal-content shadow-lg rounded-4">
-				<!-- Modal Header -->
-				<div class="modal-header bg-primary text-white">
-					<h5 class="modal-title">
-						<i class="bi bi-info-circle-fill me-2"></i> Detail Information
-					</h5>
-					<button type="button" class="btn-close text-white" @onclick="CloseDetailsModal"></button>
-				</div>
 
-				<!-- Modal Body -->
-				<div class="modal-body modal-body" style="max-width: 100%; width: auto;">
-					<form>
-						<div class="row mb-3">
-							<div class="col-sm-6">
-								<label for="id" class="form-l label fw-bold">ID:</label>
-								<input type="text" class="form-control" id="id" value="@SelectedDetail.id" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="policyHolder" class="form-label fw-bold">Policy Holder:</label>
-								<input type="text" class="form-control" id="policyHolder" value="@SelectedDetail.PolicyHolder" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="policyHolder" class="form-label fw-bold">Name of Insured:</label>
-								<input type="text" class="form-control" id="nameofinsured" value="@SelectedDetail.NameofInsured" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="policyHolder" class="form-label fw-bold">Civil Status:</label>
-								<input type="text" class="form-control" id="civilstatus" value="@SelectedDetail.CivilStatus" disabled />
-							</div>
-						</div>
-						<!-- Additional fields -->
-						<div class="row mb-3">
-							<div class="col-sm-6">
-								<label for="gender" class="form-label fw-bold">Gender:</label>
-								<input type="text" class="form-control" id="gender" value="@SelectedDetail.Gender" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="gender" class="form-label fw-bold">Height:</label>
-								<input type="text" class="form-control" id="height" value="@SelectedDetail.Height" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="gender" class="form-label fw-bold">Weight:</label>
-								<input type="text" class="form-control" id="height" value="@SelectedDetail.Weight" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="gender" class="form-label fw-bold">Address:</label>
-								<input type="text" class="form-control" id="height" value="@SelectedDetail.Address" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="gender" class="form-label fw-bold">Contact Number:</label>
-								<input type="text" class="form-control" id="height" value="@SelectedDetail.ContactNumber" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Email:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.EmailAddress" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Age:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.Age" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Date of Birth:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.DateofBirth" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Place of Birth:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.PlaceofBirth" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Nationality:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.Nationality" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">TIN/SSS/GSIS:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.GovernmentIDNo" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Source of Funds:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.SourceofFunds" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Nature of Self-Employment:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.NatureofSelfEmployment" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Address of Employer:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.AddressofEmployer" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Occupation and Livelihood:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.OccupationNLivelihood" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Amount of Insurance:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.AmountofInsurance" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Term of Loan:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.TermofLoan" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Premium:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.Premium" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Effective Date:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.EffectDate" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Mode of Payment:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.Modeofpayment" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Rider:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.Rider" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Termination Date:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.TerminationDate" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label><b>Coverage</b></label>
-								<label for="email" class="form-label fw-bold">Fullname of Beneficiaries:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.FullNamedBeneficiaries" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Age of Beneficiaries:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.AgeofBeneficiaries" disabled />
-							</div>
-							<div class="col-sm-6">
-								<label for="email" class="form-label fw-bold">Relationship to Insured Policy/Creditor:</label>
-								<input type="text" class="form-control" id="email" value="@SelectedDetail.RelationshiptoInsured" disabled />
-							</div>
-
-						</div>
-					</form>
-				</div>
-
-				<!-- Modal Footer -->
-				<div class="modal-footer">
-					<button class="btn btn-secondary" @onclick="CloseDetailsModal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-}
 
 @code {
+	private bool showModal = false;
+	private CGL_Insured selectedInsured;
 	private string searchQuery = string.Empty;
-	private List<CGL_Receipted> filteredList
-		=> (ReceiptedObj?.Where(p => string.IsNullOrEmpty(searchQuery) ||
-			(DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy-MM-dd" },
-				CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
-				&& p.Submitted_Date.Date == searchDate.Date) ||
-			(searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
-		.ToList()) ?? new List<CGL_Receipted>();
 
-	private bool IsModalOpen = false;
+	private List<CGL_CreditDebit> CreditdebitObj = new();
+	private List<CGL_Insured> InsuredObj = new();
+	private List<CGL_Policy_Holder> PolicyHolderObj = new();
+	private List<CGL_Insured_Status> Insured_StatusObj = new();
 
-	private Cgl_submittedReport SelectedDetail = new Cgl_submittedReport();
+	private int currentPage = 1;
+	private const int pageSize = 5;
+	private int totalPages => (int)Math.Ceiling((double)filteredList.Count / pageSize);
 
-	private List<Cgl_submittedReport> SubObj = new List<CGL_Receipted>();
+	private List<CGL_CreditDebit> filteredList => CreditdebitObj?
+		.Where(p =>
+			Insured_StatusObj.Any(s => s.ID_Insured == InsuredObj.FirstOrDefault(i => i.DCHS == p.DCHS_To)?.ID_Insured) &&
+			(string.IsNullOrEmpty(searchQuery) ||
+			(DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
+			&& p.Submitted_Date.Date == searchDate.Date) ||
+			(int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication)))
+		.OrderByDescending(p => p.Submitted_Date)
+		.ToList() ?? new List<CGL_CreditDebit>();
 
-	// Open modal
-	private void OpenDetailsModal(Cgl_submittedReport detail)
-	{
-		SelectedDetail = detail;
-		IsModalOpen = true;
-	}
-
-	private void CloseDetailsModal()
-	{
-		IsModalOpen = false;
-	}
+	private List<CGL_CreditDebit> pagedList => filteredList.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
 	protected override async Task OnInitializedAsync()
 	{
-		var result = await receiptedServices.GetAllCGL_CreditDebitAsync();
-		CreditdebitObj = result ?? new List<CGL_Receipted>();
+		try
+		{
+			// CreditdebitObj = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
+			// InsuredObj = (await insuredServices.GetAllINSUREDAsync() ?? new List<CGL_Insured>())
+			// 	.Where(x => x.Type?.Equals("Long Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
+			// PolicyHolderObj = await policyholderServices.GetAllPolicyHolderAsync() ?? new List<CGL_Policy_Holder>();
+			// Insured_StatusObj = (await insuredstatusServices.GetAllInsuredStatusAsync() ?? new List<CGL_Insured_Status>());
+
+
+
+
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error loading data: {ex.Message}");
+		}
 	}
 
-	//protected override async Task OnInitializedAsync()
-	//{
-		//SubObj = await accountServices.GetAllSubmittedReportsAsync();
-
-	//}
-	private string SelectedType { get; set; } = string.Empty;
-
-	private void HandleTypeChange(ChangeEventArgs e)
-	{
-		SelectedType = e.Value.ToString();
-		// Perform any action based on the selected type
-		Console.WriteLine($"Selected Type: {SelectedType}");
-
-
-	}
-}  *@
+	private void OpenModal(CGL_Insured insured) => selectedInsured = insured;
+	private void NextPage() { if (currentPage < totalPages) currentPage++; }
+	private void PreviousPage() { if (currentPage > 1) currentPage--; }
+}
