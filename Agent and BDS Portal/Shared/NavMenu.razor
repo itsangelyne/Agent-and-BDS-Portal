@@ -71,7 +71,7 @@
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
-			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
+			<NavLink class="nav-link" href="/LongTerm/Lterminated">
 				<span class="fas fa-ban text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
 			</NavLink>
 		</div>
@@ -167,12 +167,12 @@
 		</a>
 		<div class="nested-menu ps-3 @ProductionReportDropdownClass">
 			<NavLink class="nav-link" href="LongTerm/banklist">
-				<span class="fas fa-hand-paper fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-hand-paper text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ProductionReportDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Sbanklist">
-				<span class="fas fa-file-invoice-dollar" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-file-invoice-dollar text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
@@ -187,12 +187,12 @@
 		</a>
 		<div class="nested-menu ps-3 @ClaimsPaidDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
-				<span class="fas fa-file-alt" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-file-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ClaimsPaidDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
-				<span class="fas fa-stopwatch fa-spin fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-stopwatch fa-spin text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
@@ -207,12 +207,12 @@
 		</a>
 		<div class="nested-menu ps-3 @LossRatioDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
-				<span class="fas fa-calendar-alt" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-calendar-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @LossRatioDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
-				<span class="fas fa-piggy-bank fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-piggy-bank text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
@@ -227,12 +227,12 @@
 		</a>
 		<div class="nested-menu ps-3 @NetIncomeDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
-				<span class="fas fa-landmark fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
+				<span class="fas fa-landmark text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @NetIncomeDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
-				<span class="fas fa-check-circle fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
+				<span class="fas fa-check-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 	</div>
@@ -255,11 +255,11 @@
 			<i class="fa-solid @(showForpaymentDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
 		<div class="nested-menu ps-3 @ForpaymentDropdownClass">
-			<NavLink class="nav-link" href="/LongTerm/Lcommission">
-				<span class="fas fa-sync-alt fa-lg" style="margin-right:20px"></span><b>Long Term</b>
+			<NavLink class="nav-link" href="/LongTerm/LForPayment">
+				<span class="fas fa-sync-alt text-success fa-lg" style="margin-right:20px"></span><b>Long Term</b>
 			</NavLink>
-			<NavLink class="nav-link" href="/ShortTerm/Scommission">
-				<span class="fas fa-bolt fa-lg" style="margin-right:20px"></span><b>Short Term</b>
+			<NavLink class="nav-link" href="/ShortTerm/SForPayment">
+				<span class="fas fa-bolt text-success fa-lg" style="margin-right:20px"></span><b>Short Term</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @CommissionDropdownClass">
@@ -270,11 +270,11 @@
 				<i class="fa-solid @(showPaidDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 			</a>
 			<div class="nested-menu ps-3 @PaidDropdownClass">
-				<NavLink class="nav-link" href="/LongTerm/Lcommission">
-					<span class="fas fa-briefcase fa-lg" style="margin-right:20px"></span><b>Long Term</b>
+				<NavLink class="nav-link" href="/LongTerm/LPaid">
+					<span class="fas fa-briefcase text-success fa-lg" style="margin-right:20px"></span><b>Long Term</b>
 				</NavLink>
-				<NavLink class="nav-link" href="/ShortTerm/Scommission">
-					<span class="fas fa-handshake fa-lg" style="margin-right:20px"></span><b>Short Term</b>
+				<NavLink class="nav-link" href="/ShortTerm/SPaid">
+					<span class="fas fa-handshake text-success fa-lg" style="margin-right:20px"></span><b>Short Term</b>
 				</NavLink>
 			</div>
 		</div>
@@ -293,7 +293,7 @@
 	<div class="nested-menu ps-3 @UserDropdownClass">
 		<a class="nav-link d-flex justify-content-between" href="/addnewuser" @onclick="ToggleAddUserDropdown">
 			<div>
-				<span class="fas fa-plus fa-lg" aria-hidden="true" style="margin-right:10px"></span><b>Add User</b>
+				<span class="fas fa-plus text-success fa-lg" aria-hidden="true" style="margin-right:10px"></span><b>Add User</b>
 			</div>
 			</a>
 	</div>

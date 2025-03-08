@@ -536,9 +536,10 @@
 
 
             CreditdebitObj = (from cd in creditDebitList
-                              join ins in InsuredObj on cd.DCHS_To equals ins.DCHS
+                              join ins in InsuredObj on cd.DCHS_From equals ins.DCHS
                               // join Beneficiary in InsuredObj on cd.DCHS_To equals Beneficiary.DCHS
                               where ins.Type == "Short Term"
+                              
                               select new CGL_CreditDebit
                                   {
                                       Submitted_Date = cd.Submitted_Date,
@@ -551,6 +552,7 @@
                                   .Where(c => c.ID_Insured == ins.ID_Insured)
                                   .Sum(c => c.Amount_Of_Insured)
                                   }).ToList();
+
 
             // Debugging statements
             Console.WriteLine($"Insured Count: {InsuredObj.Count}");
