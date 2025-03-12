@@ -2,6 +2,14 @@
 @using Agent_and_BDS_Portal.Data
 @using Agent_and_BDS_Portal.Model
 @using System.Globalization
+@inject NavigationManager Navigation
+@inject CGL_Insured_Services insuredServices
+@inject CGL_CreditDebit_Services creditdebitServices
+@inject CGL_Coverage_Services coverageServices
+@inject CGL_Policy_Holder_Services policyholderServices
+@inject CGL_Beneficiary_Services beneficiaryServices
+@inject ImageService ImageService
+
 @inject CGL_Receipted_Services receiptedServices
 
 <h3><Strong>LONG TERM</Strong></h3>
@@ -15,53 +23,82 @@
 		<h5 class="text-center font-weight-bold"><strong><u>Bank Name: CBLIC</u></strong></h5>
 
 		<!-- Search Bar -->
-		<div class="input-group mb-3 shadow-sm">
-			<span class="input-group-text bg-light">🔍</span>
-			<input type="text" @bind="searchQuery" class="form-control" placeholder="Search..." />
+		<div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 300%;">
+			<!-- Search Box -->
+			<div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 500%;">
+				<!-- Search Box -->
+				<div class="input-group" style="max-width: 900px;">
+					<span class="input-group-text bg-light" style="height: 40px;">🔍</span>
+					<input type="text" @bind="searchQuery" class="form-control"
+						   style="height: 40px;" placeholder="Search..." />
+				</div>
+			</div>
+
+            <div class="d-flex align-items-center">
+                <span class="input-group-text bg-light" style="height: 40px;">Bank:</span>
+                <select @bind="selectedFilter" class="form-select"
+                        style="max-width: 800px; height: 40px;">
+                    <option value="date"></option>
+                    <option value="2024">CBLIC BANK (QC)</option>
+                    <option value="2025">CBLIC BANK</option>
+                   
+                </select>
+            </div>
+        
+
+			<div class="d-flex align-items-center">
+				<span class="input-group-text bg-light" style="height: 40px;">Filter By:</span>
+				<select @bind="selectedFilter" class="form-select"
+						style="max-width: 200px; height: 40px;">
+					<option value="date"></option>
+					<option value="2024">2024</option>
+					<option value="2025">2025</option>
+					<option value="2026">2026</option>
+				</select>
+			</div>
 		</div>
+
 		<!-- Table -->
 		<div class="mt-4 table-responsive">
 			<table class="table table-bordered table-hover">
 				<thead style="background-color: #77B254;">
 					<tr>
-						<th style="color:white;">OR Number</th>
-						<th style="color:white;">OR Date</th>
-						<th style="color:white;">Total Application</th>
-						<th style="color:white;">Image</th>
+                        <th class="text-center text-white">OR Number</th>
+                        <th class="text-center text-white" style="cursor: pointer;" @onclick="ToggleSortOrder">
+                            OR Date <i class="bi @(isDescending ? "bi-arrow-down" : "bi-arrow-up")"></i>
+                        </th>
+                        <th class="text-center text-white">Total Application</th>
+                        <th class="text-center text-white">Action</th>
 						
 					</tr>
 				</thead>
-				<tbody>
-					@if (!pagedList.Any())
-					{
-						<tr>
-							<td colspan="6" class="text-center">No data available.</td>
-						</tr>
-					}
-					else
-					{
-						@foreach (var creditDebit in pagedList)
-						{
-							var insured = InsuredObj.FirstOrDefault(i => i.DCHS == creditDebit.DCHS_To);
-							var policyholder = PolicyHolderObj.FirstOrDefault(p => p.ID_Policy_Holder == insured?.ID_Policy_Holder);
-							var insuredStatus = Insured_StatusObj.FirstOrDefault(s => s.ID_Insured == insured?.ID_Insured);
-
-							<tr>
-								<td class="text-center">87632</td>
-								<td class="text-center">@creditDebit.Submitted_Date.ToString("yyyy-MM-dd")</td>
-								
-								<td class="text-center">@creditDebit.Total_Application</td>
-							
-								<td class="text-center">
-									<button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured)">View</button>
-								</td>
-							</tr>
-						}
-					}
-				</tbody>
-
-			</table>
-		</div>
+                <tbody>
+                    @if (!pagedList.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center">No data available.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var creditdebit in pagedList)
+                        {
+                            <tr>
+                                <td class="hover-cell text-center">233486</td>
+								<td class="hover-cell text-center">@creditdebit.Submitted_Date.ToString("MM/dd/yyyy")</td>
+                                <td class="hover-cell text-center">@creditdebit.Total_Application</td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-success btn-sm">
+                                        View Application
+                                    </button>
+                                </td>
+                            </tr>            
+                            
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
 	</div>
 </div>
 
@@ -71,52 +108,108 @@
 
 
 @code {
+
+	private string selectedFilter = "date";
+	private string searchQuery = string.Empty;
 	private bool showModal = false;
 	private CGL_Insured selectedInsured;
-	private string searchQuery = string.Empty;
+	
 
-	private List<CGL_CreditDebit> CreditdebitObj = new();
-	private List<CGL_Insured> InsuredObj = new();
-	private List<CGL_Policy_Holder> PolicyHolderObj = new();
-	private List<CGL_Insured_Status> Insured_StatusObj = new();
-
-	private int currentPage = 1;
-	private const int pageSize = 5;
-	private int totalPages => (int)Math.Ceiling((double)filteredList.Count / pageSize);
-
-	private List<CGL_CreditDebit> filteredList => CreditdebitObj?
-		.Where(p =>
-			Insured_StatusObj.Any(s => s.ID_Insured == InsuredObj.FirstOrDefault(i => i.DCHS == p.DCHS_To)?.ID_Insured) &&
-			(string.IsNullOrEmpty(searchQuery) ||
-			(DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
-			&& p.Submitted_Date.Date == searchDate.Date) ||
-			(int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication)))
-		.OrderByDescending(p => p.Submitted_Date)
-		.ToList() ?? new List<CGL_CreditDebit>();
-
-	private List<CGL_CreditDebit> pagedList => filteredList.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-	protected override async Task OnInitializedAsync()
-	{
-		try
-		{
-			// CreditdebitObj = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
-			// InsuredObj = (await insuredServices.GetAllINSUREDAsync() ?? new List<CGL_Insured>())
-			// 	.Where(x => x.Type?.Equals("Long Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
-			// PolicyHolderObj = await policyholderServices.GetAllPolicyHolderAsync() ?? new List<CGL_Policy_Holder>();
-			// Insured_StatusObj = (await insuredstatusServices.GetAllInsuredStatusAsync() ?? new List<CGL_Insured_Status>());
+	private List<CGL_CreditDebit> CreditdebitObj { get; set; } = new List<CGL_CreditDebit>();
+	private List<CGL_Insured> InsuredObj { get; set; } = new List<CGL_Insured>();
+	private List<CGL_Coverage> CoverageObj { get; set; } = new List<CGL_Coverage>();
+	private List<CGL_Policy_Holder> PolicyHolderObj { get; set; } = new List<CGL_Policy_Holder>();
+	private List<CGL_Beneficiary> BeneficiaryObj { get; set; } = new List<CGL_Beneficiary>();
 
 
 
+    private int page = 5; // Number of items per page
+    private int currentPage = 1;
+    private int totalPages => (int)Math.Ceiling((double)filteredList.Count / page);
+    private bool isDescending = true;
 
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine($"Error loading data: {ex.Message}");
-		}
-	}
+	private List<CGL_CreditDebit> filteredList
+	=> (CreditdebitObj?
+	.Where(p => string.IsNullOrEmpty(searchQuery) ||
+	(DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" },
+	CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
+	&& p.Submitted_Date.Date == searchDate.Date) ||
+	(searchQuery.All(char.IsDigit) && int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication))
+	.OrderBy(p => isDescending ? -p.Submitted_Date.Ticks : p.Submitted_Date.Ticks)
+	.ToList()) ?? new List<CGL_CreditDebit>();
 
-	private void OpenModal(CGL_Insured insured) => selectedInsured = insured;
+
+    private List<CGL_CreditDebit> pagedList => filteredList.Skip((currentPage - 1) * page).Take(page).ToList();
+
+    private string? SelectedDCHS = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var creditDebitList = await creditdebitServices.GetAllCGL_CreditDebitAsync() ?? new List<CGL_CreditDebit>();
+            var insuredList = await insuredServices.GetAllINSUREDAsync() ?? new List<CGL_Insured>();
+            var coverageList = await coverageServices.GetAllCGL_CoverageAsync() ?? new List<CGL_Coverage>();
+            var policyholderList = await policyholderServices.GetAllPolicyHolderAsync() ?? new List<CGL_Policy_Holder>();
+            var beneficiaryList = await beneficiaryServices.GetAllBeneficiaryAsync() ?? new List<CGL_Beneficiary>();
+            // var filteredBeneficiaries = beneficiaryList
+            // .Where(b => b.ID_Insured == selectedInsured?.ID_Insured)
+            // .ToList();
+
+
+            // Initialize InsuredObj
+            InsuredObj = insuredList.Where(x => x.Type?.Equals("Long Term", StringComparison.OrdinalIgnoreCase) == true).ToList();
+
+            // Populate CoverageObj
+            CoverageObj = coverageList
+            .Where(c => InsuredObj.Any(i => i.ID_Insured == c.ID_Insured))
+            .ToList();
+
+            BeneficiaryObj = beneficiaryList
+           .Where(c => BeneficiaryObj.Any(i => i.ID_Insured == c.ID_Insured))
+           .ToList();
+
+            // Populate PolicyHolderObj
+            PolicyHolderObj = policyholderList
+            .Where(p => InsuredObj.Any(i => i.ID_Policy_Holder == p.ID_Policy_Holder))
+            .ToList();
+            CreditdebitObj = creditDebitList
+            .Where(p => creditDebitList.Any(i => i.Total_Application == p.Total_Application))
+            .ToList();
+
+
+            CreditdebitObj = (from cd in creditDebitList
+                              join ins in InsuredObj on cd.DCHS_To equals ins.DCHS
+                              join Beneficiary in InsuredObj on cd.DCHS_To equals Beneficiary.DCHS
+                              where ins.Type == "Long Term"
+                              select new CGL_CreditDebit
+                                  {
+                                      Submitted_Date = cd.Submitted_Date,
+                                      Gross_Pay = cd.Gross_Pay,
+                                      Net_Pay = cd.Net_Pay,
+                                      Total_Application = cd.Total_Application,
+                                      DCHS_From = cd.DCHS_From,
+                                      DCHS_To = cd.DCHS_To,
+                                      Total_Coverage = CoverageObj
+                                      .Where(c => c.ID_Insured == ins.ID_Insured)
+                                      .Sum(c => c.Amount_Of_Insured)
+                                  }).ToList();
+
+            // Debugging statements
+            Console.WriteLine($"Insured Count: {InsuredObj.Count}");
+            Console.WriteLine($"Coverage Count: {CoverageObj.Count}");
+            Console.WriteLine($"Policy Holder Count: {PolicyHolderObj.Count}");
+            Console.WriteLine($"Credit Debit Count: {CreditdebitObj.Count}");
+
+        }
+        catch (Exception ex)
+        {
+            // Log the error
+            Console.WriteLine($"Error loading data: {ex.Message}");
+        }
+    }
+	private void ToggleDetails(string dchsNumber) => SelectedDCHS = (SelectedDCHS == dchsNumber) ? null : dchsNumber;
+	private void ToggleSortOrder() => isDescending = !isDescending;
 	private void NextPage() { if (currentPage < totalPages) currentPage++; }
 	private void PreviousPage() { if (currentPage > 1) currentPage--; }
 }

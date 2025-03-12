@@ -30,7 +30,9 @@ namespace Agent_and_BDS_Portal.Context
         public DbSet<CGL_COC> CGL_COC { get; set; }
         public DbSet<CGL_Beneficiary> CGL_Beneficiary { get; set; }
         public DbSet<CGL_Insured_Status> CGL_Insured_Status { get; set; }
+        public DbSet<CGL_Image> CGL_Image { get; set; }
 
+       
 
     }
 

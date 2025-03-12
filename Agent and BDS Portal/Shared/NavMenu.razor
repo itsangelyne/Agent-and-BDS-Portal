@@ -42,6 +42,11 @@
 		</a>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/banklist">
+				<span class="fa-solid fa-spinner text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>In Process</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @PendingDropdownClass">
+			<NavLink class="nav-link" href="/banklist">
 				<span class="fas fa-hourglass-half text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
 			</NavLink>
 		</div>
@@ -55,11 +60,7 @@
 				<span class="fa fa-thumbs-up text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
 			</NavLink>
 		</div>
-		<div class="nested-menu ps-3 @PendingDropdownClass">
-			<NavLink class="nav-link" href="/LongTerm/Lapproved">
-				<span class="fa fa-times-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
-			</NavLink>
-		</div>
+	
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lrenewal">
 				<span class="fas fa-sync-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Renewal</b>
@@ -68,6 +69,11 @@
 		<div class="nested-menu ps-3 @PendingDropdownClass">
 			<NavLink class="nav-link" href="/LongTerm/Lcompliance">
 				<span class="fas fa-file-alt text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @PendingDropdownClass">
+			<NavLink class="nav-link" href="/LongTerm/Lapproved">
+				<span class="fa fa-times-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @PendingDropdownClass">
@@ -88,10 +94,14 @@
 			</div>
 			<i class="fa-solid @(showReceiptedDropdown ? "fa-chevron-down" : "fa-chevron-right")"></i>
 		</a>
-		
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Spendinglist">
-				<span class="fas fa-ellipsis-h text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
+				<span class="fa-solid fa-spinner text-success fa-lg text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>In Process</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Spendinglist">
+				<span class="fas fa-hourglass-half text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Pending</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
@@ -104,14 +114,15 @@
 				<span class="fa fa-thumbs-up text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Approved</b>
 			</NavLink>
 		</div>
-		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
-			<NavLink class="nav-link" href="/ShortTerm/Sdeclined">
-				<span class="fa fa-times-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
-			</NavLink>
-		</div>
+		
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
 			<NavLink class="nav-link" href="/ShortTerm/Scompliance">
 				<span class="fas fa-clipboard-check text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Compliance</b>
+			</NavLink>
+		</div>
+		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
+			<NavLink class="nav-link" href="/ShortTerm/Sdeclined">
+				<span class="fa fa-times-circle text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Declined</b>
 			</NavLink>
 		</div>
 		<div class="nested-menu ps-3 @ReceiptedDropdownClass">
@@ -119,6 +130,7 @@
 				<span class="fas fa-ban text-success fa-lg" aria-hidden="true" style="margin-right:20px"></span><b>Terminated</b>
 			</NavLink>
 		</div>
+
 	</div>
 </div>
 

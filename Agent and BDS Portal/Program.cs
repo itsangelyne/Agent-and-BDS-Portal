@@ -33,6 +33,7 @@ builder.Services.AddScoped<CGL_Health_Answer_Services>();
 builder.Services.AddScoped<CGL_COC_Services>();
 builder.Services.AddScoped<CGL_Beneficiary_Services>();
 builder.Services.AddScoped<CGL_Insured_Status_Services>();
+builder.Services.AddScoped<ImageService>();
 
 builder.Services.AddMudServices();
 

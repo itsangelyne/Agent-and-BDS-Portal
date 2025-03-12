@@ -114,7 +114,7 @@
                                             <table class="table table-bordered">
                                                 <thead class="table-success">
                                                     <tr>
-                                                        <th class="text-center">Bank</th>
+                                                      
                                                         <th class="text-center">Full Name</th>
                                                         <th class="text-center">Amount of Insured</th>
                                                         <th class="text-center">Term of Loan</th>
@@ -137,7 +137,7 @@
                                                             var policyholder = matchedPolicyHolderList.FirstOrDefault(p => p.ID_Policy_Holder == insured.ID_Policy_Holder);
 
                                                             <tr>
-                                                                <td class="text-center">@policyholder?.Policy_Holder_Name</td>
+                                                               
                                                                 <td class="text-center">@insured.First_Name @insured.Last_Name</td>
                                                                 <td class="text-center">@coverage?.Amount_Of_Insured.ToString("F2")</td>
                                                                 <td class="text-center">@coverage?.Term_Of_Loan</td>

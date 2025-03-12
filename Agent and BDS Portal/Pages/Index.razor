@@ -224,33 +224,123 @@
 	<div class="border p-3" style="background-color: #eaf5e5; border-radius: 9px;">
 		<h4 class="mb-3 text-center"><b>Top Region</b></h4>
 		<div class="table-responsive">
-			<table class="table table-bordered text-center" style="table-layout: fixed; width: 100%;">
-				<thead style="background-color: #77B254;">
-					<tr>
-						<th>Region</th>
-						<th>Province</th>
-						<th>Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><span class="badge bg-danger">Region 04A</span></td>
-						<td>Batangas</td>
-						<td>43,743,247,123</td>
-					</tr>
-					<tr>
-						<td><span class="badge bg-danger">Mimaropa</span></td>
-						<td>Mindoro</td>
-						<td>24,223,546,235</td>
-					</tr>
-				</tbody>
+			<style>
+				body {
+					font-family: Arial, sans-serif;
+				}
 
-			</table>
-			
+				table {
+					width: 100%;
+					border-collapse: collapse;
+					margin-top: 20px;
+				}
+
+				th, td {
+					border: 1px solid #B3D8A8;
+					padding: 10px;
+					text-align: left;
+					background-color: white;
+				}
+
+				th {
+					background-color: lightgreen;
+				}
+
+				.icon {
+					color: magenta;
+					font-size: 18px;
+					margin-right: 5px;
+				}
+
+				.priority {
+					padding: 5px 10px;
+					border-radius: 10px;
+					color: white;
+					font-weight: bold;
+				}
+
+				.high {
+					background-color: red;
+				}
+
+				.medium {
+					background-color: orange;
+				}
+
+				.low {
+					background-color: green;
+				}
+
+				.progress-container {
+					width: 100px;
+					background-color: #ddd;
+					border-radius: 5px;
+					overflow: hidden;
+					display: inline-block;
+				}
+
+				.progress-bar {
+					height: 10px;
+					background-color: green;
+				}
+			</style>
+
+			<body>
+
+				
+
+				<table>
+					<thead>
+						<tr>
+							<th>Region</th>
+							<th>Province</th>
+							<th>Bank Name</th>
+							<th>Total Sales</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><span class="priority high">Region 04A</span></td>
+							<td><span class="icon">📍</span> Batangas</td>
+							<td> Rural Bank of Taysan(BAT.), INC.</td>
+							<td>$12,000</td>
+							<td>
+								<div class="progress-container">
+									<div class="progress-bar" style="width: 30%; background-color: red;"></div>
+								</div> 30%
+							</td>
+						</tr>
+						<tr>
+							<td><span class="priority medium">Region 005</span></td>
+							<td><span class="icon">📍</span> Albay</td>
+							<td> CBLIC Bank</td>
+							<td>$9,500</td>
+							<td>
+								<div class="progress-container">
+									<div class="progress-bar" style="width: 80%; background-color: orange;"></div>
+								</div> 80%
+								
+							</td>
+						</tr>
+						<tr>
+							<td><span class="priority low">Region 006</span></td>
+							<td><span class="icon">📍</span> Albay</td>
+							<td> Lucky Com Katuwang Credit and Lending Inc.</td>
+							<td>$8,200</td>
+							<td>
+								<div class="progress-container">
+									<div class="progress-bar" style="width: 50%; background-color: green;"></div>
+								</div> 50%
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</body>
 		</div>
 	</div>
 </div>
-
 @code {
 
 	private string selectedFilter = "";
