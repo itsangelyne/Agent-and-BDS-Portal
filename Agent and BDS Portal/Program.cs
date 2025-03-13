@@ -25,13 +25,6 @@ builder.Services.AddScoped<CGL_CreditDebit_Services>();
 builder.Services.AddScoped<CGL_Policy_Holder_Services>();
 builder.Services.AddScoped<CGL_Particulars_Services>();
 builder.Services.AddScoped<CGL_Insured_Services>();
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-builder.Services.AddScoped<CGL_Receipted_Services>();
-builder.Services.AddScoped<CGL_Coverage_Services>();
->>>>>>> Stashed changes
-=======
 builder.Services.AddScoped<CGL_Coverage_Services>();
 builder.Services.AddScoped<CGL_Receipted_Services>();
 builder.Services.AddScoped<CGL_Health_Question_Services>();
@@ -41,7 +34,6 @@ builder.Services.AddScoped<CGL_COC_Services>();
 builder.Services.AddScoped<CGL_Beneficiary_Services>();
 builder.Services.AddScoped<CGL_Insured_Status_Services>();
 builder.Services.AddScoped<ImageService>();
->>>>>>> testcode
 
 builder.Services.AddMudServices();
 

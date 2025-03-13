@@ -34,8 +34,6 @@ namespace Agent_and_BDS_Portal.Context
 
        
 
-        public DbSet<CGL_Coverage> CGL_Coverage { get; set; }
-
     }
 
 }
