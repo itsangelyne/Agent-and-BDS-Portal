@@ -9,7 +9,7 @@ namespace Agent_and_BDS_Portal.Model
     {
         [Key]
         public int ID_Insured { get; set; }
-
+        
         public string DCHS { get; set; }
         public int ID_Policy_Holder { get; set; }
         public string First_Name { get; set; }

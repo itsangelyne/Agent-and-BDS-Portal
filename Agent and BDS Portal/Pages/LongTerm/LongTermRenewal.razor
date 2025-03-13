@@ -1,4 +1,4 @@
-﻿@page "/LongTerm/Lcompliance"
+﻿@page "/LongTerm/Lrenewal"
 @using Agent_and_BDS_Portal.Data
 @using Agent_and_BDS_Portal.Context
 @using Agent_and_BDS_Portal.Model
@@ -13,43 +13,31 @@
 
 <div class="container mt-0">
     <div class="border my-4 p-4 rounded" style="background-color: #ffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <h3 class="text-center font-weight-bold"><strong>Compliance</strong></h3>
+        <h3 class="text-center font-weight-bold"><strong>Renewal</strong></h3>
         <h5 class="text-center font-weight-bold"><strong><u>Bank Name: CBLIC</u></strong></h5>
-        <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 300%;">
-            <!-- Search Box -->
-            <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 500%;">
-                <!-- Search Box -->
-                <div class="input-group" style="max-width: 800px;">
-                    <span class="input-group-text bg-light" style="height: 40px;">🔍</span>
-                    <input type="text" @bind="searchQuery" class="form-control"
-                           style="height: 40px;" placeholder="Search..." />
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center">
-                <span class="input-group-text bg-light" style="height: 40px;">Filter By:</span>
-                <select @bind="selectedFilter" class="form-select"
-                        style="max-width: 200px; height: 40px;">
-                    <option value="date"></option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                </select>
-            </div>
+        <!-- Search and Filter -->
+        <div class="input-group mb-3 shadow-sm">
+            <span class="input-group-text bg-light" @bind="searchQuery">🔍</span>
+            <input type="text" @bind="searchQuery" class="form-control" style="max-width: 500px; margin-right: 10px;" placeholder="Search..." />
+            <span class="input-group-text bg-light">Filter By:</span>
+            <select @bind="selectedFilter" class="form-select" style="max-width: 500px; margin-right: 10px;">
+                <option value="" disabled selected>Year History</option>
+                <option value="date">2025</option>
+                <option value="date">2024</option>
+                <option value="date">2023</option>
+            </select>
         </div>
 
-        <!-- Table -->
+
         <div class="mt-4 table-responsive">
             <table class="table table-bordered table-hover">
                 <thead style="background-color: #77B254;">
                     <tr>
-                        <th class="text-center text-white" style="cursor: pointer;" @onclick="ToggleSortOrder">
-                            Release Date <i class="bi @(isDescending ? "bi-arrow-down" : "bi-arrow-up")"></i>
-                        </th>
+                       
+                        <th class="text-center text-white">Release Date</th>
                         <th class="text-center text-white">Total Application</th>
                         <th class="text-center text-white">Application Status</th>
                         <th class="text-center text-white">Action</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -66,32 +54,35 @@
                             var insured = InsuredObj.FirstOrDefault(i => i.DCHS == creditDebit.DCHS_To);
                             var policyholder = PolicyHolderObj.FirstOrDefault(p => p.ID_Policy_Holder == insured?.ID_Policy_Holder);
                             var insuredStatus = Insured_StatusObj.FirstOrDefault(s => s.ID_Insured == insured?.ID_Insured);
-
+                            if (insuredStatus?.Status == "Renewal") 
+                            {
                             <tr>
+                                <td class="text-center">@policyholder?.Policy_Holder_Name</td>
                                 <td class="text-center">@creditDebit.Submitted_Date.ToString("yyyy-MM-dd")</td>
+                                <td class="text-center">@($"{insured?.First_Name} {insured?.Last_Name}")</td>
                                 <td class="text-center">@creditDebit.Total_Application</td>
                                 <td class="text-center">@insuredStatus.Status</td>
-
                                 <td class="text-center">
-                                    <button class="btn btn-outline-success btn-sm">View</button>
+                                    <button class="btn btn-outline-success btn-sm" @onclick="() => OpenModal(insured)">View</button>
                                 </td>
-
-                               
                             </tr>
+                        }
                         }
                     }
                 </tbody>
             </table>
         </div>
     </div>
+     </div>
+    
 
-    <!-- Pagination -->
-    <div class="d-flex justify-content-between align-items-center my-3">
-        <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">Previous</button>
-        <strong>Page @currentPage of @totalPages</strong>
-        <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
-    </div>
+<!-- Pagination -->
+<div class="d-flex justify-content-between align-items-center my-3">
+    <button class="btn btn-outline-success px-4" @onclick="PreviousPage" disabled="@(currentPage == 1)">Previous</button>
+    <strong>Page @currentPage of @totalPages</strong>
+    <button class="btn btn-outline-success px-4" @onclick="NextPage" disabled="@(currentPage == totalPages)">Next</button>
 </div>
+
 
 
 @code {
@@ -103,17 +94,16 @@
     private List<CGL_Insured> InsuredObj = new();
     private List<CGL_Policy_Holder> PolicyHolderObj = new();
     private List<CGL_Insured_Status> Insured_StatusObj = new();
+
     private int currentPage = 1;
     private const int pageSize = 5;
-    private bool isDescending = true;
-
     private int totalPages => (int)Math.Ceiling((double)filteredList.Count / pageSize);
 
     private List<CGL_CreditDebit> filteredList => CreditdebitObj?
         .Where(p =>
             Insured_StatusObj.Any(s => s.ID_Insured == InsuredObj.FirstOrDefault(i => i.DCHS == p.DCHS_To)?.ID_Insured) &&
             (string.IsNullOrEmpty(searchQuery) ||
-            (DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate)
+            (DateTime.TryParseExact(searchQuery, new[] { "MM/dd/yyyy", "yyyy/dd/MM" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime searchDate) 
             && p.Submitted_Date.Date == searchDate.Date) ||
             (int.TryParse(searchQuery, out int totalApplication) && p.Total_Application == totalApplication)))
         .OrderByDescending(p => p.Submitted_Date)
@@ -137,17 +127,7 @@
         }
     }
 
-    private void OpenModal(CGL_Insured insured)
-    {
-        selectedInsured = insured;
-        showModal = true;
-    }
-
-    private void ToggleSortOrder()
-    {
-        isDescending = !isDescending;
-    }
-
+    private void OpenModal(CGL_Insured insured) => selectedInsured = insured;
     private void NextPage() { if (currentPage < totalPages) currentPage++; }
     private void PreviousPage() { if (currentPage > 1) currentPage--; }
 }

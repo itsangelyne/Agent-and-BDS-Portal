@@ -16,11 +16,19 @@ namespace Agent_and_BDS_Portal.Model
         public DateTime Period_To { get; set; }
         public double Gross_Pay { get; set; }
         public double Net_Pay { get; set; }
+<<<<<<< HEAD
         public int Total_Application { get; set; }
         public  double Total_Coverage { get; set; }
+=======
+        public double Total_Coverage { get; set; }
+        public int Total_Application { get; set; }
+       
+>>>>>>> testcode
         public DateTime Submitted_Date { get; set; }
         public string Submitted_By { get; set; }
         public string Receipt { get; set; }
+
+       
 
     }
 }
